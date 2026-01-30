@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Offbit";
+  src: url("/fonts/OffBit-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Offbit";
+  src: url("/fonts/OffBit-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-primary: #121212;
+  --background-secondary: #1F1F1F;
+  --background-tertiary: #171717;
+  --content-primary: #F3F3F3;
+  --content-secondary: #848484;
+  --accent: #B5EF77;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-accent: var(--accent);
+  --font-golos: var(--font-golos);
+  --font-offbit: "Offbit", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.text-primary {
+  color: var(--content-primary);
+}
+
+.text-secondary {
+  color: var(--content-secondary);
+}
+
+.title-large {
+  font-size: 44px;
+  line-height: 56px;
+  font-weight: 500;
+  color: var(--content-primary);
+}
+
+.card-title {
+  color: #E8E8E8;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  word-wrap: break-word;
+}
+
+.card-subtitle {
+  color: #848484;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.marquee {
+  animation: marquee 50s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
 body {
-  background: var(--background);
+  background: var(--background-primary);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-golos), sans-serif;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
