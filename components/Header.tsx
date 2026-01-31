@@ -13,7 +13,7 @@ export default function Header() {
           <a href="#" className="hidden sm:block text-text-secondary hover:text-accent transition-colors text-[14px] md:text-base whitespace-nowrap">
             Телеграм канал
           </a>
-          <ButtonPrimary icon="/windows.svg">Скачать</ButtonPrimary>
+          <ButtonPrimary icon="/windows.svg" href="/download">Скачать</ButtonPrimary>
         </div>
       </div>
     </header>
