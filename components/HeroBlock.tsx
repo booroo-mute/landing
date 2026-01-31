@@ -10,7 +10,7 @@ export default function HeroBlock() {
           <h1 className="title-large">
             Голосовое общение<br />для игр, друзей, тебя
           </h1>
-          <p className="mt-[24px] text-[24px] leading-[32px] text-text-secondary">
+          <p className="title-medium text-text-secondary mt-[24px]">
             Доступно для Mac, Windows и в браузере
           </p>
         </div>

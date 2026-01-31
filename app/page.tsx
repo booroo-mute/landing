@@ -4,6 +4,7 @@ import InfoBlock from "@/components/InfoBlock";
 import CallsCards from "@/components/CallsCards";
 import FeatureList from "@/components/FeatureList";
 import ReleaseNotes from "@/components/ReleaseNotes";
+import FinalCallSection from "@/components/FinalCallSection";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <FeatureList />
       <div className="container border-b border-[#1F1F1F]"></div>
       <ReleaseNotes />
+      <FinalCallSection />
     </>
   );
 }

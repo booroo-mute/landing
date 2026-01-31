@@ -39,7 +39,7 @@ export const typography = {
     className: 'title-medium',
     fontSize: '24px',
     lineHeight: '32px',
-    fontWeight: 600,
+    fontWeight: 400,
   },
   bodyText: {
     className: 'body-text',
