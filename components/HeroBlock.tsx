@@ -15,7 +15,7 @@ export default function HeroBlock() {
           </p>
         </div>
         <div className="flex gap-[12px]">
-          <ButtonPrimary icon="/windows.svg">Скачать</ButtonPrimary>
+          <ButtonPrimary icon="/windows.svg">Скачать для Windows</ButtonPrimary>
           <ButtonSecondary>Открыть в браузере</ButtonSecondary>
         </div>
       </div>
