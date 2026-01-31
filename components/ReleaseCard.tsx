@@ -12,10 +12,10 @@ export default function ReleaseCard({ slug, date, title, summary }: ReleaseCardP
   return (
     <Link
       href={`/releases/${slug}`}
-      className="w-1/3 border border-[#1F1F1F] p-6 transition-colors hover:bg-white/5"
+      className="w-full border border-[#1F1F1F] p-4 md:p-5 lg:p-6 transition-colors hover:bg-white/5"
     >
       <p className="body-text text-text-secondary">{formatDate(date)}</p>
-      <div className="mt-4">
+      <div className="mt-3 md:mt-4">
         <h3 className="title-medium-semibold">{title}</h3>
         <p className="body-text text-text-secondary mt-2">{summary}</p>
       </div>

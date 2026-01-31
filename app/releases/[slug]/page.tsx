@@ -24,20 +24,20 @@ export default async function ReleasePage({ params }: Props) {
     <>
       <Header />
       <main className="container">
-        <article className="max-w-[920px] mx-auto pt-[72px] pb-[80px]">
+        <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
           <div>
             <p className="body-text text-text-secondary">{formatDate(release.date)}</p>
             <h1 className="title-large mt-2">{release.title}</h1>
           </div>
 
-          <div className="mt-8 prose prose-invert max-w-none">
+          <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
-                  <h2 className="title-medium-semibold mt-8 mb-4">{children}</h2>
+                  <h2 className="title-medium-semibold mt-6 md:mt-8 mb-3 md:mb-4">{children}</h2>
                 ),
                 p: ({ children }) => (
-                  <p className="body-text text-text-secondary mb-8">{children}</p>
+                  <p className="body-text text-text-secondary mb-6 md:mb-8">{children}</p>
                 ),
                 ul: ({ children }) => (
                   <ul className="list-disc list-inside space-y-2 mb-4">{children}</ul>
@@ -46,10 +46,10 @@ export default async function ReleasePage({ params }: Props) {
                   <li className="body-text text-text-secondary">{children}</li>
                 ),
                 img: ({ src, alt }) => (
-                  <img src={src} alt={alt || ""} className="w-full my-6" />
+                  <img src={src} alt={alt || ""} className="w-full my-4 md:my-6" />
                 ),
                 video: ({ src }) => (
-                  <video src={src} controls className="w-full my-6" />
+                  <video src={src} controls className="w-full my-4 md:my-6" />
                 ),
               }}
             >
