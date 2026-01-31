@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonPrimary from "./ButtonPrimary";
-import { useOS } from "@/hooks/useOS";
+import { useOS } from "@/components/OSProvider";
 
 export default function Header() {
   const os = useOS();

@@ -4,7 +4,7 @@ import Image from "next/image";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import { useParallax } from "@/hooks/useParallax";
-import { useOS } from "@/hooks/useOS";
+import { useOS } from "@/components/OSProvider";
 
 export default function HeroBlock() {
   const offset = useParallax(0.08);

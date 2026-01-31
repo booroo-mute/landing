@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Golos_Text } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
+import { OSProvider } from "@/components/OSProvider";
 
 const golosText = Golos_Text({
   variable: "--font-golos",
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <body className={`${golosText.variable} antialiased`}>
-        <SmoothScroll>{children}</SmoothScroll>
+        <OSProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+        </OSProvider>
       </body>
     </html>
   );

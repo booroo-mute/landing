@@ -2,7 +2,7 @@
 
 import ButtonPrimary from "./ButtonPrimary";
 import LinkText from "./LinkText";
-import { useOS } from "@/hooks/useOS";
+import { useOS } from "@/components/OSProvider";
 
 export default function FinalCallSection() {
   const os = useOS();
