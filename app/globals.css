@@ -16,12 +16,13 @@
   font-display: swap;
 }
 
+/* Keep in sync with lib/tokens.ts */
 :root {
   --background-primary: #121212;
   --background-secondary: #1F1F1F;
   --background-tertiary: #171717;
-  --content-primary: #F3F3F3;
-  --content-secondary: #848484;
+  --text-primary: #F3F3F3;
+  --text-secondary: #848484;
   --accent: #B5EF77;
 }
 
@@ -29,36 +30,27 @@
   --color-background-primary: var(--background-primary);
   --color-background-secondary: var(--background-secondary);
   --color-background-tertiary: var(--background-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
   --font-golos: var(--font-golos);
   --font-offbit: "Offbit", sans-serif;
-}
-
-.text-primary {
-  color: var(--content-primary);
-}
-
-.text-secondary {
-  color: var(--content-secondary);
 }
 
 .title-large {
   font-size: 44px;
   line-height: 56px;
   font-weight: 500;
-  color: var(--content-primary);
 }
 
-.card-title {
-  color: #E8E8E8;
+.title-medium {
   font-size: 24px;
   font-weight: 600;
   line-height: 32px;
   word-wrap: break-word;
 }
 
-.card-subtitle {
-  color: #848484;
+.body-text {
   font-size: 17px;
   font-weight: 400;
   line-height: 24px;
@@ -78,10 +70,12 @@
   }
 }
 
-body {
-  background: var(--background-primary);
-  color: var(--foreground);
-  font-family: var(--font-golos), sans-serif;
+@layer base {
+  body {
+    background: var(--background-primary);
+    color: var(--text-primary);
+    font-family: var(--font-golos), sans-serif;
+  }
 }
 
 .container {

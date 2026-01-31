@@ -9,8 +9,8 @@ export default function FeatureItem() {
         width={48}
         height={48}
       />
-      <h3 className="card-title mt-8">Приватность</h3>
-      <p className="card-subtitle mt-2">Не нужно искать нужный канал или ждать пока все соберутся.</p>
+      <h3 className="title-medium mt-8">Приватность</h3>
+      <p className="body-text text-text-secondary mt-2">Не нужно искать нужный канал или ждать пока все соберутся.</p>
     </div>
   );
 }
