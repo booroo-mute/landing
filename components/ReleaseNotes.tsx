@@ -1,14 +1,23 @@
 import ReleaseCard from "./ReleaseCard";
+import { getAllReleases } from "@/lib/releases";
 
 export default function ReleaseNotes() {
+  const releases = getAllReleases();
+
   return (
     <section className="w-full py-[120px] bg-background-primary">
       <div className="container">
         <h2 className="title-large">Что нового, Mute?</h2>
         <div className="mt-8 flex gap-5">
-          <ReleaseCard />
-          <ReleaseCard />
-          <ReleaseCard />
+          {releases.slice(0, 3).map((release) => (
+            <ReleaseCard
+              key={release.slug}
+              slug={release.slug}
+              date={release.date}
+              title={release.title}
+              summary={release.summary}
+            />
+          ))}
         </div>
       </div>
     </section>
