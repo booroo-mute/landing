@@ -16,7 +16,7 @@ export default function HeroBlock() {
             Голосовое общение<br />для игр, друзей, тебя
           </h1>
           <p className="title-medium text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
-            Доступно для Mac, Windows и в браузере
+            Легче не бывает. Один клик — и ты на связи
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
