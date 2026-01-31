@@ -24,7 +24,7 @@ export default async function ReleasePage({ params }: Props) {
     <>
       <Header />
       <main className="container">
-        <article className="max-w-[700px] mx-auto pt-[72px] pb-[80px]">
+        <article className="max-w-[920px] mx-auto pt-[72px] pb-[80px]">
           <div>
             <p className="body-text text-text-secondary">{formatDate(release.date)}</p>
             <h1 className="title-large mt-2">{release.title}</h1>
@@ -46,10 +46,10 @@ export default async function ReleasePage({ params }: Props) {
                   <li className="body-text text-text-secondary">{children}</li>
                 ),
                 img: ({ src, alt }) => (
-                  <img src={src} alt={alt || ""} className="w-full rounded-lg my-6" />
+                  <img src={src} alt={alt || ""} className="w-full my-6" />
                 ),
                 video: ({ src }) => (
-                  <video src={src} controls className="w-full rounded-lg my-6" />
+                  <video src={src} controls className="w-full my-6" />
                 ),
               }}
             >

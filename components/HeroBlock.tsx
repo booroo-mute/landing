@@ -4,7 +4,7 @@ import ButtonSecondary from "./ButtonSecondary";
 
 export default function HeroBlock() {
   return (
-    <section className="w-full h-[640px] bg-background-secondary flex">
+    <section className="w-full h-[640px] bg-background-secondary flex mt-16">
       <div className="w-1/2 h-full pt-[44px] pl-[44px] pb-[44px] flex flex-col justify-between">
         <div>
           <h1 className="title-large">
