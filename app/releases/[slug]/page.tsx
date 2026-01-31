@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { getReleaseBySlug, getAllReleaseSlugs } from "@/lib/releases";
 
 interface Props {
@@ -67,7 +66,6 @@ export default async function ReleasePage({ params }: Props) {
           </div>
         </article>
       </main>
-      <Footer />
     </>
   );
 }
