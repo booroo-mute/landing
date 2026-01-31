@@ -14,12 +14,12 @@ export default function HeroBlock() {
             Доступно для Mac, Windows и в браузере
           </p>
         </div>
-        <div className="flex flex-col sm:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
+        <div className="flex flex-col lg:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
           <ButtonPrimary icon="/windows.svg">Скачать для Windows</ButtonPrimary>
           <ButtonSecondary>Открыть в браузере</ButtonSecondary>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 h-[240px] sm:h-[280px] md:h-[320px] lg:h-full relative order-1 lg:order-2">
+      <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2">
         <Image src="/hero-image.png" alt="" fill className="object-cover" />
       </div>
     </section>

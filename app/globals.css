@@ -35,6 +35,7 @@
   --color-accent: var(--accent);
   --font-golos: var(--font-golos);
   --font-offbit: "Offbit", sans-serif;
+  --breakpoint-lg: 1368px;
 }
 
 @layer components {
@@ -100,8 +101,8 @@
     }
   }
 
-  /* Desktop breakpoint (lg: 1024px+) */
-  @media (min-width: 1024px) {
+  /* Desktop breakpoint (lg: 1368px+) */
+  @media (min-width: 1368px) {
     .title-large {
       font-size: 44px;
       line-height: 56px;
@@ -178,7 +179,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1368px) {
   .container {
     padding: 0 20px;
   }

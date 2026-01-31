@@ -10,7 +10,7 @@ export default function Header() {
           <Image src="/logo.svg" alt="Logo" width={92} height={24} className="w-[72px] md:w-[82px] lg:w-[92px] h-auto" />
         </Link>
         <div className="flex items-center gap-3 md:gap-6">
-          <a href="#" className="hidden sm:block text-text-secondary hover:text-accent transition-colors text-[14px] md:text-base">
+          <a href="#" className="hidden sm:block text-text-secondary hover:text-accent transition-colors text-[14px] md:text-base whitespace-nowrap">
             Телеграм канал
           </a>
           <ButtonPrimary icon="/windows.svg">Скачать</ButtonPrimary>
