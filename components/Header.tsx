@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import ButtonPrimary from "./ButtonPrimary";
 
 export default function Header() {
@@ -19,13 +20,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 bg-background-primary z-50">
       <div className="container h-[80px] flex items-center justify-between">
-        <Image src="/logo.svg" alt="Logo" width={103} height={27} />
+        <Link href="/">
+          <Image src="/logo.svg" alt="Logo" width={103} height={27} />
+        </Link>
+        <a href="#" className="text-text-secondary hover:text-accent transition-colors">
+          Телеграм канал
+        </a>
         <div
-          className={`flex items-center gap-6 transition-opacity duration-300 ${
+          className={`transition-opacity duration-300 ${
             showButtons ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
-          <a href="#" className="text-text-secondary hover:text-accent transition-colors">Телеграм канал</a>
           <ButtonPrimary icon="/windows.svg">Скачать для Windows</ButtonPrimary>
         </div>
       </div>
