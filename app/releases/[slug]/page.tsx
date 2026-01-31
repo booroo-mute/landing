@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
-import { getReleaseBySlug, getAllReleaseSlugs } from "@/lib/releases";
+import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -24,17 +23,10 @@ export default async function ReleasePage({ params }: Props) {
   return (
     <>
       <Header />
-      <main className="container py-[80px]">
-        <article className="max-w-[700px] mx-auto">
-          <Link
-            href="/"
-            className="body-text text-text-secondary hover:text-accent transition-colors"
-          >
-            ← Назад
-          </Link>
-
-          <div className="mt-8">
-            <p className="body-text text-text-secondary">{release.date}</p>
+      <main className="container">
+        <article className="max-w-[700px] mx-auto pt-[72px] pb-[80px]">
+          <div>
+            <p className="body-text text-text-secondary">{formatDate(release.date)}</p>
             <h1 className="title-large mt-2">{release.title}</h1>
           </div>
 
@@ -45,7 +37,7 @@ export default async function ReleasePage({ params }: Props) {
                   <h2 className="title-medium-semibold mt-8 mb-4">{children}</h2>
                 ),
                 p: ({ children }) => (
-                  <p className="body-text text-text-secondary mb-4">{children}</p>
+                  <p className="body-text text-text-secondary mb-8">{children}</p>
                 ),
                 ul: ({ children }) => (
                   <ul className="list-disc list-inside space-y-2 mb-4">{children}</ul>

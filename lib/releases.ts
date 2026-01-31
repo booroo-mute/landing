@@ -61,6 +61,15 @@ export function getReleaseBySlug(slug: string): Release | null {
   };
 }
 
+export function formatDate(date: string): string {
+  const months = [
+    "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+    "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+  ];
+  const [year, month, day] = date.split("-");
+  return `${parseInt(day)} ${months[parseInt(month) - 1]}, ${year}`;
+}
+
 export function getAllReleaseSlugs(): string[] {
   if (!fs.existsSync(releasesDirectory)) {
     return [];
