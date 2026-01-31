@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
+import { useParallax } from "@/hooks/useParallax";
 
 export default function HeroBlock() {
+  const offset = useParallax(0.08);
+
   return (
     <section className="w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] bg-background-secondary flex flex-col lg:flex-row mt-8 md:mt-12 lg:mt-16">
       <div className="w-full lg:w-1/2 pt-8 px-4 pb-8 md:pt-10 md:px-8 md:pb-10 lg:pt-[44px] lg:pl-[44px] lg:pb-[44px] lg:pr-0 flex flex-col justify-between order-2 lg:order-1">
@@ -19,8 +24,14 @@ export default function HeroBlock() {
           <ButtonSecondary>Открыть в браузере</ButtonSecondary>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2">
-        <Image src="/hero-image.png" alt="" fill className="object-cover" />
+      <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
+        <Image
+          src="/hero-image.png"
+          alt=""
+          fill
+          className="object-cover transition-transform duration-100 ease-out"
+          style={{ transform: `translateY(${offset}px)` }}
+        />
       </div>
     </section>
   );
