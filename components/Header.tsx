@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import ButtonPrimary from "./ButtonPrimary";
+import { useOS } from "@/hooks/useOS";
 
 export default function Header() {
+  const os = useOS();
+  const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
+
   return (
     <header className="sticky top-0 bg-background-primary z-50">
       <div className="container h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
@@ -13,7 +19,7 @@ export default function Header() {
           <a href="#" className="hidden sm:block text-text-secondary hover:text-accent transition-colors text-[14px] md:text-base whitespace-nowrap">
             Телеграм канал
           </a>
-          <ButtonPrimary icon="/windows.svg" href="/download">Скачать</ButtonPrimary>
+          <ButtonPrimary icon={icon} href="/download">Скачать</ButtonPrimary>
         </div>
       </div>
     </header>
