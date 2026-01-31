@@ -7,7 +7,7 @@ import { useOS } from "@/hooks/useOS";
 export default function FinalCallSection() {
   const os = useOS();
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
-  const label = os === "macos" ? "Скачать для Mac" : "Скачать для Windows";
+  const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
   return (
     <section className="w-full max-w-[1440px] h-[400px] sm:h-[480px] md:h-[560px] lg:h-[640px] mx-auto mb-16 md:mb-20 lg:mb-[120px] relative overflow-hidden">

@@ -10,7 +10,7 @@ export default function HeroBlock() {
   const offset = useParallax(0.08);
   const os = useOS();
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
-  const label = os === "macos" ? "Скачать для Mac" : "Скачать для Windows";
+  const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
   return (
     <section className="w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] bg-background-secondary flex flex-col lg:flex-row mt-8 md:mt-12 lg:mt-16">
