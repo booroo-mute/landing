@@ -1,6 +1,6 @@
 export default function InfoBlock() {
   return (
-    <section className="w-full pt-16 md:pt-24 lg:pt-[160px]">
+    <section className="w-full pt-16 md:pt-24 lg:!pt-[132px]">
       <div className="container">
         <p className="title-large text-left w-full md:w-[85%] lg:w-[70%]">
           Mute дополняет привычное общение, убирает цифровой шум и помогает сосредоточиться на главном

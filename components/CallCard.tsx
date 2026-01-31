@@ -12,7 +12,7 @@ export default function CallCard() {
       />
       <div className="mt-6 md:mt-8 lg:mt-10 px-2 md:px-3 pb-6 md:pb-8 lg:pb-10 text-center">
         <h3 className="title-medium-semibold">Звонки 1-1</h3>
-        <p className="body-text text-text-secondary mt-2">Не нужно искать нужный канал или ждать пока все соберутся. Просто разговор один на один.</p>
+        <p className="body-text text-text-secondary mt-2 lg:w-[65%] lg:mx-auto">Не нужно искать нужный канал или ждать пока все соберутся. Просто разговор один на один.</p>
       </div>
     </div>
   );
