@@ -9,7 +9,7 @@ export default function FeatureItem() {
         width={48}
         height={48}
       />
-      <h3 className="title-medium mt-8">Приватность</h3>
+      <h3 className="title-medium-semibold mt-8">Приватность</h3>
       <p className="body-text text-text-secondary mt-2">Не нужно искать нужный канал или ждать пока все соберутся.</p>
     </div>
   );

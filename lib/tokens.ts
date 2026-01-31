@@ -41,10 +41,24 @@ export const typography = {
     lineHeight: '32px',
     fontWeight: 400,
   },
+  titleMediumSemibold: {
+    className: 'title-medium-semibold',
+    fontSize: '24px',
+    lineHeight: '32px',
+    fontWeight: 600,
+  },
   bodyText: {
     className: 'body-text',
     fontSize: '17px',
     lineHeight: '24px',
     fontWeight: 400,
+  },
+  titleAccent: {
+    className: 'title-accent',
+    fontSize: '32px',
+    lineHeight: '32px',
+    fontWeight: 400,
+    letterSpacing: '0.04em',
+    fontFamily: 'Offbit',
   },
 } as const
