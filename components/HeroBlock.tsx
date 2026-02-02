@@ -24,7 +24,7 @@ export default function HeroBlock() {
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
-          <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>
+          <ButtonPrimary icon={icon} href="/download" target="_blank">{label}</ButtonPrimary>
           <ButtonSecondary>Открыть в браузере</ButtonSecondary>
         </div>
       </div>
