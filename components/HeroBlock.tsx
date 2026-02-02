@@ -7,7 +7,7 @@ import { useParallax } from "@/hooks/useParallax";
 import { useOS } from "@/components/OSProvider";
 
 export default function HeroBlock() {
-  const offset = useParallax(0.08);
+  const parallaxRef = useParallax<HTMLImageElement>(0.08);
   const os = useOS();
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
@@ -30,11 +30,11 @@ export default function HeroBlock() {
       </div>
       <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
         <Image
+          ref={parallaxRef}
           src="/hero-image.png"
           alt=""
           fill
-          className="object-cover transition-transform duration-100 ease-out"
-          style={{ transform: `translateY(${offset}px)` }}
+          className="object-cover will-change-transform"
         />
       </div>
     </section>
