@@ -15,7 +15,7 @@ export default function FeatureList() {
           icon="/free.svg"
         />
         <FeatureItem
-          title="Стабильная связь"
+          title="Стабильно"
           description={"Голос без помех, связь\nбез сюрпризов."}
           icon="/stable.svg"
         />
