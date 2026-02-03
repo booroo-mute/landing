@@ -11,8 +11,30 @@ const golosText = Golos_Text({
 });
 
 export const metadata: Metadata = {
-  title: "Landing",
-  description: "",
+  title: "Mute — голосовое общение для игр и друзей",
+  description: "Легкий голосовой чат без лишнего. Один клик — и ты на связи. Личные звонки и комнаты до 8 человек. Бесплатно.",
+  openGraph: {
+    title: "Mute — голосовое общение для игр и друзей",
+    description: "Легкий голосовой чат без лишнего. Один клик — и ты на связи.",
+    url: "https://mute.ac",
+    siteName: "Mute",
+    images: [
+      {
+        url: "https://mute.ac/open-graph.png",
+        width: 1200,
+        height: 630,
+        alt: "Mute — голосовой чат",
+      },
+    ],
+    locale: "ru_RU",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mute — голосовое общение для игр и друзей",
+    description: "Легкий голосовой чат без лишнего. Один клик — и ты на связи.",
+    images: ["https://mute.ac/open-graph.png"],
+  },
 };
 
 export default function RootLayout({
