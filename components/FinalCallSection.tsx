@@ -14,7 +14,7 @@ export default function FinalCallSection() {
     <section className="w-full max-w-[1440px] h-[400px] sm:h-[480px] md:h-[560px] lg:h-[640px] mx-auto mb-16 md:mb-20 lg:mb-[120px] relative overflow-hidden">
       <div
         className="w-full h-full bg-cover bg-center bg-no-repeat animate-zoom-in"
-        style={{ backgroundImage: "url('/final-call-img.png')" }}
+        style={{ backgroundImage: "url('/calm-sky-with-clouds-1.png')" }}
       />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] sm:w-[85%] md:w-[75%] lg:w-[70%] h-[85%] md:h-[80%] bg-background-secondary flex flex-col items-center justify-center px-4 md:px-8 text-center">
         <h2 className="title-large">На старт, внимание, связь!</h2>
