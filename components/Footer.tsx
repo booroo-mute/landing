@@ -16,7 +16,8 @@ export default function Footer() {
           <div className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8">
             <LinkText href="https://t.me/mutecalls" underline={false} target="_blank">Мы в Telegram</LinkText>
             <LinkText href="https://boosty.to/muteapp" underline={false} target="_blank">Поддержать проект</LinkText>
-            <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Связаться с нами</LinkText>
+            <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Помощь</LinkText>
+            <LinkText href="mailto:hello@mute.ac" underline={false} target="_blank">Связаться с нами</LinkText>
           </div>
         </div>
       </div>
