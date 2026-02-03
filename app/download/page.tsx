@@ -1,8 +1,53 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useOS, OS } from "@/components/OSProvider";
+import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
 import LinkText from "@/components/LinkText";
 
+function getDownloadInfo(os: OS) {
+  if (os === "windows") {
+    return {
+      url: getDownloadUrl("windows"),
+      label: "нажмите сюда",
+    };
+  }
+  if (os === "macos") {
+    return {
+      url: getDownloadUrl("macos"),
+      label: "нажмите сюда",
+    };
+  }
+  return null;
+}
+
 export default function DownloadPage() {
+  const os = useOS();
+
+  useEffect(() => {
+    if (os === "mobile") {
+      window.location.href = DOWNLOAD_CONFIG.webVersion;
+      return;
+    }
+
+    const downloadInfo = getDownloadInfo(os);
+    if (downloadInfo) {
+      const timer = setTimeout(() => {
+        window.location.href = downloadInfo.url;
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [os]);
+
+  if (os === "mobile") {
+    return null;
+  }
+
+  const downloadInfo = getDownloadInfo(os);
+  const isUnknownOS = os === "other";
+
   return (
     <main className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-16 lg:py-0 gap-12 lg:gap-24">
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[500px]">
@@ -16,12 +61,25 @@ export default function DownloadPage() {
           />
         </Link>
         <h1 className="title-large">
-          Скачивание начнётся автоматически
+          {isUnknownOS
+            ? "Выбери версию для скачивания"
+            : "Скачивание начнётся автоматически"}
         </h1>
-        <p className="body-text text-text-secondary mt-4 md:mt-6">
-          Если загрузка не началась,{" "}
-          <LinkText href="/mute-installer.exe">нажмите сюда</LinkText>
-        </p>
+        {isUnknownOS ? (
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <LinkText href={getDownloadUrl("windows")}>
+              Скачать для Windows
+            </LinkText>
+            <LinkText href={getDownloadUrl("macos")}>
+              Скачать для macOS
+            </LinkText>
+          </div>
+        ) : (
+          <p className="body-text text-text-secondary mt-4 md:mt-6">
+            Если загрузка не началась,{" "}
+            <LinkText href={downloadInfo!.url}>{downloadInfo!.label}</LinkText>
+          </p>
+        )}
       </div>
       <div className="w-full max-w-[600px] lg:max-w-[500px] xl:max-w-[600px]">
         <Image
