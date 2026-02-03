@@ -12,7 +12,7 @@ export default function CallsCards() {
           />
           <CallCard
             title="Комнаты до 8 человек"
-            description="Один клик — и комната готова. Заходи когда удобно."
+            description={"Один клик — и комната готова.\nЗаходи когда удобно."}
           />
         </div>
       </div>

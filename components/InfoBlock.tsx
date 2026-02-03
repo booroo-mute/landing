@@ -2,8 +2,8 @@ export default function InfoBlock() {
   return (
     <section className="w-full pt-16 md:pt-24 lg:!pt-[132px]">
       <div className="container">
-        <p className="title-large text-left w-full md:w-[85%] lg:w-[70%]">
-          Мы убрали всё, что мешает. Никаких серверов, каналов и бесконечных настроек. Остался только голос и друзья.
+        <p className="title-large text-left w-full md:w-[85%] lg:w-[70%] whitespace-pre-line">
+          {"Мы убрали всё, что мешает.\nНикаких серверов, каналов\nи бесконечных настроек.\nОстался только голос\nи друзья."}
         </p>
       </div>
       <div className="mt-16 md:mt-24 lg:mt-[160px] overflow-hidden relative h-[64px] md:h-[80px] lg:h-[96px] flex items-center">

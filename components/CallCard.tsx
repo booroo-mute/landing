@@ -17,7 +17,7 @@ export default function CallCard({ title, description }: CallCardProps) {
       />
       <div className="mt-6 md:mt-8 lg:mt-10 px-2 md:px-3 pb-6 md:pb-8 lg:pb-10 text-center">
         <h3 className="title-medium-semibold">{title}</h3>
-        <p className="body-text text-text-secondary mt-2 lg:w-[65%] lg:mx-auto">{description}</p>
+        <p className="body-text text-text-secondary mt-2 lg:w-[65%] lg:mx-auto whitespace-pre-line">{description}</p>
       </div>
     </div>
   );
