@@ -8,6 +8,7 @@ import { useOS } from "@/components/OSProvider";
 
 export default function Header() {
   const os = useOS();
+  const isMobile = os === "mobile";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const pathname = usePathname();
 
@@ -28,7 +29,11 @@ export default function Header() {
           <a href="https://t.me/mutecalls" target="_blank" rel="noopener noreferrer" className="hidden sm:block body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap">
             Мы в Telegram
           </a>
-          <ButtonPrimary icon={icon} href="/download" target="_blank">Скачать</ButtonPrimary>
+          {isMobile ? (
+            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
+          ) : (
+            <ButtonPrimary icon={icon} href="/download" target="_blank">Скачать</ButtonPrimary>
+          )}
         </div>
       </div>
     </header>

@@ -9,6 +9,7 @@ import { useOS } from "@/components/OSProvider";
 export default function HeroBlock() {
   const parallaxRef = useParallax<HTMLImageElement>(0.08);
   const os = useOS();
+  const isMobile = os === "mobile";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
@@ -24,8 +25,14 @@ export default function HeroBlock() {
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
-          <ButtonPrimary icon={icon} href="/download" target="_blank">{label}</ButtonPrimary>
-          <ButtonSecondary>Открыть в браузере</ButtonSecondary>
+          {isMobile ? (
+            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
+          ) : (
+            <>
+              <ButtonPrimary icon={icon} href="/download" target="_blank">{label}</ButtonPrimary>
+              <ButtonSecondary href="https://beta.mute.ac/welcome" target="_blank">Открыть в браузере</ButtonSecondary>
+            </>
+          )}
         </div>
       </div>
       <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
