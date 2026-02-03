@@ -6,17 +6,17 @@ export default function FeatureList() {
       <div className="container grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-6 lg:gap-5">
         <FeatureItem
           title="Ничего лишнего"
-          description="Минимум кнопок — максимум фокуса на игре."
+          description={"Минимум кнопок — максимум\nфокуса на игре."}
           icon="/minimalistic.svg"
         />
         <FeatureItem
           title="Бесплатно"
-          description="Никаких подписок. Просто скачай и пользуйся."
+          description={"Никаких подписок.\nПросто скачай и пользуйся."}
           icon="/free.svg"
         />
         <FeatureItem
           title="Стабильная связь"
-          description="Голос без помех, связь без сюрпризов."
+          description={"Голос без помех, связь\nбез сюрпризов."}
           icon="/stable.svg"
         />
         <FeatureItem
