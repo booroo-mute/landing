@@ -3,14 +3,15 @@ import Image from "next/image";
 interface FeatureItemProps {
   title: string;
   description: string;
+  icon?: string;
 }
 
-export default function FeatureItem({ title, description }: FeatureItemProps) {
+export default function FeatureItem({ title, description, icon = "/feature.svg" }: FeatureItemProps) {
   return (
     <div className="w-full">
       <Image
-        src="/feature.svg"
-        alt="Feature"
+        src={icon}
+        alt={title}
         width={48}
         height={48}
         className="w-10 h-10 md:w-11 md:h-11 lg:w-12 lg:h-12"

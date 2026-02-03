@@ -7,18 +7,22 @@ export default function FeatureList() {
         <FeatureItem
           title="Ничего лишнего"
           description="Минимум кнопок — максимум фокуса на игре."
+          icon="/minimalistic.svg"
         />
         <FeatureItem
           title="Бесплатно"
           description="Никаких подписок. Просто скачай и пользуйся."
+          icon="/free.svg"
         />
         <FeatureItem
           title="Стабильная связь"
           description="Голос без помех, связь без сюрпризов."
+          icon="/stable.svg"
         />
         <FeatureItem
           title="Только свои"
           description="Никаких публичных серверов. Общение в своём кругу."
+          icon="/friends.svg"
         />
       </div>
     </section>
