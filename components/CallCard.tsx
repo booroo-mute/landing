@@ -3,13 +3,14 @@ import Image from "next/image";
 interface CallCardProps {
   title: string;
   description: string;
+  imageSrc: string;
 }
 
-export default function CallCard({ title, description }: CallCardProps) {
+export default function CallCard({ title, description, imageSrc }: CallCardProps) {
   return (
     <div className="w-full md:w-1/2 bg-background-secondary p-2 md:p-3">
       <Image
-        src="/calls-card.png"
+        src={imageSrc}
         alt="Calls card"
         width={700}
         height={400}

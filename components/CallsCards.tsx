@@ -9,10 +9,12 @@ export default function CallsCards() {
           <CallCard
             title="Личные звонки"
             description="Не нужно искать канал или ждать остальных. Просто разговор один на один."
+            imageSrc="/solo-calls-card.png"
           />
           <CallCard
             title="Комнаты до 8 человек"
             description={"Один клик — и комната готова.\nЗаходи когда удобно."}
+            imageSrc="/group-calls-card-1.png"
           />
         </div>
       </div>
