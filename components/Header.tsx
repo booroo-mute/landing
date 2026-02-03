@@ -25,7 +25,7 @@ export default function Header() {
           <Image src="/logo.svg" alt="Logo" width={92} height={24} className="w-[72px] md:w-[82px] lg:w-[92px] h-auto" />
         </Link>
         <div className="flex items-center gap-3 md:gap-6">
-          <a href="https://t.me/mutecalls" target="_blank" rel="noopener noreferrer" className="hidden sm:block text-text-secondary hover:text-accent transition-colors text-[14px] md:text-base whitespace-nowrap">
+          <a href="https://t.me/mutecalls" target="_blank" rel="noopener noreferrer" className="hidden sm:block body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap">
             Мы в Telegram
           </a>
           <ButtonPrimary icon={icon} href="/download" target="_blank">Скачать</ButtonPrimary>
