@@ -9,20 +9,20 @@ export default function InfoBlock() {
       <div className="mt-16 md:mt-24 lg:mt-[160px] overflow-hidden relative h-[64px] md:h-[80px] lg:h-[96px] flex items-center">
         <div className="marquee flex whitespace-nowrap">
           <div className="flex shrink-0">
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> минимум интерфейса</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> максимум игры</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> стабильный голос</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> приватные звонки</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> минимум интерфейса</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> максимум игры</span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent">✴ минимум интерфейса</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-red">⚡ максимум игры</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-orange">✨ стабильная связь</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-blue">⛔ приватные звонки</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent">✴ минимум интерфейса</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-red">⚡ максимум игры</span></span>
           </div>
           <div className="flex shrink-0">
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> стабильный голос</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> приватные звонки</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> минимум интерфейса</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> максимум игры</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> стабильный голос</span>
-            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[16px]"><span className="text-[#EF7777]">☼</span> приватные звонки</span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-orange">✨ стабильная связь</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-blue">⛔ приватные звонки</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent">✴ минимум интерфейса</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-red">⚡ максимум игры</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-orange">✨ стабильная связь</span></span>
+            <span className="title-accent text-text-primary mx-3 md:mx-4 lg:mx-[20px]"><span className="text-accent-blue">⛔ приватные звонки</span></span>
           </div>
         </div>
         <div className="absolute left-0 top-0 h-full w-[60px] md:w-[100px] lg:w-[160px] bg-gradient-to-r from-background-primary to-transparent pointer-events-none"></div>

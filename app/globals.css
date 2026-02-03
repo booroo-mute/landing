@@ -24,6 +24,9 @@
   --text-primary: #F3F3F3;
   --text-secondary: #848484;
   --accent: #B5EF77;
+  --accent-red: #EF7777;
+  --accent-orange: #EFC377;
+  --accent-blue: #77B1EF;
 }
 
 @theme inline {
@@ -33,6 +36,9 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
+  --color-accent-red: var(--accent-red);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-blue: var(--accent-blue);
   --font-golos: var(--font-golos);
   --font-offbit: "Offbit", sans-serif;
   --breakpoint-lg: 1368px;
