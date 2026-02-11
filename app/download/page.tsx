@@ -80,11 +80,23 @@ export default function DownloadPage() {
             <LinkText href={downloadInfo!.url}>{downloadInfo!.label}</LinkText>
           </p>
         )}
+        {os === "macos" && (
+          <Link
+            href="/install/macos"
+            className="group mt-14 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
+          >
+            <div className="flex flex-col">
+              <span className="text-accent">Инструкция по установке</span>
+              <span>для macOS</span>
+            </div>
+            <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
+          </Link>
+        )}
         <a
           href="https://t.me/mutecalls"
           target="_blank"
           rel="noopener noreferrer"
-          className="group mt-14 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
+          className={`group ${os !== "macos" ? "mt-14" : "mt-3"} p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full`}
         >
           <div className="flex flex-col">
             <span className="text-accent-blue">Подпишитесь на наш Telegram</span>
