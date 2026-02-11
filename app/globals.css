@@ -207,3 +207,9 @@
     padding: 0 20px;
   }
 }
+
+@media print {
+  header {
+    display: none !important;
+  }
+}
