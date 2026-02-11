@@ -35,10 +35,10 @@ export default function HeroBlock() {
           )}
         </div>
       </div>
-      <div className="w-full lg:w-1/2 aspect-[16/9] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
+      <div className="w-full lg:w-1/2 aspect-[4/3] md:aspect-[4/3] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
         <Image
           ref={parallaxRef}
-          src="/hero-image.png"
+          src="/hero-image-new.png"
           alt=""
           fill
           className="object-cover will-change-transform"

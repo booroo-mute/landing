@@ -107,7 +107,7 @@ export default function DownloadPage() {
       </div>
       <div className="w-full max-w-[600px] lg:max-w-[500px] xl:max-w-[600px]">
         <Image
-          src="/hero-image.png"
+          src="/hero-image-new.png"
           alt="Mute app"
           width={600}
           height={400}
