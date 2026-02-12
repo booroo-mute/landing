@@ -18,7 +18,7 @@ export default function Home() {
       <CallsCards />
       <FeatureList />
       <div className="container border-b border-[#1F1F1F]"></div>
-      <ReleaseNotes />
+      {/* <ReleaseNotes /> */}
       <FinalCallSection />
       <Footer />
     </>

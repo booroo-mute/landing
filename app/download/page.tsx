@@ -7,18 +7,12 @@ import { useOS, OS } from "@/components/OSProvider";
 import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
 import LinkText from "@/components/LinkText";
 
-function getDownloadInfo(os: OS) {
+function getDownloadInfo(os: OS): { url: string; label: string } | null {
   if (os === "windows") {
-    return {
-      url: getDownloadUrl("windows"),
-      label: "нажмите сюда",
-    };
+    return { url: DOWNLOAD_CONFIG.files.windows, label: "нажмите сюда" };
   }
   if (os === "macos") {
-    return {
-      url: getDownloadUrl("macos"),
-      label: "нажмите сюда",
-    };
+    return { url: DOWNLOAD_CONFIG.files.macos, label: "нажмите сюда" };
   }
   return null;
 }
