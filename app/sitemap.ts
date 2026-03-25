@@ -1,8 +1,9 @@
 import { MetadataRoute } from "next";
 import { getAllReleases } from "@/lib/releases";
+import { SITE_URL } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://mute.ac";
+  const baseUrl = SITE_URL;
 
   const releases = await getAllReleases();
   const releaseUrls = releases.map((release) => ({

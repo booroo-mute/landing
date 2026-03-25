@@ -1,9 +1,11 @@
+const path = require('path');
+
 module.exports = {
   apps: [{
     name: 'mute-landing',
     script: 'npm',
     args: 'start',
-    cwd: '/root/mute/mute-landing',
+    cwd: path.resolve(__dirname),
     instances: 1,
     exec_mode: 'fork',
     autorestart: true,
