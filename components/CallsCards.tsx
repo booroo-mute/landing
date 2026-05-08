@@ -7,14 +7,14 @@ export default function CallsCards() {
         <h2 className="title-large">Связь на любой случай</h2>
         <div className="mt-6 md:mt-8 flex flex-col md:flex-row gap-4 md:gap-6">
           <CallCard
-            title="Личные звонки"
-            description="Не нужно искать канал или ждать остальных. Просто разговор один на один."
-            imageSrc="/solo-calls-card-1.png"
+            title="Звони как удобно"
+            description="От разговора 1:1 до комнаты на 8. Один клик — и ты на связи."
+            imageSrc="/group-calls-card-2.png"
           />
           <CallCard
-            title="Комнаты до 8 человек"
-            description={"Один клик — и комната готова.\nЗаходи когда удобно."}
-            imageSrc="/group-calls-card-2.png"
+            title="Общайся текстом"
+            description="Личные сообщения и групповые чаты. Пиши друзьям и в комнатах."
+            imageSrc="/chat-card-placeholder.svg"
           />
         </div>
       </div>
