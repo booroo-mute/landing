@@ -8,7 +8,7 @@ export default function CallsCards() {
         <div className="mt-6 md:mt-8 flex flex-col md:flex-row gap-4 md:gap-6">
           <CallCard
             title="Общайся текстом"
-            description="Личные сообщения и групповые чаты. Пиши друзьям и в комнатах."
+            description="Личные сообщения и групповые чаты."
             imageSrc="/chat.png"
           />
           <CallCard
