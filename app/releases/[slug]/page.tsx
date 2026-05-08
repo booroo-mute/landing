@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
+import JsonLd from "@/components/JsonLd";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
+import { SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -47,8 +49,38 @@ export default async function ReleasePage({ params }: Props) {
     notFound();
   }
 
+  const url = `${SITE_URL}/releases/${slug}`;
+
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: release.title,
+          description: release.summary,
+          datePublished: release.date,
+          inLanguage: "ru-RU",
+          url,
+          mainEntityOfPage: url,
+          about: {
+            "@type": "SoftwareApplication",
+            name: "Mute",
+            softwareVersion: release.version,
+            operatingSystem: "Windows, macOS",
+            applicationCategory: "CommunicationApplication",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Mute",
+            url: SITE_URL,
+            logo: {
+              "@type": "ImageObject",
+              url: `${SITE_URL}/logo.png`,
+            },
+          },
+        }}
+      />
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">

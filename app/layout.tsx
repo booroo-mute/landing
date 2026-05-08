@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import { OSProvider } from "@/components/OSProvider";
+import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 
 const golosText = Golos_Text({
@@ -64,6 +65,34 @@ export default function RootLayout({
   return (
     <html lang="ru" className="scroll-smooth">
       <body className={`${golosText.variable} antialiased`}>
+        <JsonLd
+          data={[
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Mute",
+              url: SITE_URL,
+              logo: `${SITE_URL}/logo.png`,
+              sameAs: [
+                "https://t.me/mutecalls",
+                "https://boosty.to/muteapp",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "hello@mute.ac",
+                contactType: "customer support",
+                availableLanguage: ["Russian"],
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Mute",
+              url: SITE_URL,
+              inLanguage: "ru-RU",
+            },
+          ]}
+        />
         <OSProvider>
           <SmoothScroll>{children}</SmoothScroll>
         </OSProvider>

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
+import JsonLd from "@/components/JsonLd";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
+import { SITE_URL } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -49,8 +51,39 @@ export default async function InstallPage({ params }: Props) {
     notFound();
   }
 
+  const url = `${SITE_URL}/install/${slug}`;
+  const description =
+    guide.description ??
+    `${guide.title} — пошаговая инструкция для пользователей Mute.`;
+
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "TechArticle",
+          headline: guide.title,
+          description,
+          datePublished: guide.date,
+          inLanguage: "ru-RU",
+          url,
+          mainEntityOfPage: url,
+          about: {
+            "@type": "SoftwareApplication",
+            name: "Mute",
+            applicationCategory: "CommunicationApplication",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Mute",
+            url: SITE_URL,
+            logo: {
+              "@type": "ImageObject",
+              url: `${SITE_URL}/logo.png`,
+            },
+          },
+        }}
+      />
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
