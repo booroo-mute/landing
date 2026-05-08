@@ -13,7 +13,7 @@ export default function CallsCards() {
           />
           <CallCard
             title="Звони как удобно"
-            description="От разговора 1:1 до комнаты на 8. Один клик — и ты на связи."
+            description="От разговора 1:1 до комнаты на 8"
             imageSrc="/calls.png"
           />
         </div>
