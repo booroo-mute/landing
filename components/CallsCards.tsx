@@ -13,7 +13,7 @@ export default function CallsCards() {
           />
           <CallCard
             title="Звони как удобно"
-            description="От разговора 1:1 до комнаты на 8"
+            description="Разговоры 1-1 и комнаты до 8 участников"
             imageSrc="/calls.png"
           />
         </div>
