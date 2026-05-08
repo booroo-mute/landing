@@ -9,12 +9,12 @@ export default function CallsCards() {
           <CallCard
             title="Звони как удобно"
             description="От разговора 1:1 до комнаты на 8. Один клик — и ты на связи."
-            imageSrc="/group-calls-card-2.png"
+            imageSrc="/calls.png"
           />
           <CallCard
             title="Общайся текстом"
             description="Личные сообщения и групповые чаты. Пиши друзьям и в комнатах."
-            imageSrc="/chat-card-placeholder.svg"
+            imageSrc="/chat.png"
           />
         </div>
       </div>
