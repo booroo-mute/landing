@@ -39,7 +39,7 @@ export default function HeroBlock() {
         <Image
           ref={parallaxRef}
           src="/hero-image-new.png"
-          alt=""
+          alt="Mute — голосовой чат для игр: интерфейс приложения с активным звонком и списком друзей"
           fill
           className="object-cover will-change-transform"
         />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
@@ -10,6 +11,34 @@ interface Props {
 export async function generateStaticParams() {
   const slugs = getAllInstallSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const guide = getInstallGuideBySlug(slug);
+  if (!guide) return {};
+
+  const url = `/install/${slug}`;
+  const description =
+    guide.description ??
+    `${guide.title} — пошаговая инструкция для пользователей Mute.`;
+
+  return {
+    title: `${guide.title} — Mute`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: guide.title,
+      description,
+      url,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: guide.title,
+      description,
+    },
+  };
 }
 
 export default async function InstallPage({ params }: Props) {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
@@ -10,6 +11,32 @@ interface Props {
 export async function generateStaticParams() {
   const slugs = getAllReleaseSlugs();
   return slugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const release = getReleaseBySlug(slug);
+  if (!release) return {};
+
+  const title = `${release.title} — Mute ${release.version}`;
+  const url = `/releases/${slug}`;
+  return {
+    title,
+    description: release.summary,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description: release.summary,
+      url,
+      type: "article",
+      publishedTime: release.date,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: release.summary,
+    },
+  };
 }
 
 export default async function ReleasePage({ params }: Props) {

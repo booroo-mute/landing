@@ -30,9 +30,6 @@ export const metadata: Metadata = {
     "русский аналог Discord",
     "mute",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "Mute — голосовой чат для игр",
     description:

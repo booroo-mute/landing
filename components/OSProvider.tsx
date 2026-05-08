@@ -19,7 +19,7 @@ function isMobileDevice(userAgent: string): boolean {
 }
 
 export function OSProvider({ children }: { children: ReactNode }) {
-  const [os, setOS] = useState<OS | null>(null);
+  const [os, setOS] = useState<OS>("other");
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
@@ -34,13 +34,5 @@ export function OSProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  if (!os) {
-    return null;
-  }
-
-  return (
-    <OSContext.Provider value={os}>
-      <div className="animate-fade-in">{children}</div>
-    </OSContext.Provider>
-  );
+  return <OSContext.Provider value={os}>{children}</OSContext.Provider>;
 }

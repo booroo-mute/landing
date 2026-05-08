@@ -7,6 +7,8 @@ const installDirectory = path.join(process.cwd(), "content/install");
 export interface InstallGuide {
   slug: string;
   title: string;
+  description?: string;
+  date?: string;
   content: string;
 }
 
@@ -23,6 +25,8 @@ export function getInstallGuideBySlug(slug: string): InstallGuide | null {
   return {
     slug,
     title: data.title,
+    description: data.description,
+    date: data.date,
     content,
   };
 }
@@ -37,4 +41,10 @@ export function getAllInstallSlugs(): string[] {
   return fileNames
     .filter((fileName) => fileName.endsWith(".md"))
     .map((fileName) => fileName.replace(/\.md$/, ""));
+}
+
+export function getAllInstallGuides(): InstallGuide[] {
+  return getAllInstallSlugs()
+    .map((slug) => getInstallGuideBySlug(slug))
+    .filter((guide): guide is InstallGuide => guide !== null);
 }
