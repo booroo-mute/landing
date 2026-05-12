@@ -101,7 +101,7 @@ export default function DownloadClient() {
       </div>
       <div className="w-full max-w-[600px] lg:max-w-[500px] xl:max-w-[600px]">
         <Image
-          src="/hero-image-new.png"
+          src="/hero-image-new1.png"
           alt="Mute — голосовой чат для геймеров на Windows и macOS"
           width={600}
           height={400}
