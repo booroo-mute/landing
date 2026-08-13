@@ -74,23 +74,23 @@ export default function DownloadClient() {
             <LinkText href={downloadInfo!.url}>{downloadInfo!.label}</LinkText>
           </p>
         )}
-        {os === "macos" && (
-          <Link
-            href="/install/macos"
-            className="group mt-14 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
-          >
-            <div className="flex flex-col">
-              <span className="text-accent">Инструкция по установке</span>
-              <span>для macOS</span>
-            </div>
-            <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
-          </Link>
-        )}
+        {/* Ссылка всегда в серверном HTML: os === "other" при SSR, и краулеры
+            без JS иначе никогда не увидят путь на /install/* */}
+        <Link
+          href={os === "macos" ? "/install/macos" : "/install"}
+          className="group mt-14 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
+        >
+          <div className="flex flex-col">
+            <span className="text-accent">Инструкция по установке</span>
+            <span>{os === "macos" ? "для macOS" : "для Windows и macOS"}</span>
+          </div>
+          <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
+        </Link>
         <a
           href="https://t.me/mutecalls"
           target="_blank"
           rel="noopener noreferrer"
-          className={`group ${os !== "macos" ? "mt-14" : "mt-3"} p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full`}
+          className="group mt-3 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
         >
           <div className="flex flex-col">
             <span className="text-accent-blue">Подпишитесь на наш Telegram</span>
@@ -101,7 +101,7 @@ export default function DownloadClient() {
       </div>
       <div className="w-full max-w-[600px] lg:max-w-[500px] xl:max-w-[600px]">
         <Image
-          src="/hero-image-new1.png"
+          src="/hero-image-new1.webp"
           alt="Mute — голосовой чат для геймеров на Windows и macOS"
           width={600}
           height={400}

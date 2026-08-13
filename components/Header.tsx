@@ -23,7 +23,7 @@ export default function Header() {
     <header className="sticky top-0 bg-background-primary z-50">
       <div className="container h-[64px] md:h-[72px] lg:h-[80px] flex items-center justify-between">
         <Link href="/" onClick={handleLogoClick}>
-          <Image src="/logo.svg" alt="Logo" width={92} height={24} className="w-[72px] md:w-[82px] lg:w-[92px] h-auto" />
+          <Image src="/logo.svg" alt="Mute — на главную" width={92} height={24} className="w-[72px] md:w-[82px] lg:w-[92px] h-auto" />
         </Link>
         <div className="flex items-center gap-3 md:gap-6">
           <a href="https://t.me/mutecalls" target="_blank" rel="noopener noreferrer" className="hidden sm:block body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap">
@@ -32,7 +32,7 @@ export default function Header() {
           {isMobile ? (
             <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
           ) : (
-            <ButtonPrimary icon={icon} href="/download" target="_blank">Скачать</ButtonPrimary>
+            <ButtonPrimary icon={icon} href="/download">Скачать</ButtonPrimary>
           )}
         </div>
       </div>

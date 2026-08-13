@@ -9,12 +9,14 @@ export default function CallsCards() {
           <CallCard
             title="Звони как удобно"
             description="Разговоры 1-1 и комнаты до 8 участников"
-            imageSrc="/calls.png"
+            imageSrc="/calls.webp"
+            imageAlt="Интерфейс звонка в Mute: голосовая комната с участниками"
           />
           <CallCard
             title="Общайся текстом"
             description="Личные сообщения и групповые чаты"
-            imageSrc="/chat.png"
+            imageSrc="/chat.webp"
+            imageAlt="Текстовый чат в Mute: личные сообщения и групповые переписки"
           />
         </div>
       </div>

@@ -29,7 +29,7 @@ export default function HeroBlock() {
             <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
           ) : (
             <>
-              <ButtonPrimary icon={icon} href="/download" target="_blank">{label}</ButtonPrimary>
+              <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>
               <ButtonSecondary href="https://beta.mute.ac/welcome" target="_blank">Открыть в браузере</ButtonSecondary>
             </>
           )}
@@ -38,7 +38,7 @@ export default function HeroBlock() {
       <div className="w-full lg:w-1/2 aspect-[4/3] md:aspect-[4/3] lg:aspect-auto lg:h-full relative order-1 lg:order-2 overflow-hidden">
         <Image
           ref={parallaxRef}
-          src="/hero-image-new1.png"
+          src="/hero-image-new1.webp"
           alt="Mute — голосовой чат для игр: интерфейс приложения с активным звонком и списком друзей"
           fill
           className="object-cover will-change-transform"

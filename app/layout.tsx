@@ -22,15 +22,17 @@ export const metadata: Metadata = {
     "голосовой чат для игр",
     "аналог дискорда",
     "альтернатива discord",
-    "голосовой чат без VPN",
     "дискорд без VPN",
-    "голосовая связь для геймеров",
-    "бесплатный голосовой чат",
-    "общение в играх",
-    "приватный голосовой чат",
-    "русский аналог Discord",
     "mute",
   ],
+  verification: {
+    ...(process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && {
+      yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    }),
+    ...(process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION && {
+      google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    }),
+  },
   openGraph: {
     title: "Mute — голосовой чат для игр",
     description:

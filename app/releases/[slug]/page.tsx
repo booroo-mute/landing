@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
 import { SITE_URL } from "@/lib/site";
@@ -84,7 +86,13 @@ export default async function ReleasePage({ params }: Props) {
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
-          <div>
+          <Breadcrumbs
+            items={[
+              { href: "/releases", label: "Что нового" },
+              { label: release.title },
+            ]}
+          />
+          <div className="mt-6 md:mt-8">
             <p className="body-text text-text-secondary">{formatDate(release.date)}</p>
             <h1 className="title-large mt-2">{release.title}</h1>
           </div>
@@ -117,6 +125,7 @@ export default async function ReleasePage({ params }: Props) {
           </div>
         </article>
       </main>
+      <Footer />
     </>
   );
 }

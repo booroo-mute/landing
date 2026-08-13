@@ -4,14 +4,15 @@ interface CallCardProps {
   title: string;
   description: string;
   imageSrc: string;
+  imageAlt: string;
 }
 
-export default function CallCard({ title, description, imageSrc }: CallCardProps) {
+export default function CallCard({ title, description, imageSrc, imageAlt }: CallCardProps) {
   return (
     <div className="w-full md:w-1/2 bg-background-secondary p-2 md:p-3">
       <Image
         src={imageSrc}
-        alt="Calls card"
+        alt={imageAlt}
         width={700}
         height={400}
         className="w-full h-auto"

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
 import { SITE_URL } from "@/lib/site";
@@ -87,7 +89,13 @@ export default async function InstallPage({ params }: Props) {
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
-          <div>
+          <Breadcrumbs
+            items={[
+              { href: "/install", label: "Установка" },
+              { label: guide.title },
+            ]}
+          />
+          <div className="mt-6 md:mt-8">
             <h1 className="title-large mt-2">{guide.title}</h1>
           </div>
 
@@ -126,8 +134,18 @@ export default async function InstallPage({ params }: Props) {
               {guide.content}
             </ReactMarkdown>
           </div>
+
+          <p className="body-text text-text-secondary mt-8 md:mt-10">
+            Ещё не установили приложение? Бесплатные сборки для Windows и
+            macOS лежат на{" "}
+            <a href="/download" className="text-accent hover:underline">
+              странице скачивания
+            </a>
+            .
+          </p>
         </article>
       </main>
+      <Footer />
     </>
   );
 }
