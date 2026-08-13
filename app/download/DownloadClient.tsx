@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useOS, OS } from "@/components/OSProvider";
 import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
 import LinkText from "@/components/LinkText";
+import { tmrReachGoal } from "@/lib/topMailRu";
 
 function getDownloadInfo(os: OS): { url: string; label: string } | null {
   if (os === "windows") {
@@ -22,12 +23,14 @@ export default function DownloadClient() {
 
   useEffect(() => {
     if (os === "mobile") {
+      tmrReachGoal("open_app");
       window.location.href = DOWNLOAD_CONFIG.webVersion;
       return;
     }
 
     const downloadInfo = getDownloadInfo(os);
     if (downloadInfo) {
+      tmrReachGoal("download");
       const timer = setTimeout(() => {
         window.location.href = downloadInfo.url;
       }, 500);
