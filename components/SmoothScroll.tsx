@@ -3,10 +3,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 
+// Подключается только на страницах, которым нужен плавный скролл (главная).
+// На контентных страницах (блог, инструкции) лишний JS и rAF-цикл ни к чему.
 export default function SmoothScroll({
   children,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   useEffect(() => {
     const lenis = new Lenis({

@@ -6,6 +6,7 @@ const productLinks = [
   { href: "/download", label: "Скачать" },
   { href: "/install", label: "Установка" },
   { href: "/discord-alternative", label: "Аналог Discord" },
+  { href: "/voice-chat", label: "Голосовой чат онлайн" },
   { href: "/releases", label: "Что нового" },
   { href: "/blog", label: "Блог" },
 ];

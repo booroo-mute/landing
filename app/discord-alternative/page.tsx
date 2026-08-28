@@ -132,7 +132,9 @@ export default function DiscordAlternativePage() {
           </p>
         </article>
       </main>
-      <FaqSection items={faqSubset} />
+      {/* FAQPage JSON-LD объявлен только на главной — дубль на двух URL
+          выглядит для поисковиков как повторяющаяся разметка */}
+      <FaqSection items={faqSubset} withSchema={false} />
       <Footer />
     </>
   );

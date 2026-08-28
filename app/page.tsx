@@ -5,6 +5,7 @@ import InfoBlock from "@/components/InfoBlock";
 import CallsCards from "@/components/CallsCards";
 import FeatureList from "@/components/FeatureList";
 import SeoIntro from "@/components/SeoIntro";
+import SmoothScroll from "@/components/SmoothScroll";
 import FaqSection from "@/components/FaqSection";
 import FinalCallSection from "@/components/FinalCallSection";
 import Footer from "@/components/Footer";
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={SOFTWARE_APPLICATION_SCHEMA} />
+      <SmoothScroll />
       <Header />
       <main>
         <div className="container">
