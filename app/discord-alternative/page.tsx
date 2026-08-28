@@ -27,6 +27,7 @@ export const metadata: Metadata = {
 const comparisonRows: Array<{ label: string; mute: string; discord: string }> = [
   { label: "Доступ из России", mute: "Работает без VPN", discord: "Заблокирован, нужен VPN" },
   { label: "Цена", mute: "Бесплатно, без подписок", discord: "Бесплатно + платный Nitro" },
+  { label: "Что внутри", mute: "Друзья, звонки, комнаты, чаты", discord: "Серверы, каналы, роли, магазин, Nitro, стримы" },
   { label: "Звонки 1-1", mute: "Без ограничений по времени", discord: "Есть" },
   { label: "Голосовые комнаты", mute: "До 8 участников", discord: "Серверы и каналы, тысячи участников" },
   { label: "Текстовые чаты", mute: "Личные и групповые", discord: "Личные, групповые, каналы" },
@@ -90,6 +91,22 @@ export default function DiscordAlternativePage() {
               </tbody>
             </table>
           </div>
+
+          <p className="body-text text-text-secondary mt-6 md:mt-8">
+            Отдельный пункт: ресурсы компьютера.{" "}
+            <a
+              href="https://www.techradar.com/computing/memory/some-windows-11-apps-have-a-massive-ram-problem-and-this-app-is-the-worst-offender"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              По данным TechRadar
+            </a>
+            , Discord — один из самых требовательных к памяти фоновых
+            приложений на Windows. В Mute интерфейс маленький, потому что в нём
+            нет серверов, магазина и стримов, а на слабом железе можно вообще
+            ничего не ставить и открыть звонок вкладкой браузера.
+          </p>
 
           <h2 className="title-medium-semibold mt-10 md:mt-12">Кому подойдёт Mute</h2>
           <ul className="mt-4 list-disc list-inside space-y-2">

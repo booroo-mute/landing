@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getAllReleases } from "@/lib/releases";
 import { getAllInstallGuides } from "@/lib/install";
+import { getAllGameGuides } from "@/lib/games";
 import { getAllBlogPosts } from "@/lib/blog";
 import { SITE_URL, HOME_UPDATED } from "@/lib/site";
 
@@ -23,6 +24,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const gameGuides = getAllGameGuides();
+  const gameUrls: MetadataRoute.Sitemap = gameGuides.map((guide) => ({
+    url: `${baseUrl}/games/${guide.slug}`,
+    lastModified: new Date(guide.updated ?? guide.date ?? HOME_UPDATED),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   const blogPosts = getAllBlogPosts();
   const blogUrls: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
@@ -33,6 +42,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const latestRelease = releases[0]?.date;
   const latestBlog = blogPosts[0]?.date;
+  const latestGame = gameGuides
+    .map((g) => g.updated ?? g.date)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
 
   return [
     {
@@ -66,6 +80,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/games`,
+      lastModified: latestGame ? new Date(latestGame) : new Date(HOME_UPDATED),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/blog`,
       lastModified: latestBlog ? new Date(latestBlog) : new Date(HOME_UPDATED),
       changeFrequency: "weekly",
@@ -78,6 +98,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     ...installUrls,
+    ...gameUrls,
     ...blogUrls,
     ...releaseUrls,
   ];

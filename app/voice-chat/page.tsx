@@ -142,6 +142,10 @@ export default function VoiceChatPage() {
 
           <p className="body-text text-text-secondary mt-8 md:mt-10">
             Полезное по теме:{" "}
+            <Link href="/games" className="text-accent hover:underline">
+              гайды по войсу в конкретных играх
+            </Link>
+            ,{" "}
             <Link href="/blog/golosovoy-chat-v-brauzere" className="text-accent hover:underline">
               как устроен голосовой чат в браузере
             </Link>{" "}
