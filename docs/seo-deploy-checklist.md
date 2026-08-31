@@ -26,6 +26,17 @@
 
 ## Веб-клиент (beta.mute.ac)
 
+**Статус на 2026-08-31:** шаги 1–4 выполнены. `beta.mute.ac` отдаёт
+`X-Robots-Tag: noindex, nofollow` на `/`, `/welcome` и всей статике;
+`beta.mute.ac.conf` в репозитории синхронизирован с боевым конфигом
+(`/etc/nginx/sites-available/beta.mute.ac`), деплоить можно из него.
+Шаг 5 (GSC Removals) ждёт регистрации в Search Console.
+
+**Не закрывать robots.txt на beta** (`Disallow: /`): noindex работает, только
+пока робот может скачать страницу. График проверки `site:beta.mute.ac`
+в Яндексе: 2026-09-14, 2026-09-28, далее раз в 2 недели до полного
+выпадения (обычно 4–8 недель).
+
 1. `git pull && npm install && npm run build`
 2. `scripts/update-static.sh` (копирует build в /var/www/mute-app)
 3. Обновить nginx из `beta.mute.ac.conf`: `nginx -t && systemctl reload nginx`
