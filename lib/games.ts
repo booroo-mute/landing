@@ -10,6 +10,8 @@ export interface GameGuide {
   description?: string;
   date?: string;
   updated?: string;
+  image?: string;
+  ogImage?: string;
   content: string;
 }
 
@@ -29,6 +31,8 @@ export function getGameGuideBySlug(slug: string): GameGuide | null {
     description: data.description,
     date: data.date,
     updated: data.updated,
+    image: data.image,
+    ogImage: data.ogImage,
     content,
   };
 }

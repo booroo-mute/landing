@@ -38,11 +38,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       ...(guide.date && { publishedTime: guide.date }),
       ...(guide.updated && { modifiedTime: guide.updated }),
+      ...(guide.ogImage && {
+        images: [{ url: guide.ogImage, width: 1200, height: 630 }],
+      }),
     },
     twitter: {
       card: "summary_large_image",
       title: guide.title,
       description,
+      ...(guide.ogImage && { images: [guide.ogImage] }),
     },
   };
 }
@@ -72,6 +76,7 @@ export default async function GameGuidePage({ params }: Props) {
           inLanguage: "ru-RU",
           url,
           mainEntityOfPage: url,
+          ...(guide.image && { image: `${SITE_URL}${guide.image}` }),
           author: {
             "@type": "Organization",
             name: "Mute",
@@ -128,6 +133,9 @@ export default async function GameGuidePage({ params }: Props) {
                 ),
                 code: ({ children }) => (
                   <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>
+                ),
+                img: ({ src, alt }) => (
+                  <img src={src} alt={alt || ""} loading="lazy" className="w-full my-4 md:my-6" />
                 ),
                 table: ({ children }) => (
                   <div className="overflow-x-auto mb-6">
