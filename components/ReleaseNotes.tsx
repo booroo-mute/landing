@@ -6,7 +6,7 @@ export default function ReleaseNotes() {
   const releases = getAllReleases();
 
   return (
-    <section className="w-full py-16 md:py-20 lg:!py-[132px] bg-background-primary">
+    <section className="w-full py-16 md:py-20 lg:!py-[132px] bg-background-tertiary">
       <div className="container">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
           <h2 className="title-large">Что нового, Mute?</h2>
