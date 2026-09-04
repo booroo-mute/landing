@@ -112,7 +112,7 @@ export default function DiscordAlternativePage() {
           </p>
 
           <h2 className="title-medium-semibold mt-10 md:mt-12">Кому подойдёт Mute</h2>
-          <ul className="mt-4 list-disc list-inside space-y-2">
+          <ul className="mt-4 list-disc list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Компаниям друзей, которые созваниваются ради игр и общения
             </li>

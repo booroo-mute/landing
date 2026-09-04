@@ -109,10 +109,10 @@ export default async function InstallPage({ params }: Props) {
                   <p className="body-text text-text-secondary mb-6 md:mb-8">{children}</p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside space-y-2 mb-4">{children}</ul>
+                  <ul className="list-disc list-inside space-y-3 md:space-y-4 mb-4">{children}</ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside space-y-2 mb-4">{children}</ol>
+                  <ol className="list-decimal list-inside space-y-3 md:space-y-4 mb-4">{children}</ol>
                 ),
                 li: ({ children }) => (
                   <li className="body-text text-text-secondary">{children}</li>

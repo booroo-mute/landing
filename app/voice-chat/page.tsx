@@ -66,7 +66,7 @@ export default function VoiceChatPage() {
           <h2 className="title-medium-semibold mt-10 md:mt-12">
             Как созвониться
           </h2>
-          <ol className="mt-4 list-decimal list-inside space-y-2">
+          <ol className="mt-4 list-decimal list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Откройте{" "}
               <a href="https://beta.mute.ac/welcome" className="text-accent hover:underline">

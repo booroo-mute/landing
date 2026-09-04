@@ -106,10 +106,10 @@ export default async function BlogPostPage({ params }: Props) {
                   <p className="body-text text-text-secondary mb-5 md:mb-6">{children}</p>
                 ),
                 ul: ({ children }) => (
-                  <ul className="list-disc list-inside space-y-2 mb-5">{children}</ul>
+                  <ul className="list-disc list-inside space-y-3 md:space-y-4 mb-5">{children}</ul>
                 ),
                 ol: ({ children }) => (
-                  <ol className="list-decimal list-inside space-y-2 mb-5">{children}</ol>
+                  <ol className="list-decimal list-inside space-y-3 md:space-y-4 mb-5">{children}</ol>
                 ),
                 li: ({ children }) => (
                   <li className="body-text text-text-secondary">{children}</li>
