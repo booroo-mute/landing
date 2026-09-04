@@ -12,12 +12,13 @@ export async function GET() {
 
 > Mute — бесплатный голосовой чат для геймеров, российский аналог Discord,
 > который работает в России без VPN. Звонки 1:1 без ограничения времени,
-> голосовые комнаты до 8 человек, личные и групповые чаты.
-> Приложения для Windows и macOS + веб-версия в браузере.
+> голосовые комнаты до 8 человек, видеозвонки, демонстрация экрана,
+> личные и групповые чаты. Приложения для Windows и macOS + веб-версия.
 
 > Mute is a free Russian voice chat app for gamers — a Discord alternative
 > that works in Russia without a VPN. 1:1 calls, voice rooms up to 8 people,
-> personal and group text chats. Windows, macOS and web.
+> video calls, screen sharing, personal and group text chats. Windows,
+> macOS and web.
 
 ## Основное
 
@@ -37,6 +38,8 @@ ${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.description}
 - Цена: бесплатно, без подписок
 - Платформы: Windows, macOS, веб-браузер (WebRTC)
 - Лимит голосовой комнаты: 8 участников
+- Видеозвонки: есть (камера, размытие фона)
+- Демонстрация экрана: есть, в приложении и в браузере
 - Регистрация: ник, e-mail, пароль
 - Работает в России: да, VPN не требуется
 - Публичных серверов и каналов нет — общение только в своём круге

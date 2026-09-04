@@ -16,7 +16,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 > Lightweight voice chat for gaming with friends: 1:1 calls, rooms for up to 8 people, and text chats. Free, no subscriptions. Works in Russia without a VPN.
 
 **Full description:**
-> Mute is a free voice chat app built for gaming with your own circle of friends. It deliberately skips the community features of Discord — there are no public servers, channels, roles, or bots. What you get instead is a friends list, unlimited 1:1 calls, voice rooms for up to 8 people, and personal and group text chats.
+> Mute is a free voice chat app built for gaming with your own circle of friends. It deliberately skips the community features of Discord — there are no public servers, channels, roles, or bots. What you get instead is a friends list, unlimited 1:1 calls, voice rooms for up to 8 people, video calls with background blur, screen sharing, and personal and group text chats.
 >
 > The app is built on WebRTC with adaptive bitrate and echo cancellation, and it stays light enough not to compete with your game for resources. Native apps are available for Windows and macOS, and the web version runs in any modern browser, including on phones.
 >
@@ -60,7 +60,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 **Полное описание:**
 > Mute — голосовой чат, сделанный под один сценарий: собраться голосом со своей компанией и поиграть. В нём нет публичных серверов, каналов, ролей и ботов, поэтому настройка не нужна вовсе: регистрация, список друзей, звонок.
 >
-> Возможности: звонки 1:1 без ограничения по времени, голосовые комнаты до 8 участников, личные и групповые текстовые чаты, приглашения по ссылке. Приложения для Windows и macOS, веб-версия работает в любом современном браузере по WebRTC, в том числе на телефоне.
+> Возможности: звонки 1:1 без ограничения по времени, голосовые комнаты до 8 участников, видеозвонки с размытием фона, демонстрация экрана, личные и групповые текстовые чаты, приглашения по ссылке. Приложения для Windows и macOS, веб-версия работает в любом современном браузере по WebRTC, в том числе на телефоне.
 >
 > Сервис полностью работает в России, VPN не требуется. Бесплатно, без подписок и платных тарифов. Проект развивает небольшая независимая команда, новости выходят в Telegram-канале @mutecalls.
 
@@ -72,7 +72,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 > Голосовой чат для игр, который работает без VPN
 
 **Описание:**
-> После блокировки Discord созвоны на игры превратились в лотерею с VPN. Mute — наша попытка вернуть всё как было: лёгкий голосовой чат без серверов, каналов и настроек. Друзья, звонки 1:1, комнаты до 8 человек, чаты. Бесплатно, для Windows, macOS и браузера.
+> После блокировки Discord созвоны на игры превратились в лотерею с VPN. Mute — наша попытка вернуть всё как было: лёгкий голосовой чат без серверов, каналов и настроек. Друзья, звонки 1:1 с видео, комнаты до 8 человек, чаты, демонстрация экрана. Бесплатно, для Windows, macOS и браузера.
 
 **Первый комментарий от команды:**
 > Привет! Мы делаем Mute небольшой командой. Начали для себя: после блокировки Discord наши собственные вечерние созвоны развалились, а пересаживаться на корпоративные видеозвонки не хотелось.
@@ -106,7 +106,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 > Mute — лёгкий голосовой чат для геймеров и их компаний. Комнаты до 8 человек, звонки 1:1, текстовые чаты. Бесплатный, работает в РФ без VPN.
 
 **Полное описание:**
-> Mute решает одну задачу: быстрый голосовой созвон со своими во время игры. Приложение намеренно устроено проще Discord: публичных серверов и каналов нет, ролей и прав нет, ботов нет. Есть список друзей, звонки без ограничения по времени, голосовые комнаты до 8 участников и чаты.
+> Mute решает одну задачу: быстрый голосовой созвон со своими во время игры. Приложение намеренно устроено проще Discord: публичных серверов и каналов нет, ролей и прав нет, ботов нет. Есть список друзей, звонки без ограничения по времени, голосовые комнаты до 8 участников, видео с размытием фона, демонстрация экрана и чаты.
 >
 > Работает на Windows и macOS, а также в браузере через WebRTC. Доступ из России без VPN. Тарифов нет: сервис бесплатный. Подходит игровым компаниям из 2–8 человек; для крупных сообществ с каналами и модерацией не предназначен.
 
@@ -115,7 +115,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 ## 7. SaaSHub / Slant (EN)
 
 **SaaSHub short description:**
-> Free lightweight voice chat for gaming: 1:1 calls, rooms for up to 8 people, text chats. Windows, macOS, and web. Works in Russia without a VPN.
+> Free lightweight voice chat for gaming: 1:1 calls, rooms for up to 8 people, video calls, screen sharing, text chats. Windows, macOS, and web. Works in Russia without a VPN.
 
 **Slant — ответ в вопросах «What are the best Discord alternatives?» (формат «pros»):**
 > **Pro: No setup required.** Mute has no servers, channels, or roles. You register, add friends, and call — the first voice room takes under five minutes including sign-up.
@@ -140,7 +140,7 @@ Con добавить самим — честная карточка живёт �
 > Голосовой чат для игр и общения с друзьями. Бесплатно, без VPN, для Windows, macOS и браузера.
 
 **Полное описание:**
-> Mute — российский голосовой чат для геймеров. Звонки один на один без ограничения времени, голосовые комнаты до 8 человек, личные и групповые чаты. Работает в России без VPN. Приложения для Windows и macOS, веб-версия в любом браузере. Сервис бесплатный, без подписок. Поддержка: @mute_calls_bot в Telegram.
+> Mute — российский голосовой чат для геймеров. Звонки один на один без ограничения времени, голосовые комнаты до 8 человек, видеозвонки, демонстрация экрана, личные и групповые чаты. Работает в России без VPN. Приложения для Windows и macOS, веб-версия в любом браузере. Сервис бесплатный, без подписок. Поддержка: @mute_calls_bot в Telegram.
 
 Тип организации — онлайн-сервис (без физического адреса указывается зона
 обслуживания «Россия»).

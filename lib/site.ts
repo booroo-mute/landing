@@ -7,4 +7,4 @@ export const SITE_URL =
  * Обновлять вручную при правках текстов главной — НЕ использовать new Date():
  * «вечно свежий» lastModified подрывает доверие поисковиков к sitemap.
  */
-export const HOME_UPDATED = "2026-08-28";
+export const HOME_UPDATED = "2026-09-04";
