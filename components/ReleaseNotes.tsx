@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ReleaseCard from "./ReleaseCard";
 import { getAllReleases } from "@/lib/releases";
 
@@ -19,6 +20,12 @@ export default function ReleaseNotes() {
             />
           ))}
         </div>
+        <p className="body-text text-text-secondary mt-6 md:mt-8">
+          <Link href="/releases" className="text-accent hover:underline">
+            Все обновления
+          </Link>{" "}
+          — от первых пиксельных иконок до видеозвонков.
+        </p>
       </div>
     </section>
   );

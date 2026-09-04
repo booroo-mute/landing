@@ -4,6 +4,7 @@ import HeroBlock from "@/components/HeroBlock";
 import InfoBlock from "@/components/InfoBlock";
 import CallsCards from "@/components/CallsCards";
 import FeatureList from "@/components/FeatureList";
+import ReleaseNotes from "@/components/ReleaseNotes";
 import SeoIntro from "@/components/SeoIntro";
 import SmoothScroll from "@/components/SmoothScroll";
 import FaqSection from "@/components/FaqSection";
@@ -29,6 +30,7 @@ export default function Home() {
         </div>
         <CallsCards />
         <FeatureList />
+        <ReleaseNotes />
         <SeoIntro />
         <FaqSection />
         <div className="container border-b border-[#1F1F1F]"></div>
