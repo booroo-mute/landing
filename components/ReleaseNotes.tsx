@@ -8,7 +8,16 @@ export default function ReleaseNotes() {
   return (
     <section className="w-full py-16 md:py-20 lg:!py-[132px] bg-background-primary">
       <div className="container">
-        <h2 className="title-large">Что нового, Mute?</h2>
+        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+          <h2 className="title-large">Что нового, Mute?</h2>
+          <Link
+            href="/releases"
+            className="group body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap"
+          >
+            Все обновления{" "}
+            <span className="font-offbit group-hover:text-accent">→</span>
+          </Link>
+        </div>
         <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
           {releases.slice(0, 3).map((release) => (
             <ReleaseCard
@@ -20,12 +29,6 @@ export default function ReleaseNotes() {
             />
           ))}
         </div>
-        <p className="body-text text-text-secondary mt-6 md:mt-8">
-          <Link href="/releases" className="text-accent hover:underline">
-            Все обновления
-          </Link>{" "}
-          — от первых пиксельных иконок до видеозвонков.
-        </p>
       </div>
     </section>
   );
