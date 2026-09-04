@@ -10,7 +10,8 @@ export const dynamic = "force-static";
 export async function GET() {
   const releases = getAllReleases();
   const posts = getAllBlogPosts();
-  const currentVersion = releases[0]?.version ?? "0.2.2";
+  const currentVersion =
+    releases.find((r) => r.version)?.version ?? "0.2.2";
 
   const body = `# Mute — полный профиль продукта
 
@@ -71,9 +72,9 @@ https://www.windowslatest.com/2025/12/06/discord-admits-its-windows-11-app-is-a-
 
 ${FAQ_ITEMS.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n")}
 
-## История версий
+## История обновлений
 
-${releases.map((r) => `- ${r.version} (${r.date}): ${r.summary} — ${SITE_URL}/releases/${r.slug}`).join("\n")}
+${releases.map((r) => `- ${r.version ?? r.title} (${r.date}): ${r.summary} — ${SITE_URL}/releases/${r.slug}`).join("\n")}
 
 ## Статьи блога
 

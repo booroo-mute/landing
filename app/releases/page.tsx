@@ -23,7 +23,7 @@ export default function ReleasesIndexPage() {
           <Breadcrumbs items={[{ label: "Что нового" }]} />
           <h1 className="title-large mt-6 md:mt-8">Что нового в Mute</h1>
           <p className="title-medium text-text-secondary mt-4">
-            История обновлений приложения по версиям.
+            Крупные обновления Mute: что появилось и что стало лучше.
           </p>
           <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {releases.map((release) => (

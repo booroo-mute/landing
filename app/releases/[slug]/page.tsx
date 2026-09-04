@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const release = getReleaseBySlug(slug);
   if (!release) return {};
 
-  const title = `${release.title} — Mute ${release.version}`;
+  const title = release.version
+    ? `${release.title} — Mute ${release.version}`
+    : `${release.title} — Mute`;
   const url = `/releases/${slug}`;
   return {
     title,
@@ -68,7 +70,7 @@ export default async function ReleasePage({ params }: Props) {
           about: {
             "@type": "SoftwareApplication",
             name: "Mute",
-            softwareVersion: release.version,
+            ...(release.version && { softwareVersion: release.version }),
             operatingSystem: "Windows, macOS",
             applicationCategory: "CommunicationApplication",
           },

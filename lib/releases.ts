@@ -6,7 +6,8 @@ const releasesDirectory = path.join(process.cwd(), "content/releases");
 
 export interface Release {
   slug: string;
-  version: string;
+  /** Номер сборки приложения; у продуктовых вех (фичи, волны надёжности) его нет */
+  version?: string;
   date: string;
   title: string;
   summary: string;
