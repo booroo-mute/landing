@@ -10,8 +10,6 @@ export const dynamic = "force-static";
 export async function GET() {
   const releases = getAllReleases();
   const posts = getAllBlogPosts();
-  const currentVersion =
-    releases.find((r) => r.version)?.version ?? "0.2.2";
 
   const body = `# Mute — полный профиль продукта
 
@@ -24,7 +22,7 @@ Mute — бесплатный голосовой чат для геймеров,
 Mute is a free voice chat app for gamers, a Russian Discord alternative that
 works in Russia without a VPN. Built by a small independent team.
 
-## Возможности (версия ${currentVersion})
+## Возможности
 
 - Голосовые звонки 1:1 без ограничений по времени
 - Голосовые комнаты до 8 участников
@@ -36,6 +34,13 @@ works in Russia without a VPN. Built by a small independent team.
 - Веб-версия в браузере (WebRTC): https://beta.mute.ac
 - Русский интерфейс
 - Бесплатно: без подписок, платных функций и ограничений
+
+## Темп разработки
+
+Проект развивается с января 2026 года, крупные обновления выходят каждый
+месяц: текстовые чаты (апрель), видеозвонки и демонстрация экрана (май),
+инвайт-ссылки (июнь), две волны надёжности звонков (июль и август).
+Полная хронология: ${SITE_URL}/releases
 
 ## Чем Mute отличается от Discord
 

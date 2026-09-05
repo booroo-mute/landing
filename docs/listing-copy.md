@@ -1,6 +1,7 @@
 # Тексты для каталогов и площадок (Tier 1 плейбука)
 
-Правила: факты только текущей версии (0.2.x). Не обещать E2E-шифрование,
+Правила: только факты текущей версии. Номер версии в питчах не называем
+(кормит нарратив «сырой проект»). Не обещать E2E-шифрование,
 мобильные приложения и функции «в разработке». Формулировки на разных
 площадках намеренно различаются — не выравнивать под одну.
 
@@ -77,7 +78,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 **Первый комментарий от команды:**
 > Привет! Мы делаем Mute небольшой командой. Начали для себя: после блокировки Discord наши собственные вечерние созвоны развалились, а пересаживаться на корпоративные видеозвонки не хотелось.
 >
-> Внутри сейчас звонки один на один, комнаты до 8 человек и текстовые чаты. Сознательно не делаем публичные серверы и роли: Mute про свою компанию, а не про сообщества на сотни человек. Версия 0.2 — проект молодой, поэтому нам особенно полезны сообщения о багах и о том, чего не хватает. Спрашивайте здесь или в @mute_calls_bot, отвечаем сами.
+> Внутри сейчас звонки один на один, комнаты до 8 человек и текстовые чаты. Сознательно не делаем публичные серверы и роли: Mute про свою компанию, а не про сообщества на сотни человек. Проект молодой и растёт быстро: за последние полгода появились видеозвонки, демонстрация экрана и инвайт-ссылки. Нам особенно полезны сообщения о багах и о том, чего не хватает. Спрашивайте здесь или в @mute_calls_bot, отвечаем сами.
 
 ---
 
@@ -96,7 +97,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 >
 > Mute is intentionally minimal. There are no public servers, channels, or role systems — a friends list, unlimited 1:1 calls, voice rooms for up to 8 people, and text chats. It runs on WebRTC, stays light during gameplay, and the web version works in any browser without installing anything.
 >
-> It's free with no subscriptions. We're at v0.2, so honest feedback about what's missing helps us more than praise. Ask us anything!
+> It's free with no subscriptions. The project is young and moving fast — video calls, screen sharing and invite links all shipped this year — and honest feedback about what's missing helps us more than praise. Ask us anything!
 
 ---
 
