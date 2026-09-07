@@ -11,6 +11,7 @@ export interface Release {
   date: string;
   title: string;
   summary: string;
+  image?: string;
   content: string;
 }
 
@@ -35,6 +36,7 @@ export function getAllReleases(): Release[] {
         date: data.date,
         title: data.title,
         summary: data.summary,
+        image: data.image,
         content,
       };
     });
@@ -58,6 +60,7 @@ export function getReleaseBySlug(slug: string): Release | null {
     date: data.date,
     title: data.title,
     summary: data.summary,
+    image: data.image,
     content,
   };
 }

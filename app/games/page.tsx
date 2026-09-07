@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PostCard from "@/components/PostCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -19,7 +20,7 @@ export default function GamesIndexPage() {
     <>
       <Header />
       <main className="container">
-        <div className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
+        <div className="pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
           <Breadcrumbs items={[{ label: "Для игр" }]} />
           <h1 className="title-large mt-6 md:mt-8">Голосовой чат в играх</h1>
           <p className="title-medium text-text-secondary mt-4">
@@ -27,21 +28,16 @@ export default function GamesIndexPage() {
             он спрятан в настройках или закрыт проверкой возраста. Здесь мы
             разбираем, как общаться голосом в конкретных играх.
           </p>
-          <div className="mt-8 md:mt-10 flex flex-col gap-3">
+          <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
             {guides.map((guide) => (
-              <Link
+              <PostCard
                 key={guide.slug}
                 href={`/games/${guide.slug}`}
-                className="group p-4 md:p-5 border border-[#1F1F1F] hover:bg-white/5 transition-colors flex items-center justify-between gap-6"
-              >
-                <div className="flex flex-col">
-                  <span className="body-text text-accent">{guide.title}</span>
-                  {guide.description && (
-                    <span className="body-text text-text-secondary mt-1">{guide.description}</span>
-                  )}
-                </div>
-                <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
-              </Link>
+                title={guide.title}
+                description={guide.description}
+                date={guide.updated ?? guide.date}
+                image={guide.image}
+              />
             ))}
           </div>
           <p className="body-text text-text-secondary mt-8 md:mt-10">

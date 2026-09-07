@@ -10,6 +10,8 @@ export interface BlogPost {
   description: string;
   date: string;
   updated?: string;
+  image?: string;
+  ogImage?: string;
   content: string;
 }
 
@@ -40,6 +42,8 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     description: data.description,
     date: data.date,
     updated: data.updated,
+    image: data.image,
+    ogImage: data.ogImage,
     content,
   };
 }

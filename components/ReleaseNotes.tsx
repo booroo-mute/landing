@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ReleaseCard from "./ReleaseCard";
+import PostCard from "./PostCard";
 import { getAllReleases } from "@/lib/releases";
 
 export default function ReleaseNotes() {
@@ -19,12 +19,13 @@ export default function ReleaseNotes() {
         </div>
         <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
           {releases.slice(0, 3).map((release) => (
-            <ReleaseCard
+            <PostCard
               key={release.slug}
-              slug={release.slug}
-              date={release.date}
+              href={`/releases/${release.slug}`}
               title={release.title}
-              summary={release.summary}
+              description={release.summary}
+              date={release.date}
+              image={release.image}
             />
           ))}
         </div>
