@@ -7,7 +7,9 @@ export default function manifest(): MetadataRoute.Manifest {
     description:
       "Российский голосовой чат для геймеров. Аналог Discord без VPN. Звонки 1:1, комнаты до 8 человек, личные и групповые чаты.",
     start_url: "/",
-    display: "standalone",
+    // "browser", не "standalone": лендинг — сайт, а не приложение. PWA у нас
+    // beta.mute.ac; standalone здесь заставлял Chrome предлагать установку.
+    display: "browser",
     background_color: "#0A0A0A",
     theme_color: "#0A0A0A",
     lang: "ru-RU",
