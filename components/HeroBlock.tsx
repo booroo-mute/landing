@@ -14,7 +14,7 @@ export default function HeroBlock() {
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
   return (
-    <section className="w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] bg-background-secondary flex flex-col lg:flex-row mt-8 md:mt-12 lg:mt-16">
+    <section className="w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] bg-background-secondary flex flex-col lg:flex-row mt-4 md:mt-6 lg:mt-8">
       <div className="w-full lg:w-1/2 pt-8 px-4 pb-8 md:pt-10 md:px-8 md:pb-10 lg:pt-[44px] lg:pl-[44px] lg:pb-[44px] lg:pr-0 flex flex-col justify-between order-2 lg:order-1">
         <div>
           <h1 className="title-large">
