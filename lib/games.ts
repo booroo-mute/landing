@@ -51,5 +51,11 @@ export function getAllGameSlugs(): string[] {
 export function getAllGameGuides(): GameGuide[] {
   return getAllGameSlugs()
     .map((slug) => getGameGuideBySlug(slug))
-    .filter((guide): guide is GameGuide => guide !== null);
+    .filter((guide): guide is GameGuide => guide !== null)
+    .sort((a, b) => {
+      const aDate = a.updated ?? a.date ?? "";
+      const bDate = b.updated ?? b.date ?? "";
+      if (aDate !== bDate) return aDate > bDate ? -1 : 1;
+      return (a.date ?? "") > (b.date ?? "") ? -1 : 1;
+    });
 }
