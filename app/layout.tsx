@@ -69,7 +69,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="scroll-smooth">
+    {/* Без scroll-smooth на html: CSS-плавность анимировала программный сброс
+        прокрутки при смене роута, и контент «уезжал» под sticky-шапку.
+        Плавный скролл логотипа задан в JS, колесо на главной сглаживает Lenis. */}
+    <html lang="ru">
       <body className={`${golosText.variable} antialiased`}>
         {/* OffBit подключён через @font-face в globals.css и не попадает под
             автопрелоад next/font — прелоадим вручную, чтобы заголовки не мигали */}
