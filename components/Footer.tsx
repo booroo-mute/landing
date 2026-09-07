@@ -28,23 +28,19 @@ export default function Footer() {
           <LinkText href="https://boosty.to/muteapp" underline={false} target="_blank">Поддержать проект</LinkText>
           <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Помощь</LinkText>
           <LinkText href="mailto:hello@mute.ac" underline={false} target="_blank">Связаться с нами</LinkText>
+          <Link href="/privacy" className="body-text text-text-secondary hover:text-accent transition-colors">
+            Политика конфиденциальности
+          </Link>
+          <Link href="/terms" className="body-text text-text-secondary hover:text-accent transition-colors">
+            Пользовательское соглашение
+          </Link>
         </nav>
         <div className="h-6 md:h-8"></div>
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-          <div className="flex items-center gap-4">
-            <Image src="/mute-icon.svg" alt="Mute" width={32} height={32} />
-            <span className="body-text text-text-secondary">
-              © 2026 Mute
-            </span>
-          </div>
-          <div className="flex flex-wrap items-center gap-4 md:gap-6">
-            <Link href="/privacy" className="body-text text-text-secondary hover:text-accent transition-colors">
-              Политика конфиденциальности
-            </Link>
-            <Link href="/terms" className="body-text text-text-secondary hover:text-accent transition-colors">
-              Пользовательское соглашение
-            </Link>
-          </div>
+        <div className="flex items-center gap-4">
+          <Image src="/mute-icon.svg" alt="Mute" width={32} height={32} />
+          <span className="body-text text-text-secondary">
+            © 2026 Mute
+          </span>
         </div>
       </div>
       <div className="h-8 md:h-10 lg:h-[48px]"></div>
