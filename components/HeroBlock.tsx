@@ -14,8 +14,8 @@ export default function HeroBlock() {
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
   return (
-    <section className="w-full min-h-[480px] md:min-h-[560px] lg:h-[640px] bg-background-secondary flex flex-col md:flex-row mt-4 md:mt-6 lg:mt-8">
-      <div className="w-full md:w-1/2 pt-8 px-4 pb-8 md:pt-10 md:px-8 md:pb-10 lg:pt-[44px] lg:pl-[44px] lg:pb-[44px] lg:pr-0 flex flex-col justify-between order-2 md:order-1">
+    <section className="w-full min-h-[480px] md:min-h-[560px] min-[1200px]:h-[640px] bg-background-secondary flex flex-col min-[1200px]:flex-row mt-4 md:mt-6 lg:mt-8">
+      <div className="w-full min-[1200px]:w-1/2 pt-8 px-4 pb-8 md:pt-10 md:px-8 md:pb-10 min-[1200px]:pt-[44px] min-[1200px]:pl-[44px] min-[1200px]:pb-[44px] min-[1200px]:pr-0 flex flex-col justify-between order-2 min-[1200px]:order-1">
         <div>
           <h1 className="title-large">
             Голосовое общение<br />для игр, друзей, тебя
@@ -24,7 +24,7 @@ export default function HeroBlock() {
             Легче не бывает. Один клик — и ты на связи
           </p>
         </div>
-        <div className="flex flex-col lg:flex-row gap-3 mt-8 lg:mt-0 lg:gap-[12px]">
+        <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
           {isMobile ? (
             <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
           ) : (
@@ -35,7 +35,7 @@ export default function HeroBlock() {
           )}
         </div>
       </div>
-      <div className="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:h-auto relative order-1 md:order-2 overflow-hidden">
+      <div className="w-full min-[1200px]:w-1/2 aspect-[4/3] min-[1200px]:aspect-auto min-[1200px]:h-auto relative order-1 min-[1200px]:order-2 overflow-hidden">
         <Image
           ref={parallaxRef}
           src="/hero-image-new1.webp"
