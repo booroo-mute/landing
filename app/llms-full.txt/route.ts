@@ -94,6 +94,8 @@ ${posts.map((p) => `- ${p.title} — ${SITE_URL}/blog/${p.slug}\n  ${p.descripti
 - Бот поддержки: https://t.me/mute_calls_bot
 - Boosty: https://boosty.to/muteapp
 - E-mail: hello@mute.ac
+- Политика обработки персональных данных: ${SITE_URL}/privacy
+- Пользовательское соглашение: ${SITE_URL}/terms
 `;
 
   return new Response(body, {

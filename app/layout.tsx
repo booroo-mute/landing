@@ -3,6 +3,7 @@ import { Golos_Text } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { OSProvider } from "@/components/OSProvider";
+import CookieBanner from "@/components/CookieBanner";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 
@@ -119,6 +120,7 @@ export default function RootLayout({
           ]}
         />
         <OSProvider>{children}</OSProvider>
+        <CookieBanner />
         <Script
           id="yandex-metrika"
           strategy="afterInteractive"
