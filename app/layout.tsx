@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { OSProvider } from "@/components/OSProvider";
 import CookieBanner from "@/components/CookieBanner";
+import MetrikaGoals from "@/components/MetrikaGoals";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 
@@ -121,6 +122,7 @@ export default function RootLayout({
         />
         <OSProvider>{children}</OSProvider>
         <CookieBanner />
+        <MetrikaGoals />
         <Script
           id="yandex-metrika"
           strategy="afterInteractive"
