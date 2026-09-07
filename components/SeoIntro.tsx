@@ -8,7 +8,9 @@ export default function SeoIntro() {
       <div className="container">
         <div className="max-w-[920px] mx-auto">
           <h2 className="title-large text-center">
-            Аналог Discord, который работает в России
+            Аналог Discord,
+            <br />
+            который работает в России
           </h2>
           <div className="mt-6 md:mt-8 flex flex-col gap-5 md:gap-6">
             <p className="body-text text-text-secondary">
