@@ -19,13 +19,13 @@ export default function BlogIndexPage() {
     <>
       <Header />
       <main className="container">
-        <div className="pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
+        <div className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
           <Breadcrumbs items={[{ label: "Блог" }]} />
           <h1 className="title-large mt-6 md:mt-8">Блог Mute</h1>
           <p className="title-medium text-text-secondary mt-4">
             Про голосовое общение, игры и то, как созваниваться без лишних сложностей.
           </p>
-          <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
+          <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
             {posts.map((post) => (
               <PostCard
                 key={post.slug}
