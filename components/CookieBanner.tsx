@@ -30,7 +30,7 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:right-auto sm:max-w-[400px] z-50 bg-background-tertiary border border-[#1F1F1F] p-4 md:p-5 flex items-center gap-4 md:gap-5">
+    <div className="fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-[400px] z-50 bg-background-tertiary border border-[#1F1F1F] p-4 md:p-5 flex items-center gap-4 md:gap-5">
       <p className="body-text text-text-secondary">
         Пользуясь нашим сайтом, вы соглашаетесь с тем, что{" "}
         <Link href="/privacy" className="underline hover:text-accent transition-colors">
