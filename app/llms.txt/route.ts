@@ -14,11 +14,12 @@ export async function GET() {
 > который работает в России без VPN. Звонки 1:1 без ограничения времени,
 > голосовые комнаты до 8 человек, видеозвонки, демонстрация экрана,
 > личные и групповые чаты. Приложения для Windows и macOS + веб-версия.
+> По-русски название читается «мьют», пишут также «мут» и «муте».
 
 > Mute is a free Russian voice chat app for gamers — a Discord alternative
 > that works in Russia without a VPN. 1:1 calls, voice rooms up to 8 people,
 > video calls, screen sharing, personal and group text chats. Windows,
-> macOS and web.
+> macOS and web. Russian spellings: «мьют», «мут».
 
 ## Основное
 

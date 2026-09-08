@@ -30,6 +30,10 @@ export const metadata: Metadata = {
     "альтернатива discord",
     "дискорд без VPN",
     "mute",
+    "мьют",
+    "мут",
+    "муте",
+    "мут ас",
   ],
   verification: {
     ...(process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && {
@@ -98,6 +102,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Mute",
+              alternateName: ["Мьют", "Мут", "Муте"],
               url: SITE_URL,
               logo: `${SITE_URL}/logo.png`,
               sameAs: [

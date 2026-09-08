@@ -17,10 +17,12 @@ export async function GET() {
 
 Mute — бесплатный голосовой чат для геймеров, российская альтернатива Discord.
 Работает в России без VPN и обходных настроек. Сделан небольшой независимой
-командой разработчиков.
+командой разработчиков. По-русски название читается «мьют», в поиске пишут
+также «мут» и «муте» — это один и тот же сервис.
 
 Mute is a free voice chat app for gamers, a Russian Discord alternative that
-works in Russia without a VPN. Built by a small independent team.
+works in Russia without a VPN. Built by a small independent team. Russian
+spellings: «мьют», «мут», «муте».
 
 ## Возможности
 

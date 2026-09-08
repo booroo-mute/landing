@@ -6,6 +6,7 @@ export const SOFTWARE_APPLICATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "Mute",
+  alternateName: ["Мьют", "Мут", "Муте"],
   url: SITE_URL,
   description:
     "Голосовой чат для геймеров — российский аналог Discord без VPN. Звонки 1:1 с видео, комнаты до 8 человек, демонстрация экрана, личные и групповые чаты.",
