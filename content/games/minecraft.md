@@ -1,6 +1,6 @@
 ---
 title: "Как разговаривать с другом в Майнкрафте: войс-моды и способ без модов"
-description: "В Minecraft нет встроенного голосового чата. Разбираем оба рабочих способа: моды Plasmo Voice и Simple Voice Chat для своего сервера или обычный созвон в браузере."
+description: "В Minecraft нет встроенного голосового чата. Разбираем оба рабочих способа: моды Plasmo Voice и Simple Voice Chat для своего сервера или созвон в браузере."
 date: "2026-08-28"
 updated: "2026-09-02"
 image: "/games/golosovoy-chat-v-minecraft.webp"

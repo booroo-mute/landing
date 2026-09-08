@@ -13,7 +13,7 @@ import { SOFTWARE_APPLICATION_SCHEMA } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Аналог Discord в России без VPN — Mute, бесплатный голосовой чат",
   description:
-    "Ищете замену Discord, которая работает в России без VPN? Mute — бесплатный голосовой чат для игр: звонки 1:1, комнаты до 8 человек, чаты. Сравнение с Discord по пунктам.",
+    "Ищете замену Discord, которая работает в России без VPN? Mute — бесплатный голосовой чат для игр: звонки 1:1, комнаты до 8 человек, чаты. Сравнение по пунктам.",
   alternates: { canonical: "/discord-alternative" },
   openGraph: {
     title: "Аналог Discord в России — Mute",
