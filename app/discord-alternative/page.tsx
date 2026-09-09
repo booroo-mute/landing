@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 
 const comparisonRows: Array<{ label: string; mute: string; discord: string }> = [
   { label: "Доступ из России", mute: "Работает без VPN", discord: "Заблокирован, нужен VPN" },
+  { label: "Пинг в игре", mute: "Трафик идёт напрямую, VPN не нужен", discord: "С системным VPN игра тоже идёт через VPN-сервер, пинг растёт" },
   { label: "Цена", mute: "Бесплатно, без подписок", discord: "Бесплатно + платный Nitro" },
   { label: "Что внутри", mute: "Друзья, звонки, видео, чаты, демонстрация экрана", discord: "То же плюс серверы, каналы, роли, магазин, Nitro" },
   { label: "Звонки 1-1", mute: "Без ограничений по времени", discord: "Есть" },
@@ -112,13 +113,25 @@ export default function DiscordAlternativePage() {
             ничего не ставить и открыть звонок вкладкой браузера.
           </p>
 
+          <p className="body-text text-text-secondary mt-4 md:mt-5">
+            И про пинг. Системный VPN ради Discord пропускает через чужой
+            сервер весь трафик компьютера, включая саму игру, и добавляет
+            десятки миллисекунд к каждому выстрелу. Mute туннель не нужен,
+            поэтому игра идёт своей дорогой с обычным пингом. Подробнее:{" "}
+            <Link href="/blog/vpn-tolko-dlya-discord" className="text-accent hover:underline">
+              почему пинг растёт с VPN и что с этим делать
+            </Link>
+            .
+          </p>
+
           <h2 className="title-medium-semibold mt-10 md:mt-12">Кому подойдёт Mute</h2>
           <ul className="mt-4 list-disc list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Компаниям друзей, которые созваниваются ради игр и общения
             </li>
             <li className="body-text text-text-secondary">
-              Тем, кому надоело включать VPN ради каждого созвона
+              Тем, кому надоело включать VPN ради каждого созвона и
+              терять пинг в игре
             </li>
             <li className="body-text text-text-secondary">
               Тем, кто хочет лёгкое приложение без лишних настроек
