@@ -11,12 +11,12 @@ import { FAQ_ITEMS } from "@/lib/faq";
 import { SOFTWARE_APPLICATION_SCHEMA } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Аналог Discord в России без VPN — Mute, бесплатный голосовой чат",
+  title: "Аналог и замена Discord в России 2026 — Mute, без VPN",
   description:
-    "Ищете замену Discord, которая работает в России без VPN? Mute — бесплатный голосовой чат для игр: звонки 1:1, комнаты до 8 человек, чаты. Сравнение по пунктам.",
+    "Замена Discord в России без VPN для ПК и браузера: Mute — бесплатный голосовой чат для игр с демонстрацией экрана, комнаты до 8 человек. Сравнение по пунктам.",
   alternates: { canonical: "/discord-alternative" },
   openGraph: {
-    title: "Аналог Discord в России — Mute",
+    title: "Аналог и замена Discord в России — Mute",
     description:
       "Бесплатный голосовой чат для игр, работает без VPN. Сравнение Mute и Discord по пунктам.",
     url: "/discord-alternative",
@@ -35,7 +35,7 @@ const comparisonRows: Array<{ label: string; mute: string; discord: string }> = 
   { label: "Текстовые чаты", mute: "Личные и групповые", discord: "Личные, групповые, каналы" },
   { label: "Публичные сообщества", mute: "Нет — только свой круг", discord: "Да, основной сценарий" },
   { label: "Сложность", mute: "Позвонить можно сразу после регистрации", discord: "Серверы, роли, права, настройки" },
-  { label: "Платформы", mute: "Windows, macOS, браузер", discord: "Windows, macOS, Linux, iOS, Android, браузер" },
+  { label: "Платформы", mute: "ПК (Windows, macOS) и браузер", discord: "Windows, macOS, Linux, iOS, Android, браузер" },
   { label: "Язык интерфейса", mute: "Русский", discord: "Русский (частично)" },
 ];
 
@@ -51,7 +51,7 @@ export default function DiscordAlternativePage() {
           <Breadcrumbs items={[{ label: "Аналог Discord" }]} />
 
           <h1 className="title-large mt-6 md:mt-8">
-            Аналог Discord в России — Mute
+            Аналог и замена Discord в России — Mute
           </h1>
 
           <div className="mt-6 md:mt-8 flex flex-col gap-5 md:gap-6">
@@ -59,14 +59,15 @@ export default function DiscordAlternativePage() {
               Осенью 2024 года Discord перестал открываться в России без VPN,
               и миллионам геймеров пришлось искать замену для голосовых
               созвонов. Mute — один из вариантов такой замены. Это бесплатный
-              голосовой чат, который работает в России без VPN и сделан
-              специально для игр и общения со своей компанией.
+              голосовой чат для ПК и браузера, который работает в России без
+              VPN и сделан специально для игр и общения со своей компанией.
             </p>
             <p className="body-text text-text-secondary">
               Копировать Discord целиком мы не стали. В Mute нет публичных
               серверов, каналов и ролей, есть друзья, звонки один на один,
-              комнаты до 8 человек и чаты. Этого хватает, чтобы созвониться
-              и играть, а настройка не растягивается на час.
+              комнаты до 8 человек, чаты и демонстрация экрана. Этого
+              хватает, чтобы созвониться и играть, а настройка не
+              растягивается на час.
             </p>
           </div>
 
