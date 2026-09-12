@@ -13,6 +13,9 @@
      новых статей/гайдов с прошлого деплоя
    - `curl -sI https://mute.ac/releases/1-3-0` → 308/301 на /releases
    - `curl -sI "https://mute.ac/games/roblox~~~x"` → 308 на /games/roblox
+   - `curl -sI https://mute.ac/games/golosovoy-chat-v-roblox.webp` → 200 image/webp
+     (редиректы срабатывают раньше статики — правило для «хвостов» однажды
+     съело картинки)
    - `curl -s https://mute.ac/llms.txt | grep -c /games/` → число гайдов
    - `curl -sI https://mute.ac/ | grep -i strict-transport` → HSTS на месте,
      `x-powered-by` отсутствует
