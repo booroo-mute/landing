@@ -27,8 +27,10 @@ const nextConfig: NextConfig = {
       })),
       // В логах встречаются /games/roblox~~~Голосовой и /games/robloxГолосовой —
       // хвост заголовка прилипает к ссылке при копировании из мессенджеров.
+      // Точка исключена из «хвоста»: иначе под правило попадают картинки
+      // /games/*.webp и *-og.jpg (редиректы срабатывают раньше статики).
       {
-        source: "/games/:slug([a-z0-9-]+):junk([^a-z0-9\\-/].*)",
+        source: "/games/:slug([a-z0-9-]+):junk([^a-z0-9\\-/.].*)",
         destination: "/games/:slug",
         permanent: true,
       },
