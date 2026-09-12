@@ -14,7 +14,18 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
-    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
+    return [
+      { source: "/:path*", headers: SECURITY_HEADERS },
+      // Статика из public/ по умолчанию отдаётся с max-age=0 (перепроверка
+      // по ETag на каждый запрос). Картинки и шрифты меняются редко; при
+      // замене файла с тем же именем добавляйте ?v=N к URL (см. content/games).
+      {
+        source: "/:file(.*\\.(?:webp|jpe?g|png|svg|woff2|ico))",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=86400" },
+        ],
+      },
+    ];
   },
   async redirects() {
     return [
@@ -29,10 +40,12 @@ const nextConfig: NextConfig = {
       // хвост заголовка прилипает к ссылке при копировании из мессенджеров.
       // Точка исключена из «хвоста»: иначе под правило попадают картинки
       // /games/*.webp и *-og.jpg (редиректы срабатывают раньше статики).
+      // 307, а не 308: постоянный редирект браузеры кешируют бессрочно, и
+      // одна ошибка в правиле (как с картинками 13.09) залипает у посетителей.
       {
         source: "/games/:slug([a-z0-9-]+):junk([^a-z0-9\\-/.].*)",
         destination: "/games/:slug",
-        permanent: true,
+        permanent: false,
       },
     ];
   },

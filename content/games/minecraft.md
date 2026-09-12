@@ -3,8 +3,8 @@ title: "Как разговаривать с другом в Майнкрафт�
 description: "В Minecraft нет встроенного голосового чата. Разбираем оба рабочих способа: моды Plasmo Voice и Simple Voice Chat для своего сервера или созвон в браузере."
 date: "2026-08-28"
 updated: "2026-09-09"
-image: "/games/golosovoy-chat-v-minecraft.webp"
-ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg"
+image: "/games/golosovoy-chat-v-minecraft.webp?v=2"
+ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg?v=2"
 related:
   - "blog/golosovoy-chat-v-brauzere"
   - "games/roblox"
@@ -15,7 +15,7 @@ related:
 
 **Коротко.** Свой сервер на Java: поставьте войс-мод Plasmo Voice или Simple Voice Chat, получите голос «от расстояния» прямо в игре. Любой другой случай (Bedrock, Realms, чужой сервер, телефон): созвонитесь в отдельной вкладке браузера и сверните её. Дальше подробности по обоим способам.
 
-![Персонажи Майнкрафта на блоках: голосовой чат в игре доступен через войс-мод или созвон в браузере](/games/golosovoy-chat-v-minecraft.webp)
+![Персонажи Майнкрафта на блоках: голосовой чат в игре доступен через войс-мод или созвон в браузере](/games/golosovoy-chat-v-minecraft.webp?v=2)
 
 ## Способ 1: войс-моды, если у вас свой сервер на Java
 
