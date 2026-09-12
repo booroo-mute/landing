@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     description:
       "Бесплатный голосовой чат для игр, работает без VPN. Сравнение Mute и Discord по пунктам.",
     url: "/discord-alternative",
+    images: [DEFAULT_OG_IMAGE],
     type: "article",
   },
 };
@@ -142,8 +144,8 @@ export default function DiscordAlternativePage() {
           <p className="body-text text-text-secondary mt-4">
             Если вы ведёте сообщество на сотни участников с каналами, ролями
             и ботами, в Mute вам будет тесно, таких инструментов в нём нет.
-            Для больших публичных сообществ лучше подойдут Discord с VPN или
-            Telegram. Mute рассчитан на созвоны со своими.
+            Для больших публичных сообществ по-прежнему нужен Discord с VPN
+            или свой сервер вроде TeamSpeak. Mute рассчитан на созвоны со своими.
           </p>
 
           <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3">

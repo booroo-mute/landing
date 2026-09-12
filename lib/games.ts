@@ -12,6 +12,8 @@ export interface GameGuide {
   updated?: string;
   image?: string;
   ogImage?: string;
+  /** Связанные материалы: "blog/<slug>" или "games/<slug>" (см. RelatedLinks). */
+  related?: string[];
   content: string;
 }
 
@@ -33,6 +35,7 @@ export function getGameGuideBySlug(slug: string): GameGuide | null {
     updated: data.updated,
     image: data.image,
     ogImage: data.ogImage,
+    related: Array.isArray(data.related) ? data.related : undefined,
     content,
   };
 }

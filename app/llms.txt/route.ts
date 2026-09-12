@@ -1,4 +1,5 @@
 import { getAllBlogPosts } from "@/lib/blog";
+import { getAllGameGuides } from "@/lib/games";
 import { SITE_URL } from "@/lib/site";
 
 // llms.txt — краткая машиночитаемая сводка сайта для AI-краулеров
@@ -7,6 +8,7 @@ export const dynamic = "force-static";
 
 export async function GET() {
   const posts = getAllBlogPosts();
+  const guides = getAllGameGuides();
 
   const body = `# Mute
 
@@ -25,10 +27,16 @@ export async function GET() {
 
 - [Главная](${SITE_URL}/): что такое Mute и его возможности
 - [Аналог Discord в России](${SITE_URL}/discord-alternative): сравнение Mute и Discord по пунктам
+- [Голосовой чат с другом онлайн](${SITE_URL}/voice-chat): как созвониться в браузере за пару минут, в том числе с телефона
+- [Голосовой чат в играх](${SITE_URL}/games): гайды по войсу в конкретных играх и что делать, когда он не работает
 - [Скачать](${SITE_URL}/download): установщики для Windows и macOS
 - [Установка](${SITE_URL}/install): инструкции для Windows (SmartScreen) и macOS (Gatekeeper)
 - [Что нового](${SITE_URL}/releases): история обновлений приложения
 - [Веб-версия](https://beta.mute.ac/welcome): Mute в браузере, без установки
+
+## Гайды по играм
+
+${guides.map((g) => `- [${g.title}](${SITE_URL}/games/${g.slug}): ${g.description ?? ""}`).join("\n")}
 
 ## Блог
 
@@ -40,8 +48,10 @@ ${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.description}
 - Платформы: Windows, macOS, веб-браузер (WebRTC)
 - Лимит голосовой комнаты: 8 участников
 - Видеозвонки: есть; фирменная стилизация под пиксельный ретро-телефон, отключается
-- Демонстрация экрана: есть, в приложении и в браузере
-- Регистрация: ник, e-mail, пароль
+- Демонстрация экрана: есть, в приложении и в браузере, со звуком системы
+- Веб-версия на телефоне: работает в Safari (iOS) и Chrome (Android), отдельных мобильных приложений нет
+- Регистрация: ник, e-mail, пароль; гостевого входа без аккаунта нет
+- Push-to-talk: нет, микрофон включается и выключается кнопкой
 - Работает в России: да, VPN не требуется
 - Публичных серверов и каналов нет — общение только в своём круге
 

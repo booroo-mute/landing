@@ -6,7 +6,7 @@
 площадках намеренно различаются — не выравнивать под одну.
 
 Ассеты для всех площадок: логотип `public/logo.png` / `public/mute-icon.svg`,
-скриншоты `public/calls.png` (звонок) и `public/chat.png` (чат),
+скриншоты `public/calls.webp` (звонок) и `public/chat.webp` (чат),
 OG-баннер `public/open-graph.png` (1200×630).
 
 ---

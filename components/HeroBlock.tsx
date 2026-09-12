@@ -36,11 +36,15 @@ export default function HeroBlock() {
         </div>
       </div>
       <div className="w-full min-[1200px]:w-1/2 aspect-[4/3] min-[1200px]:aspect-auto min-[1200px]:h-auto relative order-1 min-[1200px]:order-2 overflow-hidden">
+        {/* LCP-элемент главной: priority снимает lazy и добавляет preload,
+            sizes — чтобы десктоп не качал 3840px-вариант под половину экрана */}
         <Image
           ref={parallaxRef}
           src="/hero-image-new1.webp"
           alt="Mute — голосовой чат для игр: интерфейс приложения с активным звонком и списком друзей"
           fill
+          priority
+          sizes="(min-width: 1200px) 50vw, 100vw"
           className="object-cover will-change-transform"
         />
       </div>

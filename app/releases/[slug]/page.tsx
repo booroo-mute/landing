@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import MarkdownImage from "@/components/MarkdownImage";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
 import { SITE_URL } from "@/lib/site";
 
@@ -114,9 +115,7 @@ export default async function ReleasePage({ params }: Props) {
                 li: ({ children }) => (
                   <li className="body-text text-text-secondary">{children}</li>
                 ),
-                img: ({ src, alt }) => (
-                  <img src={src} alt={alt || ""} className="w-full my-4 md:my-6" />
-                ),
+                img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
                 video: ({ src }) => (
                   <video src={src} controls className="w-full my-4 md:my-6" />
                 ),

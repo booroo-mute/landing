@@ -3,7 +3,15 @@ import { getAllReleases } from "@/lib/releases";
 import { getAllInstallGuides } from "@/lib/install";
 import { getAllGameGuides } from "@/lib/games";
 import { getAllBlogPosts } from "@/lib/blog";
-import { SITE_URL, HOME_UPDATED } from "@/lib/site";
+import {
+  SITE_URL,
+  HOME_UPDATED,
+  DISCORD_ALTERNATIVE_UPDATED,
+  VOICE_CHAT_UPDATED,
+  DOWNLOAD_UPDATED,
+  INSTALL_UPDATED,
+  LEGAL_UPDATED,
+} from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
@@ -41,7 +49,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const latestRelease = releases[0]?.date;
-  const latestBlog = blogPosts[0]?.date;
+  // Лента блога меняется и при обновлении старого поста, не только при новом
+  const latestBlog = blogPosts
+    .map((p) => p.updated ?? p.date)
+    .sort()
+    .at(-1);
   const latestGame = gameGuides
     .map((g) => g.updated ?? g.date)
     .filter(Boolean)
@@ -57,25 +69,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/discord-alternative`,
-      lastModified: new Date(HOME_UPDATED),
+      lastModified: new Date(DISCORD_ALTERNATIVE_UPDATED),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/voice-chat`,
-      lastModified: new Date(HOME_UPDATED),
+      lastModified: new Date(VOICE_CHAT_UPDATED),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/download`,
-      lastModified: new Date(HOME_UPDATED),
+      lastModified: new Date(DOWNLOAD_UPDATED),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/install`,
-      lastModified: new Date(HOME_UPDATED),
+      lastModified: new Date(INSTALL_UPDATED),
       changeFrequency: "monthly",
       priority: 0.6,
     },
@@ -87,13 +99,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: new Date("2026-09-07"),
+      lastModified: new Date(LEGAL_UPDATED),
       changeFrequency: "monthly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: new Date("2026-09-07"),
+      lastModified: new Date(LEGAL_UPDATED),
       changeFrequency: "monthly",
       priority: 0.3,
     },

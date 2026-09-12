@@ -28,4 +28,5 @@ cd /root/mute/landing
 git pull
 npm ci && npm run build
 pm2 reload mute-landing
+npm run indexnow   # пингует Яндекс/IndexNow только изменившимися URL (см. scripts/indexnow-ping.mjs)
 ```

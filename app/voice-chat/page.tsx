@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     description:
       "Откройте Mute в браузере, отправьте другу ссылку-приглашение и говорите. Бесплатно и без VPN.",
     url: "/voice-chat",
+    images: [DEFAULT_OG_IMAGE],
     type: "website",
   },
 };
@@ -56,6 +58,18 @@ export default function VoiceChatPage() {
               открывается прямо в браузере, работает в России без VPN и ничего
               не стоит.
             </p>
+            {/* CTA сразу под заголовком: по Метрике запрос «голосовой чат»
+                давал отказ 36% и 26 секунд на странице — люди не находили,
+                где начать. Рядом честно про регистрацию, чтобы она не была
+                сюрпризом на следующем шаге. */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">
+                Открыть в браузере
+              </ButtonPrimary>
+              <span className="body-text text-text-secondary">
+                Регистрация за минуту: ник, почта и пароль. Телефон не нужен.
+              </span>
+            </div>
             <p className="body-text text-text-secondary">
               Случайных собеседников здесь нет. Это не чат-рулетка и не сайт
               знакомств: в разговор попадают только те, кого вы сами позвали.
@@ -99,6 +113,21 @@ export default function VoiceChatPage() {
             компьютера, со школьного ноутбука или с телефона. Если вы играете на консоли и
             голосовой чат в пати недоступен, Mute на телефоне в соседнем окне
             решает и эту проблему.
+          </p>
+
+          <h2 className="title-medium-semibold mt-10 md:mt-12">
+            Голосовой чат на телефоне: Safari и Chrome
+          </h2>
+          <p className="body-text text-text-secondary mt-4">
+            Отдельного мобильного приложения у Mute нет, но веб-версия
+            работает в Safari на iPhone и в Chrome на Android: откройте{" "}
+            <a href="https://beta.mute.ac/welcome" className="text-accent hover:underline">
+              beta.mute.ac
+            </a>
+            , разрешите доступ к микрофону и звоните. Чтобы не искать вкладку
+            каждый раз, добавьте страницу на домашний экран через меню
+            браузера. Это тот самый «аналог Discord на телефоне» без установки:
+            звонок идёт в браузере, игра — рядом, на консоли или на ПК.
           </p>
 
           <h2 className="title-medium-semibold mt-10 md:mt-12">

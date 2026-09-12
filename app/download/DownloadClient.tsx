@@ -7,6 +7,7 @@ import { useOS, OS } from "@/components/OSProvider";
 import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
 import LinkText from "@/components/LinkText";
 import { tmrReachGoal } from "@/lib/topMailRu";
+import { ymReachGoal } from "@/lib/metrika";
 
 function getDownloadInfo(os: OS): { url: string; label: string } | null {
   if (os === "windows") {
@@ -24,13 +25,16 @@ export default function DownloadClient() {
   useEffect(() => {
     if (os === "mobile") {
       tmrReachGoal("open_app");
+      ymReachGoal("open_web", { auto: true });
       window.location.href = DOWNLOAD_CONFIG.webVersion;
       return;
     }
 
     const downloadInfo = getDownloadInfo(os);
     if (downloadInfo) {
+      // Авторедирект — не клик, автоцель «Скачивание файла» его не видит.
       tmrReachGoal("download");
+      ymReachGoal(os === "macos" ? "download_mac" : "download_win", { auto: true });
       const timer = setTimeout(() => {
         window.location.href = downloadInfo.url;
       }, 500);
@@ -46,7 +50,7 @@ export default function DownloadClient() {
   const isUnknownOS = os === "other";
 
   return (
-    <main className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-16 lg:py-0 gap-12 lg:gap-24">
+    <section className="min-h-[70vh] flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-12 lg:py-16 gap-12 lg:gap-24">
       <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[500px]">
         <Link href="/">
           <Image
@@ -111,6 +115,6 @@ export default function DownloadClient() {
           className="w-full h-auto"
         />
       </div>
-    </main>
+    </section>
   );
 }

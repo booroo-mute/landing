@@ -65,13 +65,15 @@ export function getReleaseBySlug(slug: string): Release | null {
   };
 }
 
+// «10 сентября 2026» — по правилам русской типографики месяц со строчной
+// и без запятой перед годом.
 export function formatDate(date: string): string {
   const months = [
-    "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
-    "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+    "января", "февраля", "марта", "апреля", "мая", "июня",
+    "июля", "августа", "сентября", "октября", "ноября", "декабря"
   ];
   const [year, month, day] = date.split("-");
-  return `${parseInt(day)} ${months[parseInt(month) - 1]}, ${year}`;
+  return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
 }
 
 export function getAllReleaseSlugs(): string[] {

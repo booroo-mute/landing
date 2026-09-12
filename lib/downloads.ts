@@ -1,8 +1,12 @@
+const VERSION = '0.2.2'
+const RELEASES_BASE = 'https://github.com/ylwsubmarine/mute-releases/releases/download'
+
 export const DOWNLOAD_CONFIG = {
+  version: VERSION,
   baseUrl: 'https://download.mute.ac', // TODO: поменять когда будет известен URL
   files: {
-    windows: 'https://github.com/ylwsubmarine/mute-releases/releases/download/v0.2.2/mute-win-0.2.2.exe',
-    macos: 'https://github.com/ylwsubmarine/mute-releases/releases/download/v0.2.2/mute-macos-0.2.2.dmg',
+    windows: `${RELEASES_BASE}/v${VERSION}/mute-win-${VERSION}.exe`,
+    macos: `${RELEASES_BASE}/v${VERSION}/mute-macos-${VERSION}.dmg`,
   },
   webVersion: 'https://beta.mute.ac/welcome',
 }

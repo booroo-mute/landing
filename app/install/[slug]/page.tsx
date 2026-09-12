@@ -5,8 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import MarkdownImage from "@/components/MarkdownImage";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, DEFAULT_OG_IMAGE } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -36,6 +37,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url,
       type: "article",
+      ...(guide.date && { publishedTime: guide.date }),
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
@@ -126,9 +129,7 @@ export default async function InstallPage({ params }: Props) {
                 code: ({ children }) => (
                   <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>
                 ),
-                img: ({ src, alt }) => (
-                  <img src={src} alt={alt || ""} className="w-full my-4 md:my-6" />
-                ),
+                img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
               }}
             >
               {guide.content}

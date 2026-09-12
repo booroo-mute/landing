@@ -7,6 +7,7 @@ import CookieBanner from "@/components/CookieBanner";
 import MetrikaGoals from "@/components/MetrikaGoals";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/schema";
 
 const golosText = Golos_Text({
   variable: "--font-golos",
@@ -24,22 +25,6 @@ export const metadata: Metadata = {
   // и подставляет случайный текст со страницы (ловили сниппет из карточки релиза).
   description:
     "Бесплатный голосовой чат для игр с друзьями: звонки 1:1, комнаты до 8 человек, чаты. В браузере и приложении, в России без VPN. Без случайных собеседников.",
-  keywords: [
-    "голосовой чат для игр",
-    "голосовой чат с другом",
-    "войс чат онлайн",
-    "аналог дискорда",
-    "альтернатива discord",
-    "замена дискорда",
-    "мессенджер для геймеров",
-    "игровой голосовой чат",
-    "дискорд без VPN",
-    "mute",
-    "мьют",
-    "мут",
-    "муте",
-    "мут ас",
-  ],
   verification: {
     ...(process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && {
       yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
@@ -65,12 +50,11 @@ export const metadata: Metadata = {
     locale: "ru_RU",
     type: "website",
   },
+  // Только тип карточки: title/description/images Next подставляет из
+  // openGraph каждой страницы. Если задать их здесь, дочерние страницы
+  // унаследуют текст главной (ловили превью гайдов с описанием главной).
   twitter: {
     card: "summary_large_image",
-    title: "Mute — голосовой чат для игр с друзьями",
-    description:
-      "Аналог Discord без VPN. Звонки 1:1, комнаты до 8 человек и чаты с друзьями. Бесплатно.",
-    images: ["/open-graph.png"],
   },
 };
 
@@ -82,7 +66,7 @@ export default function RootLayout({
   return (
     // Без scroll-smooth на html: CSS-плавность анимировала программный сброс
     // прокрутки при смене роута, и контент «уезжал» под sticky-шапку.
-    // Плавный скролл логотипа задан в JS, колесо на главной сглаживает Lenis.
+    // Плавный скролл логотипа задан в JS.
     <html lang="ru">
       <body className={`${golosText.variable} antialiased`}>
         {/* OffBit подключён через @font-face в globals.css и не попадает под
@@ -101,35 +85,7 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-        <JsonLd
-          data={[
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Mute",
-              alternateName: ["Мьют", "Мут", "Муте"],
-              url: SITE_URL,
-              logo: `${SITE_URL}/logo.png`,
-              sameAs: [
-                "https://t.me/mutecalls",
-                "https://boosty.to/muteapp",
-              ],
-              contactPoint: {
-                "@type": "ContactPoint",
-                email: "hello@mute.ac",
-                contactType: "customer support",
-                availableLanguage: ["Russian"],
-              },
-            },
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: "Mute",
-              url: SITE_URL,
-              inLanguage: "ru-RU",
-            },
-          ]}
-        />
+        <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
         <OSProvider>{children}</OSProvider>
         <CookieBanner />
         <MetrikaGoals />

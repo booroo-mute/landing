@@ -1,27 +1,38 @@
 "use client";
 
 import { useEffect } from "react";
+import { ymReachGoal, type MetrikaGoal } from "@/lib/metrika";
+import { tmrReachGoal } from "@/lib/topMailRu";
 
-const COUNTER_ID = 108242058;
-
-declare global {
-  interface Window {
-    ym?: (id: number, action: string, goal: string) => void;
-  }
-}
-
-// Единый обработчик целей Метрики: клик по любой ссылке на веб-версию
-// (все кнопки «Открыть в браузере» / «Начать общаться» на всех страницах)
-// отправляет событие open_web. Скачивания установщиков считает автоцель
-// «Скачивание файла», отдельное событие им не нужно.
+// Единый обработчик целей по кликам на всех страницах. Цели:
+//   open_web       — любая ссылка на веб-версию («Открыть в браузере», «Начать общаться»)
+//   download_click — переход на /download
+//   download_win / download_mac — прямая ссылка на установщик (клик; авторедирект
+//                    на /download шлёт те же цели сам, см. DownloadClient)
+//   telegram_click — канал или бот поддержки в Telegram
+//   guide_cta      — клик внутри CTA-блока статьи/гайда (data-goal="guide_cta")
+// Автоцель Метрики «Скачивание файла» не ловит редирект через location.href,
+// поэтому скачивания считаем явно.
 export default function MetrikaGoals() {
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      const link = (e.target as Element | null)?.closest?.("a");
+      const target = e.target as Element | null;
+      const link = target?.closest?.("a");
       if (!link) return;
       const href = link.getAttribute("href") ?? "";
-      if (href.includes("beta.mute.ac/welcome")) {
-        window.ym?.(COUNTER_ID, "reachGoal", "open_web");
+      const goals: MetrikaGoal[] = [];
+
+      if (href.includes("beta.mute.ac/welcome")) goals.push("open_web");
+      else if (href === "/download") goals.push("download_click");
+      else if (/\.exe(\?|$)/.test(href)) goals.push("download_win");
+      else if (/\.dmg(\?|$)/.test(href)) goals.push("download_mac");
+      else if (href.includes("t.me/")) goals.push("telegram_click");
+
+      if (target?.closest?.('[data-goal="guide_cta"]')) goals.push("guide_cta");
+
+      for (const goal of goals) {
+        ymReachGoal(goal, { href });
+        if (goal === "open_web") tmrReachGoal("open_web");
       }
     };
     document.addEventListener("click", onClick, true);
