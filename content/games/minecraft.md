@@ -5,6 +5,10 @@ date: "2026-08-28"
 updated: "2026-09-09"
 image: "/games/golosovoy-chat-v-minecraft.webp"
 ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg"
+related:
+  - "blog/golosovoy-chat-v-brauzere"
+  - "games/roblox"
+  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
 ---
 
 В Майнкрафте нет встроенного голосового чата. Ни в Java Edition, ни в Bedrock, ни на серверах, ни в одиночной игре по сети. Печатать в текстовый чат посреди боя или стройки неудобно, поэтому вопрос, как разговаривать с другом по микрофону, встаёт у каждого, кто начал играть вдвоём. Рабочих способа два, и выбор зависит от того, где и на чём вы играете.

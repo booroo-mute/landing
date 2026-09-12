@@ -5,6 +5,10 @@ date: "2026-09-07"
 updated: "2026-09-10"
 image: "/games/golosovoy-chat-v-dota-2.webp"
 ogImage: "/games/golosovoy-chat-v-dota-2-og.jpg"
+related:
+  - "games/cs2"
+  - "blog/vpn-tolko-dlya-discord"
+  - "blog/discord-lagaet-vo-vremya-igry"
 ---
 
 В Dota 2 разговаривать по микрофону можно прямо в игре, но устроен войс хитрее, чем кажется, и большинство проблем с ним сводится к одной развилке. С неё и начнём.
