@@ -7,7 +7,7 @@ image: "/games/golosovoy-chat-v-dota-2.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-dota-2-og.jpg?v=2"
 related:
   - "games/cs2"
-  - "blog/vpn-tolko-dlya-discord"
+  - "games/steam"
   - "blog/discord-lagaet-vo-vremya-igry"
 ---
 

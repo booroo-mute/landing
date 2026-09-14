@@ -119,11 +119,7 @@ export default function DiscordAlternativePage() {
             И про пинг. Системный VPN ради Discord пропускает через чужой
             сервер весь трафик компьютера, включая саму игру, и добавляет
             десятки миллисекунд к каждому выстрелу. Mute туннель не нужен,
-            поэтому игра идёт своей дорогой с обычным пингом. Подробнее:{" "}
-            <Link href="/blog/vpn-tolko-dlya-discord" className="text-accent hover:underline">
-              почему пинг растёт с VPN и что с этим делать
-            </Link>
-            .
+            поэтому игра идёт своей дорогой с обычным пингом.
           </p>
 
           <h2 className="title-medium-semibold mt-10 md:mt-12">Кому подойдёт Mute</h2>
