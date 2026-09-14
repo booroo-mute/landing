@@ -118,7 +118,8 @@ stories/
 | ButtonSecondary | `components/ButtonSecondary.tsx` | Вторичная кнопка |
 | CallCard | `components/CallCard.tsx` | Карточка звонка |
 | FeatureItem | `components/FeatureItem.tsx` | Элемент списка фич |
-| ReleaseCard | `components/ReleaseCard.tsx` | Карточка релиза |
+| PostCard | `components/PostCard.tsx` | Карточка для лент блога, гайдов и релизов |
+| CtaBanner | `components/CtaBanner.tsx` | Баннер-призыв в статьях: полный в конце, компактный в середине; кнопки зависят от ОС |
 
 ### Секции
 

@@ -5,12 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
-import ButtonPrimary from "@/components/ButtonPrimary";
-import ButtonSecondary from "@/components/ButtonSecondary";
+import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import { articleMarkdownComponents } from "@/components/markdownComponents";
 import { getGameGuideBySlug, getAllGameSlugs } from "@/lib/games";
-import { extractFaq, firstImageSrc } from "@/lib/markdown";
+import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
 import { formatDate } from "@/lib/releases";
 import { SITE_URL } from "@/lib/site";
@@ -64,6 +63,9 @@ export default async function GameGuidePage({ params }: Props) {
   // FAQPage объявляем только когда в тексте есть настоящий блок вопросов —
   // разметка без видимого контента считается спамом и у Google, и у Яндекса.
   const faq = extractFaq(guide.content);
+  // Компактный баннер посреди длинного гайда; короткие получают только полный в конце.
+  const [contentBefore, contentAfter] = splitForCta(guide.content);
+  const markdownComponents = articleMarkdownComponents(firstImageSrc(guide.content));
 
   return (
     <>
@@ -105,17 +107,16 @@ export default async function GameGuidePage({ params }: Props) {
           )}
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
-            <ReactMarkdown components={articleMarkdownComponents(firstImageSrc(guide.content))}>
-              {guide.content}
-            </ReactMarkdown>
+            <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>
+            {contentAfter && (
+              <>
+                <CtaBanner compact />
+                <ReactMarkdown components={markdownComponents}>{contentAfter}</ReactMarkdown>
+              </>
+            )}
           </div>
 
-          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3" data-goal="guide_cta">
-            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">
-              Открыть Mute в браузере
-            </ButtonPrimary>
-            <ButtonSecondary href="/download">Скачать приложение</ButtonSecondary>
-          </div>
+          <CtaBanner />
 
           <RelatedLinks related={guide.related} current={`games/${slug}`} />
         </article>

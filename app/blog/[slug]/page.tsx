@@ -5,10 +5,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import { articleMarkdownComponents } from "@/components/markdownComponents";
 import { getBlogPostBySlug, getAllBlogSlugs } from "@/lib/blog";
-import { extractFaq, firstImageSrc } from "@/lib/markdown";
+import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { formatDate } from "@/lib/releases";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
 import { SITE_URL } from "@/lib/site";
@@ -57,6 +58,9 @@ export default async function BlogPostPage({ params }: Props) {
 
   const url = `${SITE_URL}/blog/${slug}`;
   const faq = extractFaq(post.content);
+  // Компактный баннер посреди длинного поста; короткие получают только полный в конце.
+  const [contentBefore, contentAfter] = splitForCta(post.content);
+  const markdownComponents = articleMarkdownComponents(firstImageSrc(post.content));
 
   return (
     <>
@@ -94,16 +98,16 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
-            <ReactMarkdown components={articleMarkdownComponents(firstImageSrc(post.content))}>
-              {post.content}
-            </ReactMarkdown>
+            <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>
+            {contentAfter && (
+              <>
+                <CtaBanner compact />
+                <ReactMarkdown components={markdownComponents}>{contentAfter}</ReactMarkdown>
+              </>
+            )}
           </div>
 
-          <p className="body-text text-text-secondary mt-8 md:mt-10 border-t border-[#1F1F1F] pt-6" data-goal="guide_cta">
-            Mute — бесплатный голосовой чат для игр, работает в России без VPN.{" "}
-            <a href="/download" className="text-accent hover:underline">Скачать для Windows и macOS</a>{" "}
-            или <a href="https://beta.mute.ac/welcome" className="text-accent hover:underline">открыть в браузере</a>.
-          </p>
+          <CtaBanner />
 
           <RelatedLinks related={post.related} current={`blog/${slug}`} />
         </article>

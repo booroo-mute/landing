@@ -28,10 +28,13 @@ export default function MetrikaGoals() {
       else if (/\.dmg(\?|$)/.test(href)) goals.push("download_mac");
       else if (href.includes("t.me/")) goals.push("telegram_click");
 
-      if (target?.closest?.('[data-goal="guide_cta"]')) goals.push("guide_cta");
+      // data-variant (full | compact) у CtaBanner — чтобы сравнивать баннеры в Метрике
+      const cta = target?.closest?.('[data-goal="guide_cta"]') as HTMLElement | null;
+      if (cta) goals.push("guide_cta");
+      const params = { href, ...(cta?.dataset.variant && { variant: cta.dataset.variant }) };
 
       for (const goal of goals) {
-        ymReachGoal(goal, { href });
+        ymReachGoal(goal, params);
         if (goal === "open_web") tmrReachGoal("open_web");
       }
     };

@@ -6,10 +6,12 @@ interface ButtonSecondaryProps {
   children: React.ReactNode;
   href?: string;
   target?: string;
+  /** Дополнительные классы, например `md:w-fit` внутри узких карточек (по умолчанию кнопка во всю ширину до lg). */
+  className?: string;
 }
 
-export default function ButtonSecondary({ icon, children, href, target }: ButtonSecondaryProps) {
-  const className = "w-full lg:w-fit px-6 md:px-8 lg:px-[48px] py-3 md:py-[12px] bg-transparent border border-[#494B4A] text-text-primary body-text font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2 md:gap-[8px]";
+export default function ButtonSecondary({ icon, children, href, target, className: extraClassName = "" }: ButtonSecondaryProps) {
+  const className = `w-full lg:w-fit px-6 md:px-8 lg:px-[48px] py-3 md:py-[12px] bg-transparent border border-[#494B4A] text-text-primary body-text font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2 md:gap-[8px] ${extraClassName}`.trim();
 
   const content = (
     <>
