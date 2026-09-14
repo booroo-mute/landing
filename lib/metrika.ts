@@ -8,6 +8,14 @@
 
 export const METRIKA_COUNTER_ID = 108242058;
 
+/**
+ * Параметры визита, уходящие в init: счётчик общий с beta.mute.ac, и сегмент
+ * «Лендинг» в Метрике строится по «Параметры визитов → site = landing», а не
+ * по фильтру домена. Именно параметры визита, а не userParams: те живут у
+ * посетителя и утащили бы метку в его визиты в веб-приложение.
+ */
+export const METRIKA_VISIT_PARAMS = { site: "landing" } as const;
+
 export type MetrikaGoal =
   | "open_web"
   | "download_click"

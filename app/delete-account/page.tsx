@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -8,6 +9,13 @@ export const metadata: Metadata = {
   description:
     "Как удалить аккаунт Mute: где кнопка, что удаляется и что остаётся, сроки хранения журналов и резервных копий, что делать, если не получается войти.",
   alternates: { canonical: "/delete-account" },
+  openGraph: {
+    ...OG_SITE,
+    title: "Как удалить аккаунт Mute",
+    url: "/delete-account",
+    images: [DEFAULT_OG_IMAGE],
+    type: "website",
+  },
 };
 
 const h2 = "title-medium-semibold mt-8 md:mt-10 mb-3 md:mb-4";

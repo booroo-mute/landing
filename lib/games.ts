@@ -7,15 +7,22 @@ const gamesDirectory = path.join(process.cwd(), "content/games");
 export interface GameGuide {
   slug: string;
   title: string;
+  /** Короткий заголовок для <title> и og:title (≤ 58 символов без « — Mute»); H1 остаётся title. */
+  seoTitle?: string;
   description?: string;
   date?: string;
   updated?: string;
   image?: string;
   ogImage?: string;
+  /** Группа на /games: «Не работает войс» (broken) или «Настройка» (setup, по умолчанию). */
+  topic?: GameTopic;
   /** Связанные материалы: "blog/<slug>" или "games/<slug>" (см. RelatedLinks). */
   related?: string[];
   content: string;
 }
+
+export type GameTopic = "broken" | "setup";
+
 
 export function getGameGuideBySlug(slug: string): GameGuide | null {
   const fullPath = path.join(gamesDirectory, `${slug}.md`);
@@ -30,11 +37,13 @@ export function getGameGuideBySlug(slug: string): GameGuide | null {
   return {
     slug,
     title: data.title,
+    seoTitle: data.seoTitle,
     description: data.description,
     date: data.date,
     updated: data.updated,
     image: data.image,
     ogImage: data.ogImage,
+    topic: data.topic === "broken" ? "broken" : data.topic === "setup" ? "setup" : undefined,
     related: Array.isArray(data.related) ? data.related : undefined,
     content,
   };

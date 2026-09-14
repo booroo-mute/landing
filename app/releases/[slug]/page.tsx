@@ -5,9 +5,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import CtaBanner from "@/components/CtaBanner";
+import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
-import { SITE_URL } from "@/lib/site";
+import { PUBLISHER_REF } from "@/lib/schema";
+import { SITE_URL, OG_SITE } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,20 +26,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const release = getReleaseBySlug(slug);
   if (!release) return {};
 
+  const seoTitle = release.seoTitle ?? release.title;
   const title = release.version
-    ? `${release.title} — Mute ${release.version}`
-    : `${release.title} — Mute`;
+    ? `${seoTitle} — Mute ${release.version}`
+    : `${seoTitle} — Mute`;
   const url = `/releases/${slug}`;
   return {
     title,
     description: release.summary,
     alternates: { canonical: url },
     openGraph: {
+      ...OG_SITE,
       title,
       description: release.summary,
       url,
       type: "article",
       publishedTime: release.date,
+      ...(release.updated && { modifiedTime: release.updated }),
     },
     twitter: {
       card: "summary_large_image",
@@ -65,9 +71,11 @@ export default async function ReleasePage({ params }: Props) {
           headline: release.title,
           description: release.summary,
           datePublished: release.date,
+          dateModified: release.updated ?? release.date,
           inLanguage: "ru-RU",
           url,
           mainEntityOfPage: url,
+          // Без @id: у релиза своя версия, а общий узел приложения несёт текущую.
           about: {
             "@type": "SoftwareApplication",
             name: "Mute",
@@ -75,15 +83,8 @@ export default async function ReleasePage({ params }: Props) {
             operatingSystem: "Windows, macOS",
             applicationCategory: "CommunicationApplication",
           },
-          publisher: {
-            "@type": "Organization",
-            name: "Mute",
-            url: SITE_URL,
-            logo: {
-              "@type": "ImageObject",
-              url: `${SITE_URL}/logo.png`,
-            },
-          },
+          author: PUBLISHER_REF,
+          publisher: PUBLISHER_REF,
         }}
       />
       <Header />
@@ -124,6 +125,10 @@ export default async function ReleasePage({ params }: Props) {
               {release.content}
             </ReactMarkdown>
           </div>
+
+          <CtaBanner />
+
+          <RelatedLinks related={release.related} current={`releases/${slug}`} />
         </article>
       </main>
       <Footer />

@@ -2,6 +2,7 @@ import { FAQ_ITEMS } from "@/lib/faq";
 import { getAllReleases } from "@/lib/releases";
 import { getAllBlogPosts } from "@/lib/blog";
 import { getAllGameGuides } from "@/lib/games";
+import { getAllLandings } from "@/lib/landings";
 import { SITE_URL } from "@/lib/site";
 
 // llms-full.txt — развёрнутый фактический профиль продукта для AI-систем.
@@ -12,6 +13,7 @@ export async function GET() {
   const releases = getAllReleases();
   const posts = getAllBlogPosts();
   const guides = getAllGameGuides();
+  const landings = getAllLandings();
 
   const body = `# Mute — полный профиль продукта
 
@@ -110,6 +112,10 @@ Telegram в России работает нестабильно или не о�
 
 ${guides.map((g) => `- ${g.title} — ${SITE_URL}/games/${g.slug}\n  ${g.description ?? ""}`).join("\n")}
 
+## Отдельные сценарии
+
+${landings.map((l) => `- ${l.title} — ${SITE_URL}/voice-chat/${l.slug}\n  ${l.description}`).join("\n")}
+
 ## Частые вопросы
 
 ${FAQ_ITEMS.map((item) => `### ${item.question}\n\n${item.answer}`).join("\n\n")}
@@ -129,6 +135,7 @@ ${posts.map((p) => `- ${p.title} — ${SITE_URL}/blog/${p.slug}\n  ${p.descripti
 - Скачать: ${SITE_URL}/download
 - Голосовой чат онлайн: ${SITE_URL}/voice-chat
 - Гайды по играм: ${SITE_URL}/games
+- RSS блога и гайдов: ${SITE_URL}/blog/feed.xml
 - Telegram-канал: https://t.me/mutecalls
 - Бот поддержки: https://t.me/mute_calls_bot
 - Boosty: https://boosty.to/muteapp

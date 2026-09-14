@@ -1,10 +1,12 @@
 ---
 title: "Голосовой чат в CS2: настройка, команды и созвон для пати"
+seoTitle: "Голосовой чат в CS2: настройка и команды"
 description: "Как включить микрофон в CS2 и перенастроить клавишу, какие консольные команды управляют войсом, как заглушить тиммейта и почему пати созваниваются отдельно."
 date: "2026-09-03"
 updated: "2026-09-14"
 image: "/games/golosovoy-chat-v-cs2.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-cs2-og.jpg?v=2"
+topic: setup
 related:
   - "games/steam"
   - "games/dota-2"

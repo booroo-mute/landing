@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, VOICE_CHAT_UPDATED } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -9,20 +9,26 @@ import JsonLd from "@/components/JsonLd";
 import ButtonPrimary from "@/components/ButtonPrimary";
 import ButtonSecondary from "@/components/ButtonSecondary";
 import { FAQ_ITEMS } from "@/lib/faq";
-import { SOFTWARE_APPLICATION_SCHEMA } from "@/lib/schema";
+import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
+
+const TITLE = "Голосовой чат с другом онлайн: в браузере, без VPN";
+const DESCRIPTION =
+  "Созвониться с другом за пару минут: откройте Mute в браузере, отправьте ссылку-приглашение и говорите. Бесплатно, без VPN и установки. Комнаты до 8 человек.";
 
 export const metadata: Metadata = {
-  title: "Голосовой чат с другом онлайн: в браузере, без VPN — Mute",
-  description:
-    "Созвониться с другом за пару минут: откройте Mute в браузере, отправьте ссылку-приглашение и говорите. Бесплатно, без VPN и установки. Комнаты до 8 человек.",
+  title: `${TITLE} — Mute`,
+  description: DESCRIPTION,
   alternates: { canonical: "/voice-chat" },
   openGraph: {
+    ...OG_SITE,
     title: "Голосовой чат с другом онлайн — Mute",
     description:
       "Откройте Mute в браузере, отправьте другу ссылку-приглашение и говорите. Бесплатно и без VPN.",
     url: "/voice-chat",
     images: [DEFAULT_OG_IMAGE],
-    type: "website",
+    // article, а не website: только у этого типа Next отдаёт modifiedTime
+    type: "article",
+    modifiedTime: VOICE_CHAT_UPDATED,
   },
 };
 
@@ -38,10 +44,26 @@ const faqQuestions = [
 ];
 const faqSubset = FAQ_ITEMS.filter((item) => faqQuestions.includes(item.question));
 
+const h2 = "title-medium-semibold mt-10 md:mt-12";
+const p = "body-text text-text-secondary mt-4";
+const link = "text-accent hover:underline";
+
+// Страница-хаб раздела: сценарии «на телефоне», «демонстрация экрана» и
+// «комнаты» вынесены в /voice-chat/<slug>, здесь по абзацу и ссылке на каждый.
 export default function VoiceChatPage() {
   return (
     <>
-      <JsonLd data={SOFTWARE_APPLICATION_SCHEMA} />
+      <JsonLd
+        data={[
+          SOFTWARE_APPLICATION_SCHEMA,
+          webPageSchema({
+            url: `${SITE_URL}/voice-chat`,
+            name: TITLE,
+            description: DESCRIPTION,
+            dateModified: VOICE_CHAT_UPDATED,
+          }),
+        ]}
+      />
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
@@ -77,17 +99,15 @@ export default function VoiceChatPage() {
             </p>
           </div>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Как созвониться
-          </h2>
+          <h2 className={h2}>Как созвониться</h2>
           <ol className="mt-4 list-decimal list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Откройте{" "}
-              <a href="https://beta.mute.ac/welcome" className="text-accent hover:underline">
+              <a href="https://beta.mute.ac/welcome" className={link}>
                 веб-версию Mute
               </a>{" "}
               в любом браузере или{" "}
-              <Link href="/download" className="text-accent hover:underline">
+              <Link href="/download" className={link}>
                 скачайте приложение
               </Link>{" "}
               для Windows или macOS.
@@ -104,64 +124,66 @@ export default function VoiceChatPage() {
             </li>
           </ol>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Работает в браузере, даже на телефоне
-          </h2>
-          <p className="body-text text-text-secondary mt-4">
-            Устанавливать Mute не обязательно. Звонки, комнаты и чаты работают
-            в веб-версии целиком, поэтому созвониться можно с чужого
-            компьютера, со школьного ноутбука или с телефона. Если вы играете на консоли и
-            голосовой чат в пати недоступен, Mute на телефоне в соседнем окне
-            решает и эту проблему.
-          </p>
-
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Голосовой чат на телефоне: Safari и Chrome
-          </h2>
-          <p className="body-text text-text-secondary mt-4">
-            Отдельного мобильного приложения у Mute нет, но веб-версия
-            работает в Safari на iPhone и в Chrome на Android: откройте{" "}
-            <a href="https://beta.mute.ac/welcome" className="text-accent hover:underline">
-              beta.mute.ac
-            </a>
-            , разрешите доступ к микрофону и звоните. Чтобы не искать вкладку
-            каждый раз, добавьте страницу на домашний экран через меню
-            браузера. Звонок идёт в браузере телефона, а игра рядом, на консоли
-            или на ПК. Подробнее в статье{" "}
-            <Link href="/blog/mute-na-telefone" className="text-accent hover:underline">
-              про Mute на телефоне
+          <h2 className={h2}>Где созвониться с друзьями в России</h2>
+          <p className={p}>
+            Сайт для созвона с друзьями сейчас выбирают по одному признаку:
+            открывается ли он в России напрямую. Mute открывается и работает
+            без VPN: звонок идёт своим путём, настраивать ничего не нужно, и
+            проверять перед каждым созвоном, у кого что сегодня открывается,
+            больше не приходится. Из того, что ещё работает, есть встроенный
+            войс самой игры и свой сервер вроде TeamSpeak или Mumble. Чем они
+            отличаются и когда что выбрать, разобрано в статье{" "}
+            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className={link}>
+              «Где созвониться с друзьями в 2026: три способа»
             </Link>
             .
           </p>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Вдвоём или компанией
-          </h2>
-          <p className="body-text text-text-secondary mt-4">
-            Звонок один на один не ограничен по времени: хоть весь вечер, хоть
-            всю ночь. Для компании есть голосовые комнаты до 8 человек, этого
-            хватает на полный состав в большинстве игр. Внутри также есть личные
-            и групповые текстовые чаты, а когда голоса мало, можно включить
-            камеру или показать свой экран, в том числе из браузера.
+          <h2 className={h2}>Работает в браузере, даже на телефоне</h2>
+          <p className={p}>
+            Устанавливать Mute не обязательно. Звонки, комнаты и чаты работают
+            в веб-версии целиком, поэтому созвониться можно с чужого
+            компьютера, со школьного ноутбука или с телефона. Отдельного
+            мобильного приложения нет, но та же веб-версия открывается в Safari
+            на iPhone и в Chrome на Android; если играете на консоли и войс в
+            пати недоступен, Mute на телефоне в соседнем окне решает и это.
+            Как открыть, дать доступ к микрофону и добавить иконку на домашний
+            экран:{" "}
+            <Link href="/voice-chat/phone" className={link}>
+              Mute на телефоне
+            </Link>
+            .
           </p>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Почему без VPN
-          </h2>
-          <p className="body-text text-text-secondary mt-4">
+          <h2 className={h2}>Вдвоём или компанией</h2>
+          <p className={p}>
+            Звонок один на один не ограничен по времени: хоть весь вечер, хоть
+            всю ночь. Для компании есть{" "}
+            <Link href="/voice-chat/rooms" className={link}>
+              голосовые комнаты до 8 человек
+            </Link>
+            , этого хватает на полный состав в большинстве игр. Внутри также
+            есть личные и групповые текстовые чаты, а когда голоса мало, можно
+            включить камеру или{" "}
+            <Link href="/voice-chat/screen-share" className={link}>
+              показать свой экран со звуком
+            </Link>
+            , в том числе из браузера.
+          </p>
+
+          <h2 className={h2}>Почему без VPN</h2>
+          <p className={p}>
             Mute открывается в России напрямую, никаких дополнительных
             настроек ему не нужно. Не приходится проверять перед каждым
             созвоном, у кого что работает. Если вы переходите с Discord, посмотрите{" "}
-            <Link href="/discord-alternative" className="text-accent hover:underline">
+            <Link href="/discord-alternative" className={link}>
               подробное сравнение Mute и Discord
             </Link>
             .
           </p>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            О чём честно предупредим
-          </h2>
-          <p className="body-text text-text-secondary mt-4">
+          <h2 className={h2}>О чём честно предупредим</h2>
+          <p className={p}>
             Mute — молодой проект небольшой команды. Мобильных приложений пока
             нет, на телефоне работает браузерная версия. Публичных серверов и
             каналов тоже нет: Mute рассчитан на созвоны со своим кругом, а не
@@ -177,16 +199,16 @@ export default function VoiceChatPage() {
 
           <p className="body-text text-text-secondary mt-8 md:mt-10">
             Полезное по теме:{" "}
-            <Link href="/games" className="text-accent hover:underline">
+            <Link href="/games" className={link}>
               гайды по войсу в конкретных играх
             </Link>
             ,{" "}
-            <Link href="/blog/golosovoy-chat-v-brauzere" className="text-accent hover:underline">
+            <Link href="/blog/golosovoy-chat-v-brauzere" className={link}>
               как устроен голосовой чат в браузере
             </Link>{" "}
             и{" "}
-            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className="text-accent hover:underline">
-              как позвонить друзьям в игре без Discord
+            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className={link}>
+              где созвониться с друзьями в 2026
             </Link>
             .
           </p>

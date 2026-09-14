@@ -92,7 +92,11 @@ Webmaster (оба не подключены), нет таблицы позици
 | robots.txt не называет AI-краулеров явно (разрешены через `*`) | P3 | Явные блоки Allow для GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, Claude-SearchBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot, YandexBot | код |
 | Нет image-sitemap для иллюстраций гайдов | P3 | `<image:image>` в sitemap для `/games/*.webp` | код |
 | nginx без brotli, HSTS без `preload` | P3 | При следующем обслуживании сервера | руками |
-| `/releases/*` и `/install/*` без RelatedLinks и CTA (тупиковые страницы) | P2 | Подключить те же компоненты, что в блоге | код |
+| `/releases/*` и `/install/*` без RelatedLinks и CTA (тупиковые страницы) | P2, сделано 14.09 | Подключены те же компоненты, что в блоге | код |
+| Страницы со своим `openGraph` (обе посадочные, `/download`, все `[slug]`) теряли `og:site_name` и `og:locale`: Next подменяет объект из layout целиком | P1, сделано 14.09 | `OG_SITE` в `lib/site.ts`, разворачивается в каждый page-level `openGraph`; индексные и юридические страницы получили свой og | код |
+| `/download` для краулеров с мобильным UA (Googlebot Smartphone, YandexMobileBot) заканчивался авторедиректом на `beta.mute.ac` с noindex | P1, сделано 14.09 | `OSProvider` держит для краулеров вариант «other»: без редиректов, обе ссылки на установщики в HTML | код |
+| Еженедельные статус-посты двигали `date` и меняли `<title>` каждую неделю: `datePublished` плыл, Метрика делила страницу на несколько заголовков | P2, сделано 14.09 | `seoTitle` без даты, `date` фиксируется днём первой публикации, обновляется только `updated` (правило в README) | код |
+| robots веб-приложения (`mute-webclient/public/robots.txt`) рекламировал `/register`, `/dashboard` и sitemap на несуществующем `app.mute.ac` | P2, сделано 14.09 | `Allow: /`, `Disallow: /api/`, `/uploads/`, без Sitemap; `public/sitemap.xml` удалён; обход оставлен, чтобы noindex был виден | код |
 
 ### 3.3 Страницы и сниппеты
 
@@ -153,11 +157,9 @@ lifehacker, hi-tech.mail.ru после двух-трёх внешних упом
   нужно завести как JavaScript-события, иначе они не попадают в отчёты.
   Сегмент «Лендинг» (Домен = mute.ac) обязателен: счётчик общий с
   веб-приложением.
-- Таблицы позиций нет. Завести `docs/seo-positions.md`: восемь запросов
-  («аналог дискорда», «аналог дискорда в россии», «замена дискорда», «дискорд
-  без vpn», «российский дискорд», «голосовой чат для игр», «голосовой чат для
-  игр без vpn», «discord не работает сегодня»), Яндекс (Москва, инкогнито),
-  Google RU, Bing, раз в две недели.
+- Таблица позиций заведена 14.09 в `docs/seo-positions.md`: восемь запросов
+  аудита плюс четыре из плана по спросу; Яндекс (Москва, инкогнито),
+  Google RU, Bing, раз в две недели. Первые числа снимает Alex.
 - Полевых данных Web Vitals нет (мало трафика), Lighthouse снимать раз в
   месяц по двум страницам, см. раздел 4.
 
@@ -219,18 +221,31 @@ metadata у 404; `llms.txt` объявлен в robots и layout, Cache-Control 
    проверок в нейросетях.
 6. Проверить `mute-na-telefone` на iPhone и Android, убрать `draftNote`.
 
-### Недели 1–2, код
+### Недели 1–2, код (сделано 14 сентября, второй проход)
 
-- `seoTitle` в frontmatter и короткие title для 8 длинных страниц.
-- Мобильный LCP гайдов: `sizes`/`priority` у первой иллюстрации.
-- `/download` до ~300 слов с разделами.
-- dateModified для `/discord-alternative` и `/voice-chat`; `@id` издателя и
-  dateModified в TechArticle.
-- Решение по `softwareVersion`.
-- RSS для блога.
-- Явные Allow для AI-краулеров в robots.txt.
-- RelatedLinks и CTA на `/releases/*` и `/install/*`.
-- Разбор замечаний Lighthouse «best practices» и accessibility.
+- `seoTitle` в frontmatter, короткие title у 15 страниц; проверка длины в
+  `check-content`.
+- Мобильный LCP гайдов: первая иллюстрация через `next/image` с `priority`
+  и `sizes`, `localPatterns` под `?v=N`.
+- `/download` около 300 слов с пятью разделами и защитой от редиректа
+  краулеров.
+- Узел WebPage с dateModified на `/discord-alternative`, `/voice-chat`,
+  `/download` и посадочных; CollectionPage с ItemList на `/games`, `/blog`,
+  `/releases`; `@id` издателя и dateModified в TechArticle.
+- RSS `/blog/feed.xml` (посты и гайды), ссылка в layout и в llms.
+- Явные Allow для 13 AI-краулеров в robots.txt, Yandex-группа не тронута.
+- RelatedLinks и CTA на `/releases/*` и `/install/*`; `related` во всех
+  релизах и инструкциях.
+- `/games` сгруппирован по `topic` («Не работает войс» / «Настройка») с
+  блоком «Вашей игры нет в списке?».
+- Посадочные `/voice-chat/phone`, `/voice-chat/screen-share`,
+  `/voice-chat/rooms` из `content/landings/`; `/voice-chat` стал хабом.
+- Параметр визита `site = landing` для сегмента Метрики.
+- Image-расширение sitemap для иллюстраций гайдов (перенесено из «Месяцы 2–3»).
+
+Осталось из этого блока: решение по `softwareVersion`, замечания Lighthouse
+«best practices» и accessibility, `ym('hit')` на смену маршрута, если отчёты
+по страницам покажут только точки входа.
 
 ### Месяц 1, внешние площадки
 
@@ -248,8 +263,16 @@ ItemList на индексных страницах; brotli и HSTS preload; web
 
 ### Контент, постоянно
 
-Еженедельно два статус-поста (дата = день деплоя); два новых гайда по
-ПК-играм в месяц после проверки спроса; кросс-игровые статьи из 3.4;
+План по спросу с кластерами, календарём на двенадцать недель и
+переименованиями вынесен в `seo-keyword-research-2026-09.md` (14 сентября,
+по данным Метрики и подсказок). В постоянный ритм входят два статус-поста в
+неделю (`date` первой публикации, `updated` = день деплоя, `seoTitle` без
+даты); два гайда
+по играм в месяц в порядке из раздела 2.1 H того документа (PUBG, Warface,
+Valorant, Sea of Thieves, Genshin, Мир танков, Tarkov, War Thunder, Squad,
+Phasmophobia, GTA 5 RP, Battlefield 6, Rust, Among Us, Standoff 2); две
+сквозные статьи («Не слышно тиммейтов», «Голосовой чат на PS5 и Xbox»);
+гайды «Как транслировать экран другу» и «Как позвонить другу в TeamSpeak»;
 ежемесячное обновление статьи про аналоги Discord.
 
 ### Мониторинг и KPI

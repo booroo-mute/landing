@@ -97,6 +97,64 @@ export const SOFTWARE_APPLICATION_SCHEMA = {
   author: { "@id": ORGANIZATION_ID },
 };
 
+interface WebPageOptions {
+  /** Абсолютный URL страницы. */
+  url: string;
+  name: string;
+  description: string;
+  /** Дата последней содержательной правки (ISO), та же, что в sitemap. */
+  dateModified: string;
+  datePublished?: string;
+  type?: "WebPage" | "CollectionPage";
+  /** Например, ItemList для индексных страниц. */
+  mainEntity?: Record<string, unknown>;
+}
+
+/**
+ * Узел WebPage для посадочных и индексных страниц: даёт поисковикам
+ * dateModified и связывает страницу с сайтом и приложением по @id.
+ * У статей его нет: там роль страницы играют Article/BlogPosting.
+ */
+export function webPageSchema({
+  url,
+  name,
+  description,
+  dateModified,
+  datePublished,
+  type = "WebPage",
+  mainEntity,
+}: WebPageOptions) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    "@id": `${url}#webpage`,
+    url,
+    name,
+    description,
+    inLanguage: "ru-RU",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": SOFTWARE_APPLICATION_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    ...(datePublished && { datePublished }),
+    dateModified,
+    ...(mainEntity && { mainEntity }),
+  };
+}
+
+/** Список материалов индексной страницы в порядке показа (mainEntity у CollectionPage). */
+export function itemListSchema(items: Array<{ url: string; name: string }>) {
+  return {
+    "@type": "ItemList",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: item.url,
+      name: item.name,
+    })),
+  };
+}
+
 export function faqPageSchema(items: FaqItem[]) {
   return {
     "@context": "https://schema.org",

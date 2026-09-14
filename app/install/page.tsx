@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -10,6 +11,15 @@ export const metadata: Metadata = {
   description:
     "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows и Gatekeeper на macOS.",
   alternates: { canonical: "/install" },
+  openGraph: {
+    ...OG_SITE,
+    title: "Установка Mute: инструкции для Windows и macOS",
+    description:
+      "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows и Gatekeeper на macOS.",
+    url: "/install",
+    images: [DEFAULT_OG_IMAGE],
+    type: "website",
+  },
 };
 
 export default function InstallIndexPage() {

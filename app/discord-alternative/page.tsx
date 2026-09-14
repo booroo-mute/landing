@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DEFAULT_OG_IMAGE } from "@/lib/site";
+import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, DISCORD_ALTERNATIVE_UPDATED } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,21 +8,26 @@ import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import ButtonPrimary from "@/components/ButtonPrimary";
 import ButtonSecondary from "@/components/ButtonSecondary";
-import { FAQ_ITEMS } from "@/lib/faq";
-import { SOFTWARE_APPLICATION_SCHEMA } from "@/lib/schema";
+import { FAQ_ITEMS, type FaqItem } from "@/lib/faq";
+import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
+
+const TITLE = "Аналог и замена Discord в России 2026 — Mute, без VPN";
+const DESCRIPTION =
+  "Замена Discord в России без VPN для ПК и браузера: Mute — бесплатный голосовой чат для игр с демонстрацией экрана, комнаты до 8 человек. Сравнение по пунктам.";
 
 export const metadata: Metadata = {
-  title: "Аналог и замена Discord в России 2026 — Mute, без VPN",
-  description:
-    "Замена Discord в России без VPN для ПК и браузера: Mute — бесплатный голосовой чат для игр с демонстрацией экрана, комнаты до 8 человек. Сравнение по пунктам.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/discord-alternative" },
   openGraph: {
+    ...OG_SITE,
     title: "Аналог и замена Discord в России — Mute",
     description:
       "Бесплатный голосовой чат для игр, работает без VPN. Сравнение Mute и Discord по пунктам.",
     url: "/discord-alternative",
     images: [DEFAULT_OG_IMAGE],
     type: "article",
+    modifiedTime: DISCORD_ALTERNATIVE_UPDATED,
   },
 };
 
@@ -32,7 +37,7 @@ const comparisonRows: Array<{ label: string; mute: string; discord: string }> = 
   { label: "Что внутри", mute: "Друзья, звонки, видео, чаты, демонстрация экрана", discord: "То же плюс серверы, каналы, роли, магазин, Nitro" },
   { label: "Звонки 1-1", mute: "Без ограничений по времени", discord: "Есть" },
   { label: "Видеозвонки", mute: "Есть, в фирменном пиксельном ретро-стиле (отключается)", discord: "Есть" },
-  { label: "Демонстрация экрана", mute: "Есть, в приложении и в браузере", discord: "Есть (Go Live)" },
+  { label: "Демонстрация экрана", mute: "Есть, со звуком, в приложении и в браузере", discord: "Есть (Go Live)" },
   { label: "Голосовые комнаты", mute: "До 8 участников", discord: "Серверы и каналы, тысячи участников" },
   { label: "Текстовые чаты", mute: "Личные и групповые", discord: "Личные, групповые, каналы" },
   { label: "Публичные сообщества", mute: "Нет — только свой круг", discord: "Да, основной сценарий" },
@@ -41,12 +46,35 @@ const comparisonRows: Array<{ label: string; mute: string; discord: string }> = 
   { label: "Язык интерфейса", mute: "Русский", discord: "Русский (частично)" },
 ];
 
-const faqSubset = FAQ_ITEMS.slice(0, 6);
+// В поиске это слово чаще пишут кириллицей («аналог дискорда»), поэтому один
+// вопрос страницы задан именно так: на сайте иначе не было ни одной формы,
+// которую люди набирают.
+const pageFaq: FaqItem = {
+  question: "Чем Mute отличается от других замен Дискорда?",
+  answer:
+    "Mute сделан для своей компании, а не для сообществ: в нём нет серверов, ролей и ботов, зато созвон начинается через минуту после регистрации, а экран показывается со звуком прямо из браузера. Если нужны каналы на сотни человек, ищите сервис с серверами.",
+};
+const faqSubset = [...FAQ_ITEMS.slice(0, 5), pageFaq];
+
+const h2 = "title-medium-semibold mt-10 md:mt-12";
+const h3 = "title-medium-semibold mt-6 md:mt-8";
+const p = "body-text text-text-secondary mt-4";
+const link = "text-accent hover:underline";
 
 export default function DiscordAlternativePage() {
   return (
     <>
-      <JsonLd data={SOFTWARE_APPLICATION_SCHEMA} />
+      <JsonLd
+        data={[
+          SOFTWARE_APPLICATION_SCHEMA,
+          webPageSchema({
+            url: `${SITE_URL}/discord-alternative`,
+            name: TITLE,
+            description: DESCRIPTION,
+            dateModified: DISCORD_ALTERNATIVE_UPDATED,
+          }),
+        ]}
+      />
       <Header />
       <main className="container">
         <article className="max-w-[920px] mx-auto pt-10 md:pt-14 lg:pt-[72px] pb-12 md:pb-16 lg:pb-[80px]">
@@ -73,9 +101,7 @@ export default function DiscordAlternativePage() {
             </p>
           </div>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">
-            Mute и Discord: сравнение по пунктам
-          </h2>
+          <h2 className={h2}>Mute и Discord: сравнение по пунктам</h2>
           <div className="mt-4 md:mt-6 overflow-x-auto">
             <table className="w-full border-collapse text-left">
               <thead>
@@ -103,7 +129,7 @@ export default function DiscordAlternativePage() {
               href="https://www.techradar.com/computing/memory/some-windows-11-apps-have-a-massive-ram-problem-and-this-app-is-the-worst-offender"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent hover:underline"
+              className={link}
             >
               По данным TechRadar
             </a>
@@ -120,7 +146,51 @@ export default function DiscordAlternativePage() {
             настраивать перед созвоном не нужно.
           </p>
 
-          <h2 className="title-medium-semibold mt-10 md:mt-12">Кому подойдёт Mute</h2>
+          <h2 className={h2}>Замена Дискорда для игр: что умеет Mute</h2>
+          <p className={p}>
+            Замену Дискорду обычно ищут с уточнением: с демонстрацией экрана,
+            в браузере, на телефон, для слабого ПК. По каждому пункту коротко.
+          </p>
+
+          <h3 className={h3}>С демонстрацией экрана и звуком</h3>
+          <p className={p}>
+            Показать весь экран или одно окно можно и в приложении, и в
+            браузере, вместе со звуком системы: фильм, реплей или чужую игру
+            слышно так же, как видно. Качество выбирается в меню демонстрации,
+            до 1080p при 60 кадрах. Подробнее на странице про{" "}
+            <Link href="/voice-chat/screen-share" className={link}>
+              демонстрацию экрана
+            </Link>
+            .
+          </p>
+
+          <h3 className={h3}>В браузере, без установки</h3>
+          <p className={p}>
+            Всё работает во вкладке на beta.mute.ac: звонки, комнаты, чаты,
+            видео и экран. Ставить приложение не обязательно, а на чужом или
+            школьном компьютере это единственный вариант.
+          </p>
+
+          <h3 className={h3}>На телефоне</h3>
+          <p className={p}>
+            Мобильного приложения нет, но та же веб-версия открывается в
+            Safari на iPhone и в Chrome на Android. Как добавить её на
+            домашний экран и дать доступ к микрофону, рассказано на странице{" "}
+            <Link href="/voice-chat/phone" className={link}>
+              про Mute на телефоне
+            </Link>
+            .
+          </p>
+
+          <h3 className={h3}>На слабом ПК</h3>
+          <p className={p}>
+            Если компьютер еле тянет игру, не ставьте ничего: откройте звонок
+            вкладкой в уже запущенном браузере. Интерфейс Mute маленький, в нём
+            нет серверов, магазина и ленты, а собственных замеров памяти
+            приложения мы пока не публикуем.
+          </p>
+
+          <h2 className={h2}>Кому подойдёт Mute</h2>
           <ul className="mt-4 list-disc list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Компаниям друзей, которые созваниваются ради игр и общения
@@ -135,7 +205,7 @@ export default function DiscordAlternativePage() {
           </ul>
 
           <h2 className="title-medium-semibold mt-8 md:mt-10">Кому Mute не подойдёт</h2>
-          <p className="body-text text-text-secondary mt-4">
+          <p className={p}>
             Если вы ведёте сообщество на сотни участников с каналами, ролями
             и ботами, в Mute вам будет тесно, таких инструментов в нём нет.
             Для больших публичных сообществ по-прежнему подойдёт Discord,
@@ -151,11 +221,15 @@ export default function DiscordAlternativePage() {
 
           <p className="body-text text-text-secondary mt-8 md:mt-10">
             Полезное по теме:{" "}
-            <Link href="/install" className="text-accent hover:underline">
+            <Link href="/blog/analogi-discord-v-rossii" className={link}>
+              обзор остальных замен
+            </Link>
+            ,{" "}
+            <Link href="/install" className={link}>
               как установить Mute
             </Link>{" "}
             и{" "}
-            <Link href="/releases" className="text-accent hover:underline">
+            <Link href="/releases" className={link}>
               что нового в последних версиях
             </Link>
             .

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { getAllGameGuides, getGameGuideBySlug } from "@/lib/games";
+import { getReleaseBySlug } from "@/lib/releases";
+import { getInstallGuideBySlug } from "@/lib/install";
+import { getLandingBySlug } from "@/lib/landings";
 
 interface RelatedItem {
   href: string;
@@ -8,11 +11,13 @@ interface RelatedItem {
   description?: string;
 }
 
+type Section = "blog" | "games" | "releases" | "install" | "landings";
+
 interface RelatedLinksProps {
-  /** Записи вида "blog/<slug>" | "games/<slug>" из frontmatter текущей статьи. */
+  /** Записи вида "<раздел>/<slug>" из frontmatter текущей страницы. */
   related?: string[];
-  /** Текущая статья, чтобы не предлагать её саму себе. */
-  current: `blog/${string}` | `games/${string}`;
+  /** Текущая страница, чтобы не предлагать её саму себе. */
+  current: `${Section}/${string}`;
   /** Сколько ссылок показать (frontmatter + добор из соседнего раздела). */
   limit?: number;
 }
@@ -27,14 +32,32 @@ function resolve(ref: string): RelatedItem | null {
     const guide = getGameGuideBySlug(slug);
     return guide ? { href: `/games/${slug}`, title: guide.title, description: guide.description } : null;
   }
+  if (section === "releases") {
+    const release = getReleaseBySlug(slug);
+    return release ? { href: `/releases/${slug}`, title: release.title, description: release.summary } : null;
+  }
+  if (section === "install") {
+    const guide = getInstallGuideBySlug(slug);
+    return guide ? { href: `/install/${slug}`, title: guide.title, description: guide.description } : null;
+  }
+  if (section === "landings") {
+    const landing = getLandingBySlug(slug);
+    return landing ? { href: `/voice-chat/${slug}`, title: landing.title, description: landing.description } : null;
+  }
   return null;
 }
 
-// Перелинковка блога и гайдов: явные ссылки из frontmatter, а недостающие
-// места добираем свежими материалами из соседнего раздела (из гайда — посты
-// блога, из поста — гайды). До этого гайды и посты друг на друга не ссылались.
+/** Куда ведёт текущая страница в разделе; посадочные и релизы лежат под другими путями. */
+function currentHref(current: string): string {
+  const [section, slug] = current.split("/");
+  return section === "landings" ? `/voice-chat/${slug}` : `/${section}/${slug}`;
+}
+
+// Перелинковка: явные ссылки из frontmatter, а недостающие места добираем
+// свежими материалами из соседнего раздела. Из гайда и релиза — посты блога,
+// из поста и посадочной — гайды по играм (они приводят больше всего трафика).
 export default function RelatedLinks({ related = [], current, limit = 3 }: RelatedLinksProps) {
-  const seen = new Set<string>([`/${current}`]);
+  const seen = new Set<string>([currentHref(current)]);
   const items: RelatedItem[] = [];
 
   for (const ref of related) {
@@ -46,9 +69,10 @@ export default function RelatedLinks({ related = [], current, limit = 3 }: Relat
   }
 
   if (items.length < limit) {
-    const fallback: RelatedItem[] = current.startsWith("games/")
-      ? getAllBlogPosts().map((p) => ({ href: `/blog/${p.slug}`, title: p.title, description: p.description }))
-      : getAllGameGuides().map((g) => ({ href: `/games/${g.slug}`, title: g.title, description: g.description }));
+    const wantGuides = current.startsWith("blog/") || current.startsWith("landings/");
+    const fallback: RelatedItem[] = wantGuides
+      ? getAllGameGuides().map((g) => ({ href: `/games/${g.slug}`, title: g.title, description: g.description }))
+      : getAllBlogPosts().map((p) => ({ href: `/blog/${p.slug}`, title: p.title, description: p.description }));
     for (const item of fallback) {
       if (items.length >= limit) break;
       if (!seen.has(item.href)) {

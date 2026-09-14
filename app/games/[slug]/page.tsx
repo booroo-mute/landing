@@ -12,7 +12,7 @@ import { getGameGuideBySlug, getAllGameSlugs } from "@/lib/games";
 import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
 import { formatDate } from "@/lib/releases";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, OG_SITE } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,12 +31,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     guide.description ?? `${guide.title} — гайд от команды Mute.`;
 
+  const seoTitle = guide.seoTitle ?? guide.title;
   return {
-    title: `${guide.title} — Mute`,
+    title: `${seoTitle} — Mute`,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: guide.title,
+      ...OG_SITE,
+      title: seoTitle,
       description,
       url,
       type: "article",

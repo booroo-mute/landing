@@ -3,6 +3,8 @@ import { getAllReleases } from "@/lib/releases";
 import { getAllInstallGuides } from "@/lib/install";
 import { getAllGameGuides } from "@/lib/games";
 import { getAllBlogPosts } from "@/lib/blog";
+import { getAllLandings } from "@/lib/landings";
+import { allImageSrcs } from "@/lib/markdown";
 import {
   SITE_URL,
   HOME_UPDATED,
@@ -19,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const releases = getAllReleases();
   const releaseUrls: MetadataRoute.Sitemap = releases.map((release) => ({
     url: `${baseUrl}/releases/${release.slug}`,
-    lastModified: new Date(release.date),
+    lastModified: new Date(release.updated ?? release.date),
     changeFrequency: "yearly",
     priority: 0.5,
   }));
@@ -27,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const installGuides = getAllInstallGuides();
   const installUrls: MetadataRoute.Sitemap = installGuides.map((guide) => ({
     url: `${baseUrl}/install/${guide.slug}`,
-    lastModified: guide.date ? new Date(guide.date) : new Date(HOME_UPDATED),
+    lastModified: new Date(guide.updated ?? guide.date ?? HOME_UPDATED),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
@@ -38,6 +40,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(guide.updated ?? guide.date ?? HOME_UPDATED),
     changeFrequency: "monthly",
     priority: 0.8,
+    // Иллюстрации гайдов для image-расширения sitemap (Google); ?v=N
+    // оставляем, чтобы адрес совпадал с тем, что стоит на странице.
+    images: allImageSrcs(guide.content).map((src) => `${baseUrl}${src}`),
   }));
 
   const blogPosts = getAllBlogPosts();
@@ -46,6 +51,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.updated ?? post.date),
     changeFrequency: "monthly",
     priority: 0.7,
+  }));
+
+  const landings = getAllLandings();
+  const landingUrls: MetadataRoute.Sitemap = landings.map((landing) => ({
+    url: `${baseUrl}/voice-chat/${landing.slug}`,
+    lastModified: new Date(landing.updated ?? landing.date),
+    changeFrequency: "monthly",
+    priority: 0.8,
   }));
 
   const latestRelease = releases[0]?.date;
@@ -127,6 +140,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    ...landingUrls,
     ...installUrls,
     ...gameUrls,
     ...blogUrls,

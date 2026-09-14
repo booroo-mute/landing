@@ -5,9 +5,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
+import CtaBanner from "@/components/CtaBanner";
+import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
-import { SITE_URL, DEFAULT_OG_IMAGE } from "@/lib/site";
+import { PUBLISHER_REF, SOFTWARE_APPLICATION_ID } from "@/lib/schema";
+import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -27,22 +30,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description =
     guide.description ??
     `${guide.title} — пошаговая инструкция для пользователей Mute.`;
+  const seoTitle = guide.seoTitle ?? guide.title;
 
   return {
-    title: `${guide.title} — Mute`,
+    title: `${seoTitle} — Mute`,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title: guide.title,
+      ...OG_SITE,
+      title: seoTitle,
       description,
       url,
       type: "article",
       ...(guide.date && { publishedTime: guide.date }),
+      ...(guide.updated && { modifiedTime: guide.updated }),
       images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       card: "summary_large_image",
-      title: guide.title,
+      title: seoTitle,
       description,
     },
   };
@@ -70,23 +76,13 @@ export default async function InstallPage({ params }: Props) {
           headline: guide.title,
           description,
           datePublished: guide.date,
+          dateModified: guide.updated ?? guide.date,
           inLanguage: "ru-RU",
           url,
           mainEntityOfPage: url,
-          about: {
-            "@type": "SoftwareApplication",
-            name: "Mute",
-            applicationCategory: "CommunicationApplication",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "Mute",
-            url: SITE_URL,
-            logo: {
-              "@type": "ImageObject",
-              url: `${SITE_URL}/logo.png`,
-            },
-          },
+          about: { "@id": SOFTWARE_APPLICATION_ID },
+          author: PUBLISHER_REF,
+          publisher: PUBLISHER_REF,
         }}
       />
       <Header />
@@ -136,14 +132,12 @@ export default async function InstallPage({ params }: Props) {
             </ReactMarkdown>
           </div>
 
-          <p className="body-text text-text-secondary mt-8 md:mt-10">
-            Ещё не установили приложение? Бесплатные сборки для Windows и
-            macOS лежат на{" "}
-            <a href="/download" className="text-accent hover:underline">
-              странице скачивания
-            </a>
-            .
-          </p>
+          <CtaBanner
+            heading="Установка не задалась? Mute работает и в браузере"
+            text="Откройте веб-версию: звонки, комнаты и чаты в ней те же, ставить ничего не нужно. Установщики для Windows и macOS лежат на странице скачивания."
+          />
+
+          <RelatedLinks related={guide.related} current={`install/${slug}`} />
         </article>
       </main>
       <Footer />

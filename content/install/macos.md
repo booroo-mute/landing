@@ -2,6 +2,10 @@
 title: "Установка Mute на macOS"
 description: "Пошаговая инструкция по установке Mute на macOS: обход Gatekeeper и разрешение запуска через Терминал."
 date: "2026-03-15"
+related:
+  - "blog/golosovoy-chat-v-brauzere"
+  - "blog/mute-na-telefone"
+  - "games/dota-2"
 ---
 
 Apple блокирует приложения, скачанные не из App Store. Система при этом исправна, ей просто нужно ваше разрешение на запуск. Вся процедура занимает пару минут.

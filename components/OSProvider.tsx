@@ -14,6 +14,12 @@ export function useOS(): OS {
   return os;
 }
 
+// Краулеры с мобильным UA (Googlebot Smartphone, YandexMobileBot, Lighthouse)
+// иначе получали авторедирект с /download на beta.mute.ac (там noindex) и
+// мобильный вариант кнопок. Для них ОС остаётся «other»: нейтральные кнопки
+// и обе ссылки на установщики в HTML.
+const BOT_UA = /bot|crawl|spider|lighthouse|headless|pagespeed/i;
+
 function isMobileDevice(userAgent: string): boolean {
   return /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile|tablet/i.test(userAgent);
 }
@@ -23,6 +29,7 @@ export function OSProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const userAgent = navigator.userAgent.toLowerCase();
+    if (BOT_UA.test(userAgent)) return;
     if (isMobileDevice(userAgent)) {
       setOS("mobile");
     } else if (userAgent.includes("mac")) {

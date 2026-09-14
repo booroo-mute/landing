@@ -3,7 +3,8 @@
 //
 // 1. Frontmatter статей: обязательные поля, даты не из будущего (по Москве),
 //    updated не раньше date, description не длиннее 160 символов (Bing и
-//    Яндекс обрезают или подменяют сниппет), title длиннее 70 — предупреждение.
+//    Яндекс обрезают или подменяют сниппет), title длиннее 70 без seoTitle
+//    и seoTitle длиннее 58 (в <title> добавляется « — Mute») — предупреждение.
 // 2. Запрещённые формулировки в публичных текстах и внутренних документах:
 //    названия утилит и тема возврата доступа к заблокированным сервисам,
 //    имя регулятора вне юридических страниц, VPN вне связки «без VPN»
@@ -29,6 +30,8 @@ const todayMoscow = new Intl.DateTimeFormat("en-CA", {
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 const MAX_DESCRIPTION = 160;
 const MAX_TITLE_WARN = 70;
+// В <title> к seoTitle добавляется « — Mute» (7 символов): 58 + 7 = 65, дальше выдача режет.
+const MAX_SEO_TITLE_WARN = 58;
 
 // ---------- 1. Frontmatter ----------
 
@@ -37,6 +40,7 @@ const CONTENT_RULES = {
   games: { description: true, date: true },
   install: { description: true, date: true },
   releases: { description: false, date: true },
+  landings: { description: true, date: true },
 };
 
 function listFiles(dir, pattern) {
@@ -58,8 +62,14 @@ function checkFrontmatter() {
       const where = `${rel}:1`;
 
       if (!data.title) errors.push(`${where}: нет title`);
-      else if (String(data.title).length > MAX_TITLE_WARN) {
-        warnings.push(`${where}: title длиннее ${MAX_TITLE_WARN} символов (${String(data.title).length})`);
+      else if (!data.seoTitle && String(data.title).length > MAX_TITLE_WARN) {
+        warnings.push(`${where}: title длиннее ${MAX_TITLE_WARN} символов (${String(data.title).length}), задайте seoTitle`);
+      }
+      if (data.seoTitle && String(data.seoTitle).length > MAX_SEO_TITLE_WARN) {
+        warnings.push(`${where}: seoTitle длиннее ${MAX_SEO_TITLE_WARN} символов (${String(data.seoTitle).length}), в выдаче будет обрезан`);
+      }
+      if (data.seoTitle && data.seoTitle === data.title) {
+        warnings.push(`${where}: seoTitle совпадает с title, поле лишнее`);
       }
 
       if (rules.description && !data.description) errors.push(`${where}: нет description`);

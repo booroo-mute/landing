@@ -11,9 +11,21 @@
 4. Проверки:
    - `curl -s https://mute.ac/robots.txt` — есть блок `User-agent: Yandex` с
      `Clean-param: ysclid&utm_…` (отдаётся из `app/robots.txt/route.ts`)
-   - `curl -s https://mute.ac/sitemap.xml | grep -c "<loc>"` → 41 (на 14.09.2026)
-     + число новых статей/гайдов с прошлого деплоя; `grep lastmod` не должен
-     показывать дат из будущего
+   - `curl -s https://mute.ac/robots.txt | grep -c "^User-agent:"` → 15
+     (13 AI-краулеров, `*` и `Yandex`); `Clean-param` по-прежнему в группе `Yandex`
+   - `curl -s https://mute.ac/sitemap.xml | grep -c "<loc>"` → 44 (на 14.09.2026:
+     41 + три посадочные `/voice-chat/*`) + число новых статей/гайдов с прошлого
+     деплоя; `grep -c "<image:loc>"` → число иллюстраций гайдов (8);
+     `grep lastmod` не должен показывать дат из будущего
+   - `curl -sI https://mute.ac/blog/feed.xml | grep -i content-type` →
+     `application/rss+xml`; `curl -s https://mute.ac/blog/feed.xml | grep -c "<item>"`
+     → число постов + гайдов (18 на 14.09.2026)
+   - `curl -s https://mute.ac/download | grep -c "<h2"` → 5;
+     `curl -s https://mute.ac/games | grep -c "<h2"` → 3
+   - `curl -s https://mute.ac/voice-chat | grep -o 'og:site_name" content="[^"]*"'`
+     → `Mute` (страницы со своим openGraph раньше теряли site_name и locale)
+   - `curl -s https://mute.ac/voice-chat/rooms | grep -o '"@type":"[A-Za-z]*"' | sort -u`
+     → BreadcrumbList, Organization, SoftwareApplication, WebPage, WebSite; FAQPage нет
    - `curl -s https://mute.ac/robots.txt | grep llms` → строка с llms.txt на месте
    - `curl -s https://mute.ac/games/cs2 | grep -c FAQPage` → 1 (то же для /games/dota-2)
    - `curl -sI https://mute.ac/releases/1-3-0` → 308/301 на /releases
@@ -85,13 +97,18 @@ JS-цели, которые шлёт сайт (`components/MetrikaGoals.tsx`, `l
 | `download_click` | клик по ссылке на `/download` | все страницы |
 | `download_win` / `download_mac` | клик по прямой ссылке на `.exe`/`.dmg` и авторедирект на /download (`auto: true`) | все страницы, /download |
 | `telegram_click` | клик по ссылке на `t.me/…` (канал или бот поддержки) | все страницы |
-| `guide_cta` | клик внутри CTA-блока статьи или гайда (`data-goal="guide_cta"`) | /blog/*, /games/* |
+| `guide_cta` | клик внутри CTA-блока статьи, гайда, релиза, инструкции или посадочной (`data-goal="guide_cta"`) | /blog/*, /games/*, /releases/*, /install/*, /voice-chat/* |
 
 Top.Mail.Ru: `open_web`, `open_app`, `download` (без разделения по ОС).
 
-Отдельно: в Метрике стоит создать сегмент «Лендинг» (`Домен = mute.ac`) —
-счётчик общий с `beta.mute.ac`, и без сегмента ~80% просмотров в отчётах
-приходятся на веб-приложение, а не на сайт.
+Отдельно: в Метрике стоит создать сегмент «Лендинг». Счётчик общий с
+`beta.mute.ac`, и без сегмента ~80% просмотров в отчётах приходятся на
+веб-приложение, а не на сайт. Сайт передаёт параметр визита `site = landing`
+(`lib/metrika.ts`, уходит в `ym('init')`), поэтому сегмент строится так:
+«Визиты, в которых → Параметры визитов → site → landing», сохранить как
+«Лендинг». Отчёт «Содержание → Параметры визитов» покажет, что метка дошла,
+примерно через 15 минут после деплоя. Если отчёты по страницам показывают
+только страницы входа, добавить `ym('hit')` на смену маршрута.
 
 ## Шрифты
 

@@ -24,10 +24,36 @@ export function extractFaq(markdown: string): FaqItem[] {
   return items;
 }
 
+/**
+ * Отрезает секцию частых вопросов от тела статьи: посадочные рендерят её
+ * через FaqSection (details/summary), а не как обычный markdown, иначе
+ * вопросы показывались бы дважды.
+ */
+export function splitFaq(markdown: string): { body: string; faq: FaqItem[] } {
+  const header = markdown.match(/^##\s+[^\n]*(?:частых вопросах|частые вопросы)[^\n]*\n/im);
+  if (!header || header.index === undefined) return { body: markdown, faq: [] };
+  const rest = markdown.slice(header.index + header[0].length);
+  const nextHeading = rest.search(/^##\s/m);
+  const after = nextHeading === -1 ? "" : rest.slice(nextHeading);
+  const body = `${markdown.slice(0, header.index).trimEnd()}\n\n${after}`.trimEnd();
+  return { body, faq: extractFaq(markdown) };
+}
+
 /** Первая картинка статьи — кандидат в LCP, её грузим без lazy. */
 export function firstImageSrc(markdown: string): string | null {
   const m = markdown.match(/!\[[^\]]*\]\(([^)\s]+)/);
   return m ? m[1] : null;
+}
+
+/** Все картинки статьи по порядку (для image-расширения sitemap). */
+export function allImageSrcs(markdown: string): string[] {
+  const out: string[] = [];
+  const re = /!\[[^\]]*\]\(([^)\s]+)/g;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(markdown)) !== null) {
+    if (!out.includes(m[1])) out.push(m[1]);
+  }
+  return out;
 }
 
 interface SplitForCtaOptions {

@@ -9,9 +9,14 @@ export interface Release {
   /** Номер сборки приложения; у продуктовых вех (фичи, волны надёжности) его нет */
   version?: string;
   date: string;
+  /** Дата содержательной правки текста релиза (для dateModified и sitemap). */
+  updated?: string;
   title: string;
+  seoTitle?: string;
   summary: string;
   image?: string;
+  /** Связанные материалы для RelatedLinks ("blog/<slug>", "games/<slug>", …). */
+  related?: string[];
   content: string;
 }
 
@@ -30,15 +35,7 @@ export function getAllReleases(): Release[] {
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const { data, content } = matter(fileContents);
 
-      return {
-        slug,
-        version: data.version,
-        date: data.date,
-        title: data.title,
-        summary: data.summary,
-        image: data.image,
-        content,
-      };
+      return readRelease(slug, data, content);
     });
 
   return releases.sort((a, b) => (a.date > b.date ? -1 : 1));
@@ -54,13 +51,20 @@ export function getReleaseBySlug(slug: string): Release | null {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
+  return readRelease(slug, data, content);
+}
+
+function readRelease(slug: string, data: Record<string, unknown>, content: string): Release {
   return {
     slug,
-    version: data.version,
-    date: data.date,
-    title: data.title,
-    summary: data.summary,
-    image: data.image,
+    version: data.version as string | undefined,
+    date: data.date as string,
+    updated: data.updated as string | undefined,
+    title: data.title as string,
+    seoTitle: data.seoTitle as string | undefined,
+    summary: data.summary as string,
+    image: data.image as string | undefined,
+    related: Array.isArray(data.related) ? (data.related as string[]) : undefined,
     content,
   };
 }

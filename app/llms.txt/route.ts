@@ -1,5 +1,6 @@
 import { getAllBlogPosts } from "@/lib/blog";
 import { getAllGameGuides } from "@/lib/games";
+import { getAllLandings } from "@/lib/landings";
 import { SITE_URL } from "@/lib/site";
 
 // llms.txt — краткая машиночитаемая сводка сайта для AI-краулеров
@@ -9,6 +10,7 @@ export const dynamic = "force-static";
 export async function GET() {
   const posts = getAllBlogPosts();
   const guides = getAllGameGuides();
+  const landings = getAllLandings();
 
   const body = `# Mute
 
@@ -28,6 +30,7 @@ export async function GET() {
 - [Главная](${SITE_URL}/): что такое Mute и его возможности
 - [Аналог Discord в России](${SITE_URL}/discord-alternative): сравнение Mute и Discord по пунктам
 - [Голосовой чат с другом онлайн](${SITE_URL}/voice-chat): как созвониться в браузере за пару минут, в том числе с телефона
+${landings.map((l) => `- [${l.title}](${SITE_URL}/voice-chat/${l.slug}): ${l.description}`).join("\n")}
 - [Голосовой чат в играх](${SITE_URL}/games): гайды по войсу в конкретных играх и что делать, когда он не работает
 - [Скачать](${SITE_URL}/download): установщики для Windows и macOS
 - [Установка](${SITE_URL}/install): инструкции для Windows (SmartScreen) и macOS (Gatekeeper)
@@ -61,6 +64,7 @@ ${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.description}
 - Telegram-канал: https://t.me/mutecalls
 - Поддержка: https://t.me/mute_calls_bot
 - E-mail: hello@mute.ac
+- RSS блога и гайдов: ${SITE_URL}/blog/feed.xml
 
 Расширенная версия: ${SITE_URL}/llms-full.txt
 `;

@@ -12,7 +12,7 @@ import { getBlogPostBySlug, getAllBlogSlugs } from "@/lib/blog";
 import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { formatDate } from "@/lib/releases";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, OG_SITE } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -28,12 +28,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   const url = `/blog/${slug}`;
+  // seoTitle: короткая версия для выдачи; H1 и карточки остаются с title.
+  const seoTitle = post.seoTitle ?? post.title;
   return {
-    title: `${post.title} — Mute`,
+    title: `${seoTitle} — Mute`,
     description: post.description,
     alternates: { canonical: url },
     openGraph: {
-      title: post.title,
+      ...OG_SITE,
+      title: seoTitle,
       description: post.description,
       url,
       type: "article",

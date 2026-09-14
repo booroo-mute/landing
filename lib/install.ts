@@ -7,8 +7,12 @@ const installDirectory = path.join(process.cwd(), "content/install");
 export interface InstallGuide {
   slug: string;
   title: string;
+  seoTitle?: string;
   description?: string;
   date?: string;
+  updated?: string;
+  /** Связанные материалы для RelatedLinks ("blog/<slug>", "games/<slug>", …). */
+  related?: string[];
   content: string;
 }
 
@@ -25,8 +29,11 @@ export function getInstallGuideBySlug(slug: string): InstallGuide | null {
   return {
     slug,
     title: data.title,
+    seoTitle: data.seoTitle,
     description: data.description,
     date: data.date,
+    updated: data.updated,
+    related: Array.isArray(data.related) ? data.related : undefined,
     content,
   };
 }

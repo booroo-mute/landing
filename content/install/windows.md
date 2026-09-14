@@ -2,6 +2,10 @@
 title: "Установка Mute на Windows"
 description: "Пошаговая инструкция по установке Mute на Windows и что делать с предупреждением SmartScreen."
 date: "2026-08-13"
+related:
+  - "blog/golosovoy-chat-v-brauzere"
+  - "blog/mute-na-telefone"
+  - "games/steam"
 ---
 
 При запуске установщика Windows может показать предупреждение SmartScreen. Так система реагирует на любые новые приложения, которые ещё не набрали «репутацию» у Microsoft, с вирусами это никак не связано. Достаточно один раз разрешить запуск.

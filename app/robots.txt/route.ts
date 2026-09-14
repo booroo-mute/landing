@@ -3,8 +3,7 @@ import { SITE_URL } from "@/lib/site";
 // robots.txt как route handler, а не app/robots.ts: типизированный
 // MetadataRoute.Robots не умеет Clean-param, а Яндекс без него плодит в
 // индексе дубли с ?ysclid= (клик-метка из выдачи) и utm-хвостами — такие
-// URL уже видны в Метрике. AI-краулеры (GPTBot, OAI-SearchBot, PerplexityBot,
-// ClaudeBot, bingbot, YandexBot) намеренно НЕ блокируются.
+// URL уже видны в Метрике.
 export const dynamic = "force-static";
 
 const TRACKING_PARAMS = [
@@ -21,8 +20,31 @@ const TRACKING_PARAMS = [
   "from",
 ].join("&");
 
+// AI-краулеры перечислены явно, по одному блоку на каждого: часть из них
+// ищет именно свою группу, а не `*`. YandexBot отдельно не выделяем: Яндекс
+// берёт самую точную группу, и блок «YandexBot» без Clean-param отобрал бы
+// его у основного робота.
+const OPEN_CRAWLERS = [
+  "GPTBot",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Google-Extended",
+  "Applebot-Extended",
+  "CCBot",
+  "Bytespider",
+  "Amazonbot",
+];
+
 export function GET() {
-  const body = `User-agent: *
+  const crawlerBlocks = OPEN_CRAWLERS.map((ua) => `User-agent: ${ua}\nAllow: /\n`).join("\n");
+
+  const body = `${crawlerBlocks}
+User-agent: *
 Allow: /
 
 User-agent: Yandex

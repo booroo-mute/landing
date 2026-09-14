@@ -8,6 +8,7 @@ import MetrikaGoals from "@/components/MetrikaGoals";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/schema";
+import { METRIKA_VISIT_PARAMS } from "@/lib/metrika";
 
 const golosText = Golos_Text({
   variable: "--font-golos",
@@ -87,6 +88,9 @@ export default function RootLayout({
         />
         {/* Машиночитаемый профиль продукта для AI-краулеров (llmstxt.org) */}
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+        {/* Вручную, а не через metadata.alternates: страницы задают свой
+            alternates.canonical, и объект из layout на них исчезает целиком */}
+        <link rel="alternate" type="application/rss+xml" title="Mute: блог и гайды" href="/blog/feed.xml" />
         <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
         <OSProvider>{children}</OSProvider>
         <CookieBanner />
@@ -102,7 +106,7 @@ export default function RootLayout({
                 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
                 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
               })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108242058', 'ym');
-              ym(108242058, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+              ym(108242058, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true, params: {site: '${METRIKA_VISIT_PARAMS.site}'}});
             `,
           }}
         />

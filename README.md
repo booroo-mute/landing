@@ -20,8 +20,8 @@ npm run lint
 
 | Путь | Что там |
 |---|---|
-| `app/` | маршруты: главная, `/discord-alternative`, `/voice-chat`, `/download`, `/install/*`, `/games/*`, `/blog/*`, `/releases/*`, `/privacy`, `/terms`; `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt` генерируются кодом |
-| `content/` | markdown: `blog/`, `games/` (гайды по войсу в играх), `install/`, `releases/`. Frontmatter: `title`, `description`, `date`, `updated`, `image`, `ogImage`, `related` (ссылки вида `blog/<slug>` / `games/<slug>`) |
+| `app/` | маршруты: главная, `/discord-alternative`, `/voice-chat`, `/voice-chat/*` (посадочные под сценарии), `/download`, `/install/*`, `/games/*`, `/blog/*`, `/releases/*`, `/privacy`, `/terms`; `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`, `blog/feed.xml` (RSS) генерируются кодом |
+| `content/` | markdown: `blog/`, `games/` (гайды по войсу в играх), `landings/` (посадочные `/voice-chat/<slug>`), `install/`, `releases/`. Frontmatter: `title`, `seoTitle` (короткий заголовок для `<title>` и og:title, ≤ 58 символов; H1 остаётся `title`), `description`, `date`, `updated`, `image`, `ogImage`, `topic` (у гайдов: `broken` или `setup`, группа на `/games`), `related` (ссылки вида `blog/<slug>`, `games/<slug>`, `releases/<slug>`, `install/<slug>`, `landings/<slug>`) |
 | `components/` | UI; `markdownComponents.tsx` — общий рендер статей, `RelatedLinks.tsx` — перелинковка блога и гайдов, `MetrikaGoals.tsx` — цели аналитики |
 | `lib/` | данные и SEO: `site.ts` (URL и даты обновления страниц), `schema.ts` (JSON-LD), `markdown.ts` (FAQ из текста → FAQPage), `imageSize.ts`, `ogImage.tsx` (генерация OG-картинок), `metrika.ts` |
 | `docs/` | `seo-audit-2026-09.md` (аудит SEO и LLM-видимости, план на осень 2026), `seo-deploy-checklist.md` (деплой, проверки, цели Метрики), `seo-offsite-playbook.md` (внешние площадки и LLM-видимость), `seo-ugc-platforms.md` (тихие dofollow-площадки), `listing-copy.md` (тексты для каталогов), `design-system.md`, `release-notes-guide.md` |
@@ -36,8 +36,22 @@ npm run lint
    генерируется автоматически.
 2. Блок «## Коротко о частых вопросах» с парами `**Вопрос?** Ответ` попадёт в
    FAQPage-разметку сам.
-3. Заполнить `related`, чтобы перелинковка была осмысленной.
-4. `npm run build`, задеплоить, `npm run indexnow`.
+3. Заполнить `related`, чтобы перелинковка была осмысленной. У гайда задать
+   `topic` (`broken`, если статья про сломанный войс, иначе `setup`).
+4. Если `title` длиннее 58 символов, задать `seoTitle`: он уходит в `<title>`
+   и og:title, а длинный заголовок остаётся в H1 и карточках.
+5. `npm run build`, задеплоить, `npm run indexnow`.
+
+Еженедельные статус-посты («Discord не работает сегодня», «Когда вернут чат
+в Роблоксе») при обновлении меняют дату в `title`, первой строке и `updated`;
+`date` остаётся датой первой публикации, а `seoTitle` без даты не трогают,
+иначе у Метрики и поисковиков каждую неделю получается новая страница.
+
+Посадочные под сценарии лежат в `content/landings/<slug>.md` и открываются
+как `/voice-chat/<slug>`: один сценарий на страницу, свой набор разделов и
+свои вопросы в блоке «## Коротко о частых вопросах» (он рендерится
+аккордеоном без FAQPage-разметки). Поле `breadcrumb` задаёт короткую подпись
+в хлебных крошках.
 
 Правила текста: честно про ограничения продукта (нет мобильных приложений,
 гостевого входа и push-to-talk), без названий конкурентов, без советов, как

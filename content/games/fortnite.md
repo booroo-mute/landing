@@ -1,10 +1,12 @@
 ---
 title: "Голосовой чат в Fortnite не работает: как включить, почему пропал и как созвониться с пати"
+seoTitle: "Не работает голосовой чат в Fortnite: как включить"
 description: "Где включается войс в Fortnite, почему он пропадает (канал «Игра», выключенный микрофон, родительский контроль, аккаунт до 13 лет) и как созвониться с пати."
 date: "2026-09-14"
 updated: "2026-09-14"
 image: "/games/golosovoy-chat-v-fortnite.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-fortnite-og.jpg?v=2"
+topic: broken
 related:
   - "games/steam"
   - "games/cs2"

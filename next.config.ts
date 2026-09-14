@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
+    // Первая иллюстрация гайда идёт через next/image (мобильный LCP):
+    // кэш оптимизатора держим столько же, сколько статику из public/.
+    minimumCacheTTL: 2592000,
+    // Иллюстрации гайдов живут с ?v=N (сброс кэша при замене файла); без
+    // localPatterns next/image отказывается от src с query-строкой.
+    localPatterns: [{ pathname: "/**" }],
   },
   async headers() {
     return [

@@ -7,6 +7,8 @@ const blogDirectory = path.join(process.cwd(), "content/blog");
 export interface BlogPost {
   slug: string;
   title: string;
+  /** Короткий заголовок для <title> и og:title (≤ 58 символов без « — Mute»); H1 остаётся title. */
+  seoTitle?: string;
   description: string;
   date: string;
   updated?: string;
@@ -41,6 +43,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
   return {
     slug,
     title: data.title,
+    seoTitle: data.seoTitle,
     description: data.description,
     date: data.date,
     updated: data.updated,
