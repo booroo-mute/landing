@@ -2,6 +2,11 @@
 
 ## Лендинг (mute.ac)
 
+Сервер `mute-prod` (алиас в `~/.ssh/config`), лендинг в `/root/mute/landing`,
+процесс pm2 `mute-landing` на порту 3002. Рядом живут `backend` и `sfu-server`:
+их и nginx при деплое лендинга не трогать, идут живые звонки. Правки
+`deploy/nginx-mute.ac.conf` применяются только в окно обслуживания.
+
 1. На сервере: `git pull && npm install && npm run build` (перед сборкой
    автоматически идёт `npm run check:content`: даты не из будущего,
    description ≤ 160, запрещённые формулировки; при ошибке сборка не начнётся)
@@ -70,6 +75,10 @@
 в Яндексе: 2026-09-14, 2026-09-28, далее раз в 2 недели до полного
 выпадения (обычно 4–8 недель).
 
+0. Репозиторий веб-клиента приватный, и у сервера нет учётных данных GitHub:
+   `git pull` в `/root/mute/webclient` не проходит. Статику (robots.txt и
+   подобное) кладите через `scp` в `/var/www/mute-app/` и в `build/`
+   чекаута, полный деплой делайте с машины, у которой есть доступ.
 1. `git pull && npm install && npm run build`
 2. `scripts/update-static.sh` (копирует build в /var/www/mute-app)
 3. Обновить nginx из `beta.mute.ac.conf`: `nginx -t && systemctl reload nginx`
@@ -77,7 +86,8 @@
    - `curl -sI https://beta.mute.ac/ | grep -i x-robots` → `noindex, nofollow`
    - `curl -sI https://beta.mute.ac/welcome | grep -i x-robots` → то же
    - `curl -s https://beta.mute.ac/ | grep noindex` → мета-тег на месте
-   - `curl -s -o /dev/null -w "%{http_code}" https://beta.mute.ac/sitemap.xml` → 404
+   - `curl -sI https://beta.mute.ac/sitemap.xml` → `text/html` с `x-robots-tag:
+     noindex` (файла нет с 14.09.2026, SPA отдаёт свою оболочку), не XML
    - Приложение работает: логин, звонок, инвайт-ссылка
 5. В GSC → Removals: запросить удаление beta.mute.ac/* (ускоряет выпадение
    из выдачи с недель до дней)
