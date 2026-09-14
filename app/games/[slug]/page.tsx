@@ -12,6 +12,7 @@ import { articleMarkdownComponents } from "@/components/markdownComponents";
 import { getGameGuideBySlug, getAllGameSlugs } from "@/lib/games";
 import { extractFaq, firstImageSrc } from "@/lib/markdown";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
+import { formatDate } from "@/lib/releases";
 import { SITE_URL } from "@/lib/site";
 
 interface Props {
@@ -93,6 +94,15 @@ export default async function GameGuidePage({ params }: Props) {
             ]}
           />
           <h1 className="title-large mt-6 md:mt-8">{guide.title}</h1>
+          {(guide.updated ?? guide.date) && (
+            // Гайды обновляются еженедельно: дата видна читателю и совпадает
+            // с dateModified в разметке.
+            <p className="body-text text-text-secondary mt-3">
+              {guide.updated && guide.updated !== guide.date
+                ? `Обновлено ${formatDate(guide.updated)}`
+                : `Опубликовано ${formatDate((guide.updated ?? guide.date)!)}`}
+            </p>
+          )}
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
             <ReactMarkdown components={articleMarkdownComponents(firstImageSrc(guide.content))}>
