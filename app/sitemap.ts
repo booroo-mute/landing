@@ -110,6 +110,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
     {
+      url: `${baseUrl}/delete-account`,
+      lastModified: new Date(LEGAL_UPDATED),
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
+    {
       url: `${baseUrl}/blog`,
       lastModified: latestBlog ? new Date(latestBlog) : new Date(HOME_UPDATED),
       changeFrequency: "weekly",
