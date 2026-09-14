@@ -66,6 +66,9 @@ ${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.description}
 `;
 
   return new Response(body, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=3600",
+    },
   });
 }

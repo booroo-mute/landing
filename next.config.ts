@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
         destination: "/releases",
         permanent: true,
       })),
-      // Посты про VPN и «запрет» сняты 14.09.2026 — адреса были в индексе,
+      // Два поста сняты 14.09.2026 — адреса были в индексе,
       // ведём на ближайшие по смыслу страницы.
       { source: "/blog/zapret-dlya-discord-ne-rabotaet", destination: "/blog/discord-ne-rabotaet-segodnya", permanent: true },
       { source: "/blog/vpn-tolko-dlya-discord", destination: "/discord-alternative", permanent: true },

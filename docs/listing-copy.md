@@ -21,7 +21,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 >
 > The app is built on WebRTC with adaptive bitrate and echo cancellation, and it stays light enough not to compete with your game for resources. Native apps are available for Windows and macOS, and the web version runs in any modern browser, including on phones.
 >
-> Mute is developed by a small independent team and is notable as a Discord alternative that works in Russia, where Discord has been blocked since late 2024 and otherwise requires a VPN. The interface is Russian-first.
+> Mute is developed by a small independent team and is notable as a Discord alternative that works in Russia, where Discord has been blocked since late 2024. The interface is Russian-first.
 >
 > Free, with no subscriptions or paid tiers.
 
@@ -75,7 +75,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 > Голосовой чат для игр, который работает без VPN
 
 **Описание:**
-> После блокировки Discord созвоны на игры превратились в лотерею с VPN. Mute (читается «мьют») — наша попытка вернуть всё как было: лёгкий голосовой чат без серверов, каналов и настроек. Друзья, звонки 1:1 с видео, комнаты до 8 человек, чаты, демонстрация экрана. Бесплатно, для Windows, macOS и браузера.
+> После блокировки Discord созвоны на игры превратились в лотерею: у кого сегодня что открывается. Mute (читается «мьют») — наша попытка вернуть всё как было: лёгкий голосовой чат без серверов, каналов и настроек. Друзья, звонки 1:1 с видео, комнаты до 8 человек, чаты, демонстрация экрана. Бесплатно, для Windows, macOS и браузера.
 
 **Первый комментарий от команды:**
 > Привет! Мы делаем Mute небольшой командой. Начали для себя: после блокировки Discord наши собственные вечерние созвоны развалились, а пересаживаться на корпоративные видеозвонки не хотелось.
@@ -95,7 +95,7 @@ OG-баннер `public/open-graph.png` (1200×630).
 > Mute is a free voice chat for gamers: 1:1 calls, rooms for up to 8, and text chats. No servers, channels, or roles to configure — just your friends. Windows and macOS apps plus a web version. Built by an indie team; works in Russia without a VPN.
 
 **First maker comment:**
-> Hi Product Hunt! We're a small team from the gaming community that lost its home when Discord got blocked in Russia in 2024. VPNs kept dropping mid-game, so we built the tool we needed ourselves.
+> Hi Product Hunt! We're a small team from the gaming community that lost its home when Discord got blocked in Russia in 2024. Every evening started with figuring out who could connect at all, so we built the tool we needed ourselves.
 >
 > Mute is intentionally minimal. There are no public servers, channels, or role systems — a friends list, unlimited 1:1 calls, voice rooms for up to 8 people, and text chats. It runs on WebRTC, stays light during gameplay, and the web version works in any browser without installing anything.
 >
@@ -159,7 +159,7 @@ Con добавить самим — честная карточка живёт �
 > Делаем голосовой чат без серверов и без VPN. Рассказываю, что получилось за полгода
 
 **Тело (каркас, 400–600 слов):**
-> Привет, DTF. Мы небольшой командой делаем Mute — голосовой чат для созвонов со своей компанией. Начали для себя: после блокировки Discord вечерние катки развалились, а VPN отваливался посреди игры у кого-нибудь одного, и созвон умирал.
+> Привет, DTF. Мы небольшой командой делаем Mute — голосовой чат для созвонов со своей компанией. Начали для себя: после блокировки Discord вечерние катки развалились, а у кого-нибудь одного связь отваливалась посреди игры, и созвон умирал.
 >
 > Главное решение — не копировать Discord. Серверов, каналов и ролей в Mute нет, и это не «пока не успели», а принцип: для компании из пяти человек это лишние настройки. Есть друзья, звонки один на один без лимита времени, комнаты до 8 человек, чаты, демонстрация экрана и видеозвонки со стилизацией под старый пиксельный телефон (отключается). Работает в России без VPN, открывается вкладкой браузера, приложения есть для Windows и macOS. Бесплатно.
 >

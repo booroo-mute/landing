@@ -149,9 +149,9 @@ export default function VoiceChatPage() {
             Почему без VPN
           </h2>
           <p className="body-text text-text-secondary mt-4">
-            Mute не заблокирован в России, поэтому обходные настройки ему не
-            нужны. Не приходится проверять перед каждым созвоном, «поднялся ли
-            VPN» у вас и у друга. Если вы переходите с Discord, посмотрите{" "}
+            Mute открывается в России напрямую, никаких дополнительных
+            настроек ему не нужно. Не приходится проверять перед каждым
+            созвоном, у кого что работает. Если вы переходите с Discord, посмотрите{" "}
             <Link href="/discord-alternative" className="text-accent hover:underline">
               подробное сравнение Mute и Discord
             </Link>

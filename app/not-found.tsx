@@ -1,6 +1,15 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+
+// Без своего metadata 404 отдаётся с title и description главной,
+// и «битые» URL выглядят в отчётах вебмастеров как дубли главной.
+// noindex для not-found Next добавляет сам, второй раз не объявляем.
+export const metadata: Metadata = {
+  title: "Страница не найдена — Mute",
+  description: "Такой страницы на mute.ac нет: ссылка устарела или в адресе опечатка.",
+};
 
 export default function NotFound() {
   return (

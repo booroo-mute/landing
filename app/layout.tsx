@@ -85,6 +85,8 @@ export default function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
+        {/* Машиночитаемый профиль продукта для AI-краулеров (llmstxt.org) */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
         <JsonLd data={[ORGANIZATION_SCHEMA, WEBSITE_SCHEMA]} />
         <OSProvider>{children}</OSProvider>
         <CookieBanner />

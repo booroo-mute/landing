@@ -2,15 +2,20 @@
 
 ## Лендинг (mute.ac)
 
-1. На сервере: `git pull && npm install && npm run build`
+1. На сервере: `git pull && npm install && npm run build` (перед сборкой
+   автоматически идёт `npm run check:content`: даты не из будущего,
+   description ≤ 160, запрещённые формулировки; при ошибке сборка не начнётся)
 2. `pm2 restart mute-landing`
 3. Обновить nginx из `deploy/nginx-mute.ac.conf`:
    `nginx -t && systemctl reload nginx`
 4. Проверки:
    - `curl -s https://mute.ac/robots.txt` — есть блок `User-agent: Yandex` с
      `Clean-param: ysclid&utm_…` (отдаётся из `app/robots.txt/route.ts`)
-   - `curl -s https://mute.ac/sitemap.xml | grep -c "<loc>"` → 35 + число
-     новых статей/гайдов с прошлого деплоя
+   - `curl -s https://mute.ac/sitemap.xml | grep -c "<loc>"` → 41 (на 14.09.2026)
+     + число новых статей/гайдов с прошлого деплоя; `grep lastmod` не должен
+     показывать дат из будущего
+   - `curl -s https://mute.ac/robots.txt | grep llms` → строка с llms.txt на месте
+   - `curl -s https://mute.ac/games/cs2 | grep -c FAQPage` → 1 (то же для /games/dota-2)
    - `curl -sI https://mute.ac/releases/1-3-0` → 308/301 на /releases
    - `curl -sI "https://mute.ac/games/roblox~~~x"` → 308 на /games/roblox
    - `curl -sI https://mute.ac/games/golosovoy-chat-v-roblox.webp` → 200 image/webp
@@ -27,15 +32,14 @@
      микроразметки» для `/`, `/download`, `/games/roblox` (Article + FAQPage)
 5. `npm run indexnow` — пингует только URL с изменившимся `lastmod`
    (состояние в `.indexnow-last.json`; `npm run indexnow -- --all` — весь sitemap)
-6. Прописать в `.env` токены `NEXT_PUBLIC_YANDEX_VERIFICATION` /
-   `NEXT_PUBLIC_GOOGLE_VERIFICATION` (после регистрации в вебмастерах)
-   и повторить шаги 1–2.
+6. Прописать в `.env` токен `NEXT_PUBLIC_GOOGLE_VERIFICATION` (после
+   регистрации в Google Search Console; Яндекс подтверждён HTML-файлом,
+   Bing Webmaster импортирует сайт из GSC) и повторить шаги 1–2.
 
-### www.mute.ac (отложено до DNS)
+### www.mute.ac
 
-1. Добавить DNS A/AAAA запись для www.mute.ac
-2. `certbot --nginx -d mute.ac -d www.mute.ac`
-3. Раскомментировать www-блок в `deploy/nginx-mute.ac.conf`, залить, `nginx -t && reload`
+Готово: `https://www.mute.ac/` и `http://mute.ac/` отдают 301 на
+`https://mute.ac/` (проверено 14.09.2026). Ничего делать не нужно.
 
 ## Веб-клиент (beta.mute.ac)
 
@@ -44,6 +48,10 @@
 `beta.mute.ac.conf` в репозитории синхронизирован с боевым конфигом
 (`/etc/nginx/sites-available/beta.mute.ac`), деплоить можно из него.
 Шаг 5 (GSC Removals) ждёт регистрации в Search Console.
+
+**Проверка 2026-09-14:** noindex отдаётся, но `beta.mute.ac/` всё ещё
+встречается в выдаче Google и Bing. Следующая проверка 2026-09-28; после
+регистрации в GSC и Bing Webmaster запросить удаление там и там.
 
 **Не закрывать robots.txt на beta** (`Disallow: /`): noindex работает, только
 пока робот может скачать страницу. График проверки `site:beta.mute.ac`
