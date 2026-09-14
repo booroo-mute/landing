@@ -72,7 +72,8 @@ TenChat и Дзен режут охваты за ИИ-текст и неориг
 - Текст и скриншоты готовы в `docs/listing-copy.md` (раздел productradar). Первый комментарий от команды: почему без серверов и каналов, что дальше.
 - Ссылка: `https://mute.ac/?utm_source=productradar&utm_medium=listing`.
 
-### 2. Teletype — статья под кластер (день 1–2)
+### 2. Teletype — статья под кластер (день 1–2) — ✅ опубликовано 15.09.2026
+- https://teletype.in/@mute.app/golosovoy-chat-dlya-igr-bez-vpn-2026 — обе ссылки на mute.ac без nofollow (проверено по HTML), canonical на себя, description задан. Текст: `docs/external/2026-09-teletype-golosovoy-chat-bez-vpn.md`.
 - Без модерации, ссылки dofollow, комментарии можно не включать. В Google по кластеру уже стоят пять статей мелких блогов с Teletype — наш текст 2026 года свежее любого из них.
 - Тема: «Голосовой чат для игр без VPN в 2026: что работает, что нет и почему» — встроенный войс игр, TeamSpeak/Mumble, корпоративные ВКС, Mute; с датой, с оговорками, без имён конкурентов.
 - Ссылки: `/` и `/discord-alternative` с utm.
