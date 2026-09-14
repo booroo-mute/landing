@@ -19,8 +19,9 @@ interface CtaBannerProps {
 const DEFAULT_HEADING = "Созвонись с друзьями без VPN";
 const DEFAULT_TEXT =
   "Зарегистрируйся за минуту (ник, почта, пароль) и зови своих по ссылке. Бесплатно, в браузере или в приложении для Windows и macOS.";
-const COMPACT_TEXT =
-  "Созвонись с друзьями без VPN: Mute бесплатный и открывается прямо в браузере.";
+// Компактная версия: две короткие строки вместо одной длинной, которая
+// ломалась переносом посреди фразы.
+const COMPACT_TEXT = "Mute бесплатный и открывается прямо в браузере.";
 
 // Баннер-призыв в статьях вместо голых кнопок: квадратный знак Mute, короткая
 // подводка и кнопки как в hero (зависят от ОС, поэтому компонент клиентский,
@@ -45,8 +46,11 @@ export default function CtaBanner({
         className="my-8 md:my-10 bg-background-secondary p-3 md:p-4 flex flex-col sm:flex-row sm:items-center gap-3 md:gap-4"
       >
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <Image src="/mute-icon.svg" alt="" width={40} height={40} className="w-10 h-10 shrink-0" />
-          <p className="body-text">{text}</p>
+          <Image src="/mute-icon.svg" alt="" width={44} height={44} className="w-11 h-11 shrink-0" />
+          <div className="min-w-0">
+            <p className="body-text font-medium">{heading}</p>
+            <p className="body-text text-text-secondary">{text}</p>
+          </div>
         </div>
         <ButtonPrimary href={WEB_URL} target="_blank" className="sm:w-fit sm:shrink-0">
           {isMobile ? "Начать общаться" : "Открыть в браузере"}

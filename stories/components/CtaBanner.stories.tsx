@@ -17,8 +17,8 @@ const meta: Meta<typeof CtaBanner> = {
   ],
   argTypes: {
     compact: { control: 'boolean', description: 'Компактная однострочная версия для середины статьи' },
-    heading: { control: 'text', description: 'Заголовок (только полная версия)' },
-    text: { control: 'text', description: 'Подводка' },
+    heading: { control: 'text', description: 'Заголовок (в компактной версии — первая строка)' },
+    text: { control: 'text', description: 'Подводка (в компактной версии — вторая строка)' },
   },
 }
 
