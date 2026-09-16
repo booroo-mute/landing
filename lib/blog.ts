@@ -12,6 +12,9 @@ export interface BlogPost {
   description: string;
   date: string;
   updated?: string;
+  /** Дата и одна строка статуса под H1 («Статус на 16 сентября: …») у страниц, которые обновляются по событиям. */
+  statusDate?: string;
+  statusLine?: string;
   image?: string;
   ogImage?: string;
   /** Связанные материалы: "blog/<slug>" или "games/<slug>" (см. RelatedLinks). */
@@ -47,6 +50,8 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     description: data.description,
     date: data.date,
     updated: data.updated,
+    statusDate: data.statusDate,
+    statusLine: data.statusLine,
     image: data.image,
     ogImage: data.ogImage,
     related: Array.isArray(data.related) ? data.related : undefined,

@@ -107,6 +107,12 @@ export default async function GameGuidePage({ params }: Props) {
                 : `Опубликовано ${formatDate((guide.updated ?? guide.date)!)}`}
             </p>
           )}
+          {guide.statusDate && guide.statusLine && (
+            <p className="body-text mt-4 border-l-2 border-accent pl-4">
+              <span className="font-semibold">Статус на {formatDate(guide.statusDate)}:</span>{" "}
+              <span className="text-text-secondary">{guide.statusLine}</span>
+            </p>
+          )}
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
             <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>

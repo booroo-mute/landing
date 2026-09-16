@@ -79,9 +79,17 @@ function checkFrontmatter() {
 
       const date = data.date ? String(data.date).slice(0, 10) : undefined;
       const updated = data.updated ? String(data.updated).slice(0, 10) : undefined;
+      const statusDate = data.statusDate ? String(data.statusDate).slice(0, 10) : undefined;
+
+      if ((statusDate && !data.statusLine) || (!statusDate && data.statusLine)) {
+        errors.push(`${where}: statusDate и statusLine задаются вместе`);
+      }
+      if (data.statusLine && String(data.statusLine).length > 220) {
+        warnings.push(`${where}: statusLine длиннее 220 символов, это одна строка под заголовком`);
+      }
 
       if (rules.date && !date) errors.push(`${where}: нет date`);
-      for (const [name, value] of [["date", date], ["updated", updated]]) {
+      for (const [name, value] of [["date", date], ["updated", updated], ["statusDate", statusDate]]) {
         if (value === undefined) continue;
         if (!ISO_DATE.test(value)) {
           errors.push(`${where}: ${name} не в формате YYYY-MM-DD (${value})`);

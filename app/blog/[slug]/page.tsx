@@ -98,6 +98,14 @@ export default async function BlogPostPage({ params }: Props) {
               )}
             </p>
             <h1 className="title-large mt-2">{post.title}</h1>
+            {post.statusDate && post.statusLine && (
+              // Строка статуса: правится двумя полями frontmatter, чтобы
+              // «сегодня»-запросы видели свежую дату без переписывания текста.
+              <p className="body-text mt-4 border-l-2 border-accent pl-4">
+                <span className="font-semibold">Статус на {formatDate(post.statusDate)}:</span>{" "}
+                <span className="text-text-secondary">{post.statusLine}</span>
+              </p>
+            )}
           </div>
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
