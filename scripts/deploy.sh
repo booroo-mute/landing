@@ -29,7 +29,7 @@ REMOTE
 echo "== public checks"
 B=https://mute.ac
 echo "robots groups: $(curl -s $B/robots.txt | grep -c '^User-agent:')  sitemap loc: $(curl -s $B/sitemap.xml | grep -c '<loc>')  feed items: $(curl -s $B/blog/feed.xml | grep -c '<item>')"
-for p in / download games voice-chat discord-alternative blog/discord-ne-rabotaet-segodnya games/steam; do
-  printf "%-40s %s\n" "$p" "$(curl -s -o /dev/null -w '%{http_code}' "$B/$p")"
+for p in "" download games voice-chat discord-alternative blog/discord-ne-rabotaet-segodnya games/steam; do
+  printf "%-40s %s\n" "/$p" "$(curl -s -o /dev/null -w '%{http_code}' "$B/$p")"
 done
 echo "HSTS: $(curl -sI $B/ | grep -ic strict-transport)  beta x-robots: $(curl -sI https://beta.mute.ac/welcome | grep -i x-robots-tag | tr -d '\r')"
