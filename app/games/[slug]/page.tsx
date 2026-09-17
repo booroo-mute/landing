@@ -67,7 +67,7 @@ export default async function GameGuidePage({ params }: Props) {
   const faq = extractFaq(guide.content);
   // Компактный баннер посреди длинного гайда; короткие получают только полный в конце.
   const [contentBefore, contentAfter] = splitForCta(guide.content);
-  const markdownComponents = articleMarkdownComponents(firstImageSrc(guide.content));
+  const markdownComponents = articleMarkdownComponents(firstImageSrc(guide.content), `games/${slug}`);
 
   return (
     <>

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 import { DOWNLOAD_CONFIG } from "@/lib/downloads";
+import { webAppUrl } from "@/lib/webApp";
 
 const TITLE = "Скачать Mute — голосовой чат для игр на Windows и macOS";
 const DESCRIPTION =
@@ -67,7 +68,7 @@ export default function DownloadPage() {
             Текущая версия — {DOWNLOAD_CONFIG.version}, изменения по версиям в разделе{" "}
             <Link href="/releases" className={link}>«Что нового»</Link>.
             Не хотите ничего устанавливать?{" "}
-            <a href={DOWNLOAD_CONFIG.webVersion} className={link}>Веб-версия</a>{" "}
+            <a href={webAppUrl("download", "text")} className={link}>Веб-версия</a>{" "}
             работает в браузере на компьютере и телефоне.
           </p>
 
@@ -95,7 +96,7 @@ export default function DownloadPage() {
           <h2 className={h2}>Не хотите устанавливать: веб-версия</h2>
           <p className={p}>
             Всё, что есть в приложении, работает и во вкладке браузера на{" "}
-            <a href={DOWNLOAD_CONFIG.webVersion} className={link}>beta.mute.ac</a>:
+            <a href={webAppUrl("download", "web-section")} className={link}>beta.mute.ac</a>:
             звонки, комнаты, чаты, видео и демонстрация экрана. На телефоне
             откройте ту же ссылку в Safari на iPhone или в Chrome на Android,
             отдельного мобильного приложения нет. На слабом компьютере вкладка

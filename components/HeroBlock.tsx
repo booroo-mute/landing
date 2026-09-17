@@ -5,6 +5,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
 import { useParallax } from "@/hooks/useParallax";
 import { useOS } from "@/components/OSProvider";
+import { webAppUrl } from "@/lib/webApp";
 
 export default function HeroBlock() {
   const parallaxRef = useParallax<HTMLImageElement>(0.08);
@@ -26,11 +27,11 @@ export default function HeroBlock() {
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
           {isMobile ? (
-            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
+            <ButtonPrimary href={webAppUrl("home", "hero-mobile")} target="_blank">Начать общаться</ButtonPrimary>
           ) : (
             <>
               <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>
-              <ButtonSecondary href="https://beta.mute.ac/welcome" target="_blank">Открыть в браузере</ButtonSecondary>
+              <ButtonSecondary href={webAppUrl("home", "hero-secondary")} target="_blank">Открыть в браузере</ButtonSecondary>
             </>
           )}
         </div>

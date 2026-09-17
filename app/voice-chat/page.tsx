@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { webAppUrl } from "@/lib/webApp";
 import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, VOICE_CHAT_UPDATED } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -85,7 +86,7 @@ export default function VoiceChatPage() {
                 где начать. Рядом честно про регистрацию, чтобы она не была
                 сюрпризом на следующем шаге. */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">
+              <ButtonPrimary href={webAppUrl("voice-chat", "intro")} target="_blank">
                 Открыть в браузере
               </ButtonPrimary>
               <span className="body-text text-text-secondary">
@@ -103,7 +104,7 @@ export default function VoiceChatPage() {
           <ol className="mt-4 list-decimal list-inside space-y-3 md:space-y-4">
             <li className="body-text text-text-secondary">
               Откройте{" "}
-              <a href="https://beta.mute.ac/welcome" className={link}>
+              <a href={webAppUrl("voice-chat", "steps")} className={link}>
                 веб-версию Mute
               </a>{" "}
               в любом браузере или{" "}
@@ -191,7 +192,7 @@ export default function VoiceChatPage() {
           </p>
 
           <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3">
-            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">
+            <ButtonPrimary href={webAppUrl("voice-chat", "bottom")} target="_blank">
               Открыть в браузере
             </ButtonPrimary>
             <ButtonSecondary href="/download">Скачать приложение</ButtonSecondary>

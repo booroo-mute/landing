@@ -15,7 +15,7 @@ import { getLandingBySlug, getAllLandingSlugs } from "@/lib/landings";
 import { splitFaq } from "@/lib/markdown";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
-import { DOWNLOAD_CONFIG } from "@/lib/downloads";
+import { webAppUrl } from "@/lib/webApp";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -74,7 +74,7 @@ export default async function LandingPage({ params }: Props) {
   const url = `${SITE_URL}/voice-chat/${slug}`;
   const { body, faq } = splitFaq(landing.content);
   const [intro, rest] = splitIntro(body);
-  const markdownComponents = articleMarkdownComponents();
+  const markdownComponents = articleMarkdownComponents(null, `voice-chat/${slug}`);
 
   return (
     <>
@@ -106,7 +106,7 @@ export default async function LandingPage({ params }: Props) {
           </div>
 
           <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-3">
-            <ButtonPrimary href={DOWNLOAD_CONFIG.webVersion} target="_blank">
+            <ButtonPrimary href={webAppUrl(`voice-chat/${slug}`, "intro")} target="_blank">
               Открыть в браузере
             </ButtonPrimary>
             <ButtonSecondary href="/download">Скачать приложение</ButtonSecondary>

@@ -3,11 +3,9 @@
 import Image from "next/image";
 import ButtonPrimary from "./ButtonPrimary";
 import ButtonSecondary from "./ButtonSecondary";
+import { usePathname } from "next/navigation";
 import { useOS } from "@/components/OSProvider";
-import { DOWNLOAD_CONFIG } from "@/lib/downloads";
-
-// Тот же URL, что ловит MetrikaGoals как цель open_web.
-const WEB_URL = DOWNLOAD_CONFIG.webVersion;
+import { webAppUrl, pageIdFromPath } from "@/lib/webApp";
 
 interface CtaBannerProps {
   /** Компактная однострочная версия для середины статьи. */
@@ -36,6 +34,9 @@ export default function CtaBanner({
   const isMobile = os === "mobile";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
+  // Тот же адрес, что ловит MetrikaGoals как open_web, плюс UTM страницы и места.
+  const pathname = usePathname();
+  const WEB_URL = webAppUrl(pageIdFromPath(pathname), compact ? "cta-compact" : "cta-full");
 
   if (compact) {
     return (

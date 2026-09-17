@@ -31,7 +31,13 @@ export default function MetrikaGoals() {
       // data-variant (full | compact) у CtaBanner — чтобы сравнивать баннеры в Метрике
       const cta = target?.closest?.('[data-goal="guide_cta"]') as HTMLElement | null;
       if (cta) goals.push("guide_cta");
-      const params = { href, ...(cta?.dataset.variant && { variant: cta.dataset.variant }) };
+      // utm_term ссылки в веб-версию = место на странице (см. lib/webApp.ts)
+      const placement = /[?&]utm_term=([^&]+)/.exec(href)?.[1];
+      const params = {
+        href,
+        ...(placement && { placement: decodeURIComponent(placement) }),
+        ...(cta?.dataset.variant && { variant: cta.dataset.variant }),
+      };
 
       for (const goal of goals) {
         ymReachGoal(goal, params);

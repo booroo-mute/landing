@@ -3,6 +3,7 @@
 import ButtonPrimary from "./ButtonPrimary";
 import LinkText from "./LinkText";
 import { useOS } from "@/components/OSProvider";
+import { webAppUrl } from "@/lib/webApp";
 
 export default function FinalCallSection() {
   const os = useOS();
@@ -20,11 +21,11 @@ export default function FinalCallSection() {
         <h2 className="title-large">На старт, внимание, связь!</h2>
         <p className="title-medium text-text-secondary mt-3 md:mt-4 lg:mt-[16px] mb-6 md:mb-8 lg:mb-[40px]">Начни общаться прямо сейчас</p>
         {isMobile ? (
-          <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
+          <ButtonPrimary href={webAppUrl("home", "final-mobile")} target="_blank">Начать общаться</ButtonPrimary>
         ) : (
           <>
             <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>
-            <LinkText href="https://beta.mute.ac/welcome" target="_blank" className="mt-3 md:mt-4">Открыть в браузере</LinkText>
+            <LinkText href={webAppUrl("home", "final-text")} target="_blank" className="mt-3 md:mt-4">Открыть в браузере</LinkText>
           </>
         )}
       </div>

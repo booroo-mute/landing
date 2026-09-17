@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { webAppUrl } from "@/lib/webApp";
 import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, DISCORD_ALTERNATIVE_UPDATED } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -214,7 +215,7 @@ export default function DiscordAlternativePage() {
 
           <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3">
             <ButtonPrimary href="/download">Скачать Mute бесплатно</ButtonPrimary>
-            <ButtonSecondary href="https://beta.mute.ac/welcome" target="_blank">
+            <ButtonSecondary href={webAppUrl("discord-alternative", "bottom")} target="_blank">
               Открыть в браузере
             </ButtonSecondary>
           </div>

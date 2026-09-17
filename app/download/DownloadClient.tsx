@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useOS, OS } from "@/components/OSProvider";
 import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
+import { webAppUrl } from "@/lib/webApp";
 import LinkText from "@/components/LinkText";
 import { tmrReachGoal } from "@/lib/topMailRu";
 import { ymReachGoal } from "@/lib/metrika";
@@ -26,7 +27,7 @@ export default function DownloadClient() {
     if (os === "mobile") {
       tmrReachGoal("open_app");
       ymReachGoal("open_web", { auto: true });
-      window.location.href = DOWNLOAD_CONFIG.webVersion;
+      window.location.href = webAppUrl("download", "auto-redirect");
       return;
     }
 

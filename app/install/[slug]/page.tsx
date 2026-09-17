@@ -9,6 +9,7 @@ import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
 import { articleRemarkPlugins, tableMarkdownComponents } from "@/components/markdownComponents";
+import { withWebAppUtm } from "@/lib/webApp";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
 import { PUBLISHER_REF, SOFTWARE_APPLICATION_ID } from "@/lib/schema";
 import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
@@ -122,7 +123,7 @@ export default async function InstallPage({ params }: Props) {
                   <strong className="text-text-primary font-semibold">{children}</strong>
                 ),
                 a: ({ href, children }) => (
-                  <a href={href} className="text-accent-blue hover:underline">{children}</a>
+                  <a href={withWebAppUtm(href, `install/${slug}`)} className="text-accent-blue hover:underline">{children}</a>
                 ),
                 code: ({ children }) => (
                   <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>

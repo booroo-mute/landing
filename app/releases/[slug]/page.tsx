@@ -9,6 +9,7 @@ import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
 import { articleRemarkPlugins, tableMarkdownComponents } from "@/components/markdownComponents";
+import { withWebAppUtm } from "@/lib/webApp";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
 import { PUBLISHER_REF } from "@/lib/schema";
 import { SITE_URL, OG_SITE } from "@/lib/site";
@@ -121,6 +122,9 @@ export default async function ReleasePage({ params }: Props) {
                 ),
                 li: ({ children }) => (
                   <li className="body-text text-text-secondary">{children}</li>
+                ),
+                a: ({ href, children }) => (
+                  <a href={withWebAppUtm(href, `releases/${slug}`)} className="text-accent hover:underline">{children}</a>
                 ),
                 img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
                 video: ({ src }) => (

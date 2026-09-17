@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonPrimary from "./ButtonPrimary";
 import { useOS } from "@/components/OSProvider";
+import { webAppUrl, pageIdFromPath } from "@/lib/webApp";
 
 export default function Header() {
   const os = useOS();
@@ -36,7 +37,7 @@ export default function Header() {
             Мы в Telegram
           </a>
           {isMobile ? (
-            <ButtonPrimary href="https://beta.mute.ac/welcome" target="_blank">Начать общаться</ButtonPrimary>
+            <ButtonPrimary href={webAppUrl(pageIdFromPath(pathname), "header")} target="_blank">Начать общаться</ButtonPrimary>
           ) : (
             <ButtonPrimary icon={icon} href="/download">Скачать</ButtonPrimary>
           )}

@@ -1,6 +1,7 @@
 import type { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MarkdownImage from "./MarkdownImage";
+import { withWebAppUtm } from "@/lib/webApp";
 
 /**
  * Плагины remark для всех статей. Без remark-gfm react-markdown понимает
@@ -27,9 +28,10 @@ export const tableMarkdownComponents: Pick<Components, "table" | "thead" | "th" 
 /**
  * Единый набор переопределений react-markdown для длинных статей
  * (блог и гайды по играм). `eagerSrc` — первая картинка статьи, её грузим
- * сразу, остальные лениво.
+ * сразу, остальные лениво. `page` — идентификатор страницы для UTM на
+ * ссылках в веб-версию (см. lib/webApp.ts).
  */
-export function articleMarkdownComponents(eagerSrc: string | null = null): Components {
+export function articleMarkdownComponents(eagerSrc: string | null = null, page = "article"): Components {
   return {
     h2: ({ children }) => (
       <h2 className="title-medium-semibold mt-8 md:mt-10 mb-3 md:mb-4">{children}</h2>
@@ -53,7 +55,7 @@ export function articleMarkdownComponents(eagerSrc: string | null = null): Compo
       <strong className="text-text-primary font-semibold">{children}</strong>
     ),
     a: ({ href, children }) => (
-      <a href={href} className="text-accent hover:underline">{children}</a>
+      <a href={withWebAppUtm(href, page)} className="text-accent hover:underline">{children}</a>
     ),
     code: ({ children }) => (
       <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>
