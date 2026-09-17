@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
-import { articleMarkdownComponents } from "@/components/markdownComponents";
+import { articleMarkdownComponents, articleRemarkPlugins } from "@/components/markdownComponents";
 import { getGameGuideBySlug, getAllGameSlugs } from "@/lib/games";
 import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { faqPageSchema, PUBLISHER_REF } from "@/lib/schema";
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       type: "article",
       ...(guide.date && { publishedTime: guide.date }),
-      ...(guide.updated && { modifiedTime: guide.updated }),
+      ...((guide.updated ?? guide.date) && { modifiedTime: guide.updated ?? guide.date }),
       ...(guide.ogImage && {
         images: [{ url: guide.ogImage, width: 1200, height: 630 }],
       }),
@@ -78,7 +78,7 @@ export default async function GameGuidePage({ params }: Props) {
           headline: guide.title,
           description,
           ...(guide.date && { datePublished: guide.date }),
-          ...(guide.updated && { dateModified: guide.updated }),
+          ...((guide.updated ?? guide.date) && { dateModified: guide.updated ?? guide.date }),
           inLanguage: "ru-RU",
           url,
           mainEntityOfPage: url,
@@ -115,11 +115,11 @@ export default async function GameGuidePage({ params }: Props) {
           )}
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
-            <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{contentBefore}</ReactMarkdown>
             {contentAfter && (
               <>
                 <CtaBanner compact />
-                <ReactMarkdown components={markdownComponents}>{contentAfter}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{contentAfter}</ReactMarkdown>
               </>
             )}
           </div>

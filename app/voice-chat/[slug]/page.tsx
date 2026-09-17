@@ -10,7 +10,7 @@ import RelatedLinks from "@/components/RelatedLinks";
 import FaqSection from "@/components/FaqSection";
 import ButtonPrimary from "@/components/ButtonPrimary";
 import ButtonSecondary from "@/components/ButtonSecondary";
-import { articleMarkdownComponents } from "@/components/markdownComponents";
+import { articleMarkdownComponents, articleRemarkPlugins } from "@/components/markdownComponents";
 import { getLandingBySlug, getAllLandingSlugs } from "@/lib/landings";
 import { splitFaq } from "@/lib/markdown";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
@@ -102,7 +102,7 @@ export default async function LandingPage({ params }: Props) {
           <h1 className="title-large mt-6 md:mt-8">{landing.title}</h1>
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
-            <ReactMarkdown components={markdownComponents}>{intro}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{intro}</ReactMarkdown>
           </div>
 
           <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -117,7 +117,7 @@ export default async function LandingPage({ params }: Props) {
 
           {rest && (
             <div className="mt-8 md:mt-10 prose prose-invert max-w-none">
-              <ReactMarkdown components={markdownComponents}>{rest}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{rest}</ReactMarkdown>
             </div>
           )}
 

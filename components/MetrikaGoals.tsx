@@ -23,7 +23,7 @@ export default function MetrikaGoals() {
       const goals: MetrikaGoal[] = [];
 
       if (href.includes("beta.mute.ac/welcome")) goals.push("open_web");
-      else if (href === "/download") goals.push("download_click");
+      else if (/^(https?:\/\/mute\.ac)?\/download(\?|#|$)/.test(href)) goals.push("download_click");
       else if (/\.exe(\?|$)/.test(href)) goals.push("download_win");
       else if (/\.dmg(\?|$)/.test(href)) goals.push("download_mac");
       else if (href.includes("t.me/")) goals.push("telegram_click");

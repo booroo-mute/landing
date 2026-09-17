@@ -7,7 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
-import { articleMarkdownComponents } from "@/components/markdownComponents";
+import { articleMarkdownComponents, articleRemarkPlugins } from "@/components/markdownComponents";
 import { getBlogPostBySlug, getAllBlogSlugs } from "@/lib/blog";
 import { extractFaq, firstImageSrc, splitForCta } from "@/lib/markdown";
 import { formatDate } from "@/lib/releases";
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       type: "article",
       publishedTime: post.date,
-      ...(post.updated && { modifiedTime: post.updated }),
+      modifiedTime: post.updated ?? post.date,
       // OG-картинка генерируется в ./opengraph-image.tsx, если во frontmatter
       // нет своей: у постов без графики иначе уезжала общая картинка главной.
       ...(post.ogImage && {
@@ -74,7 +74,7 @@ export default async function BlogPostPage({ params }: Props) {
           headline: post.title,
           description: post.description,
           datePublished: post.date,
-          ...(post.updated && { dateModified: post.updated }),
+          dateModified: post.updated ?? post.date,
           inLanguage: "ru-RU",
           url,
           mainEntityOfPage: url,
@@ -109,11 +109,11 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
-            <ReactMarkdown components={markdownComponents}>{contentBefore}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{contentBefore}</ReactMarkdown>
             {contentAfter && (
               <>
                 <CtaBanner compact />
-                <ReactMarkdown components={markdownComponents}>{contentAfter}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{contentAfter}</ReactMarkdown>
               </>
             )}
           </div>

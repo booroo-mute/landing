@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
+import { articleRemarkPlugins, tableMarkdownComponents } from "@/components/markdownComponents";
 import { getInstallGuideBySlug, getAllInstallSlugs } from "@/lib/install";
 import { PUBLISHER_REF, SOFTWARE_APPLICATION_ID } from "@/lib/schema";
 import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
@@ -100,6 +101,7 @@ export default async function InstallPage({ params }: Props) {
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
             <ReactMarkdown
+              remarkPlugins={articleRemarkPlugins}
               components={{
                 h2: ({ children }) => (
                   <h2 className="title-medium-semibold mt-6 md:mt-8 mb-3 md:mb-4">{children}</h2>
@@ -126,6 +128,7 @@ export default async function InstallPage({ params }: Props) {
                   <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>
                 ),
                 img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
+                ...tableMarkdownComponents,
               }}
             >
               {guide.content}

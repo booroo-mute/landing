@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import MarkdownImage from "@/components/MarkdownImage";
+import { articleRemarkPlugins, tableMarkdownComponents } from "@/components/markdownComponents";
 import { getReleaseBySlug, getAllReleaseSlugs, formatDate } from "@/lib/releases";
 import { PUBLISHER_REF } from "@/lib/schema";
 import { SITE_URL, OG_SITE } from "@/lib/site";
@@ -27,9 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!release) return {};
 
   const seoTitle = release.seoTitle ?? release.title;
-  const title = release.version
-    ? `${seoTitle} — Mute ${release.version}`
-    : `${seoTitle} — Mute`;
+  // У релизов с номером версии заголовок сам «Mute 0.2.2»: не дублируем
+  // его в «Mute 0.2.2 — Mute 0.2.2».
+  const title = !release.version
+    ? `${seoTitle} — Mute`
+    : seoTitle.includes(release.version)
+      ? `${seoTitle} — что нового`
+      : `${seoTitle} — Mute ${release.version}`;
   const url = `/releases/${slug}`;
   return {
     title,
@@ -103,6 +108,7 @@ export default async function ReleasePage({ params }: Props) {
 
           <div className="mt-6 md:mt-8 prose prose-invert max-w-none">
             <ReactMarkdown
+              remarkPlugins={articleRemarkPlugins}
               components={{
                 h2: ({ children }) => (
                   <h2 className="title-medium-semibold mt-6 md:mt-8 mb-3 md:mb-4">{children}</h2>
@@ -120,6 +126,7 @@ export default async function ReleasePage({ params }: Props) {
                 video: ({ src }) => (
                   <video src={src} controls className="w-full my-4 md:my-6" />
                 ),
+                ...tableMarkdownComponents,
               }}
             >
               {release.content}

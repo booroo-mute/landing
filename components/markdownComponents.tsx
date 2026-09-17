@@ -1,5 +1,28 @@
 import type { Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import MarkdownImage from "./MarkdownImage";
+
+/**
+ * Плагины remark для всех статей. Без remark-gfm react-markdown понимает
+ * только CommonMark, и pipe-таблицы статус-постов уезжали в текст с «|».
+ */
+export const articleRemarkPlugins = [remarkGfm];
+
+/** Таблицы: общий рендер для статей, релизов и инструкций. */
+export const tableMarkdownComponents: Pick<Components, "table" | "thead" | "th" | "td"> = {
+  table: ({ children }) => (
+    <div className="overflow-x-auto mb-6">
+      <table className="w-full border-collapse text-left">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => <thead className="text-text-primary">{children}</thead>,
+  th: ({ children }) => (
+    <th className="body-text font-semibold py-3 pr-4 border-b border-[#1F1F1F] align-top">{children}</th>
+  ),
+  td: ({ children }) => (
+    <td className="body-text text-text-secondary py-3 pr-4 border-b border-[#1F1F1F] align-top">{children}</td>
+  ),
+};
 
 /**
  * Единый набор переопределений react-markdown для длинных статей
@@ -38,16 +61,6 @@ export function articleMarkdownComponents(eagerSrc: string | null = null): Compo
     img: ({ src, alt }) => (
       <MarkdownImage src={src} alt={alt} eager={typeof src === "string" && src === eagerSrc} />
     ),
-    table: ({ children }) => (
-      <div className="overflow-x-auto mb-6">
-        <table className="w-full border-collapse text-left">{children}</table>
-      </div>
-    ),
-    th: ({ children }) => (
-      <th className="title-medium-semibold py-3 pr-4 border-b border-[#1F1F1F]">{children}</th>
-    ),
-    td: ({ children }) => (
-      <td className="body-text text-text-secondary py-3 pr-4 border-b border-[#1F1F1F]">{children}</td>
-    ),
+    ...tableMarkdownComponents,
   };
 }

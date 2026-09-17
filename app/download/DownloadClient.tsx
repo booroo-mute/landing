@@ -61,11 +61,9 @@ export default function DownloadClient() {
             className="w-[72px] md:w-[82px] lg:w-[92px] h-auto mb-6 md:mb-8"
           />
         </Link>
-        <h1 className="title-large">
-          {isUnknownOS
-            ? "Выбери версию для скачивания"
-            : "Скачивание начнётся автоматически"}
-        </h1>
+        {/* H1 не зависит от ОС: при SSR os === "other", и краулеры раньше
+            видели «Выбери версию для скачивания» вместо названия страницы. */}
+        <h1 className="title-large">Скачать Mute для Windows и macOS</h1>
         {isUnknownOS ? (
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
             <LinkText href={getDownloadUrl("windows")}>
@@ -77,7 +75,7 @@ export default function DownloadClient() {
           </div>
         ) : (
           <p className="body-text text-text-secondary mt-4 md:mt-6">
-            Если загрузка не началась,{" "}
+            Скачивание начнётся автоматически. Если загрузка не началась,{" "}
             <LinkText href={downloadInfo!.url}>{downloadInfo!.label}</LinkText>
           </p>
         )}
