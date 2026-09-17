@@ -66,7 +66,7 @@ export default async function GameGuidePage({ params }: Props) {
   // разметка без видимого контента считается спамом и у Google, и у Яндекса.
   const faq = extractFaq(guide.content);
   // Компактный баннер посреди длинного гайда; короткие получают только полный в конце.
-  const [contentBefore, contentAfter] = splitForCta(guide.content);
+  const [contentBefore, contentAfter] = splitForCta(guide.content, { beforeHeadingText: guide.ctaBefore });
   const markdownComponents = articleMarkdownComponents(firstImageSrc(guide.content), `games/${slug}`);
 
   return (

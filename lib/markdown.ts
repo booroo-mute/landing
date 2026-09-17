@@ -59,6 +59,12 @@ export function allImageSrcs(markdown: string): string[] {
 interface SplitForCtaOptions {
   /** Перед каким по счёту H2 (0-based) вставлять баннер. */
   beforeHeading?: number;
+  /**
+   * Текст H2 (начало, без учёта регистра), перед которым резать: frontmatter
+   * `ctaBefore` у статей, где баннер по счёту попадает не туда, например
+   * перед чеклистом, ради которого пришли. Явное указание обходит пороги.
+   */
+  beforeHeadingText?: string;
   /** Минимум H2 в статье, чтобы разрез вообще имел смысл. */
   minHeadings?: number;
   /** Минимум слов в статье, чтобы разрез вообще имел смысл. */
@@ -74,12 +80,18 @@ interface SplitForCtaOptions {
  */
 export function splitForCta(
   markdown: string,
-  { beforeHeading = 2, minHeadings = 5, minWords = 600 }: SplitForCtaOptions = {},
+  { beforeHeading = 2, beforeHeadingText, minHeadings = 5, minWords = 600 }: SplitForCtaOptions = {},
 ): [string, string] {
+  const lines = markdown.split("\n");
+  if (beforeHeadingText) {
+    const needle = beforeHeadingText.trim().toLowerCase();
+    const idx = lines.findIndex((l) => /^##\s/.test(l) && l.replace(/^##\s+/, "").trim().toLowerCase().startsWith(needle));
+    if (idx > 0) return [lines.slice(0, idx).join("\n"), lines.slice(idx).join("\n")];
+  }
+
   const words = markdown.split(/\s+/).filter(Boolean).length;
   if (words < minWords) return [markdown, ""];
 
-  const lines = markdown.split("\n");
   const headingLines: number[] = [];
   let inFence = false;
   lines.forEach((line, i) => {

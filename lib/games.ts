@@ -15,6 +15,8 @@ export interface GameGuide {
   /** Дата и одна строка статуса под H1 («Статус на 16 сентября: …») у страниц, которые обновляются по событиям. */
   statusDate?: string;
   statusLine?: string;
+  /** Перед каким H2 (начало текста) вставлять компактный баннер; по умолчанию перед третьим. */
+  ctaBefore?: string;
   image?: string;
   ogImage?: string;
   /** Группа на /games: «Не работает войс» (broken) или «Настройка» (setup, по умолчанию). */
@@ -46,6 +48,7 @@ export function getGameGuideBySlug(slug: string): GameGuide | null {
     updated: data.updated,
     statusDate: data.statusDate,
     statusLine: data.statusLine,
+    ctaBefore: data.ctaBefore,
     image: data.image,
     ogImage: data.ogImage,
     topic: data.topic === "broken" ? "broken" : data.topic === "setup" ? "setup" : undefined,

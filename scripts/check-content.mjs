@@ -58,8 +58,15 @@ function listFiles(dir, pattern) {
 function checkFrontmatter() {
   for (const [section, rules] of Object.entries(CONTENT_RULES)) {
     for (const rel of listFiles(path.join("content", section), /\.md$/)) {
-      const { data } = matter(fs.readFileSync(path.join(ROOT, rel), "utf8"));
+      const { data, content } = matter(fs.readFileSync(path.join(ROOT, rel), "utf8"));
       const where = `${rel}:1`;
+
+      // ctaBefore должен указывать на существующий H2, иначе баннер молча уедет на место по умолчанию.
+      if (data.ctaBefore) {
+        const needle = String(data.ctaBefore).trim().toLowerCase();
+        const found = content.split("\n").some((l) => /^##\s/.test(l) && l.replace(/^##\s+/, "").trim().toLowerCase().startsWith(needle));
+        if (!found) errors.push(`${where}: ctaBefore «${data.ctaBefore}» не совпадает ни с одним H2`);
+      }
 
       if (!data.title) errors.push(`${where}: нет title`);
       else if (!data.seoTitle && String(data.title).length > MAX_TITLE_WARN) {

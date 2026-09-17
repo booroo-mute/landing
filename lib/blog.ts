@@ -15,6 +15,8 @@ export interface BlogPost {
   /** Дата и одна строка статуса под H1 («Статус на 16 сентября: …») у страниц, которые обновляются по событиям. */
   statusDate?: string;
   statusLine?: string;
+  /** Перед каким H2 (начало текста) вставлять компактный баннер; по умолчанию перед третьим. */
+  ctaBefore?: string;
   image?: string;
   ogImage?: string;
   /** Связанные материалы: "blog/<slug>" или "games/<slug>" (см. RelatedLinks). */
@@ -52,6 +54,7 @@ export function getBlogPostBySlug(slug: string): BlogPost | null {
     updated: data.updated,
     statusDate: data.statusDate,
     statusLine: data.statusLine,
+    ctaBefore: data.ctaBefore,
     image: data.image,
     ogImage: data.ogImage,
     related: Array.isArray(data.related) ? data.related : undefined,

@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: Props) {
   const url = `${SITE_URL}/blog/${slug}`;
   const faq = extractFaq(post.content);
   // Компактный баннер посреди длинного поста; короткие получают только полный в конце.
-  const [contentBefore, contentAfter] = splitForCta(post.content);
+  const [contentBefore, contentAfter] = splitForCta(post.content, { beforeHeadingText: post.ctaBefore });
   const markdownComponents = articleMarkdownComponents(firstImageSrc(post.content), `blog/${slug}`);
 
   return (
