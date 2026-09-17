@@ -115,8 +115,7 @@ JS-цели, которые шлёт сайт (`components/MetrikaGoals.tsx`, `l
 Параметры целей: `href`; `placement` (место на странице, это `utm_term`
 ссылки в веб-версию: `hero-secondary`, `hero-primary-web`, `cta-full`,
 `cta-compact`, `intro`, `body`, `header`, `auto-redirect`); `variant`
-(`full`/`compact` у баннера); `cta_variant` (`control`/`web`, ветка теста
-«браузер первым» на главной, cookie `mute_cta`, см. `lib/ctaTest.ts`).
+(`full`/`compact` у баннера).
 
 Top.Mail.Ru: `open_web`, `open_app`, `download` (без разделения по ОС).
 
@@ -139,9 +138,6 @@ Top.Mail.Ru: `open_web`, `open_app`, `download` (без разделения п�
 3. Сохранить отчёт «Регистрации по страницам лендинга»: Конверсии → цель
    «Зарегистрировался», группировка «Метки UTM: utm_content», затем
    `utm_term`; атрибуция «Последний значимый источник».
-4. Для теста CTA: тот же отчёт с группировкой по `utm_term`
-   (`hero-primary-web` против `hero-secondary`) плюс «Параметры визитов →
-   cta_variant» в лендинговом сегменте.
 
 Побочный эффект, чтобы не искать регрессию: визит лендинга заканчивается
 на клике по ссылке в веб-версию, поэтому глубина и время на лендинге после

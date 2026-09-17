@@ -30,17 +30,6 @@ declare global {
   }
 }
 
-/** Параметры визита после init (например, ветка теста CTA). */
-export function ymParams(params: Record<string, unknown>, attempt = 0): void {
-  if (typeof window === "undefined") return;
-  if (typeof window.ym === "function") {
-    window.ym(METRIKA_COUNTER_ID, "params", params);
-    return;
-  }
-  if (attempt < 10) {
-    window.setTimeout(() => ymParams(params, attempt + 1), 500);
-  }
-}
 
 export function ymReachGoal(goal: MetrikaGoal, params?: Record<string, unknown>, attempt = 0): void {
   if (typeof window === "undefined") return;

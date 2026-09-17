@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { ymReachGoal, type MetrikaGoal } from "@/lib/metrika";
 import { tmrReachGoal } from "@/lib/topMailRu";
-import { readCtaVariant } from "@/hooks/useCtaVariant";
 
 // Единый обработчик целей по кликам на всех страницах. Цели:
 //   open_web       — любая ссылка на веб-версию («Открыть в браузере», «Начать общаться»)
@@ -34,11 +33,9 @@ export default function MetrikaGoals() {
       if (cta) goals.push("guide_cta");
       // utm_term ссылки в веб-версию = место на странице (см. lib/webApp.ts)
       const placement = /[?&]utm_term=([^&]+)/.exec(href)?.[1];
-      const ctaVariant = readCtaVariant();
       const params = {
         href,
         ...(placement && { placement: decodeURIComponent(placement) }),
-        ...(ctaVariant && { cta_variant: ctaVariant }),
         ...(cta?.dataset.variant && { variant: cta.dataset.variant }),
       };
 
