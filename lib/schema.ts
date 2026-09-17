@@ -108,6 +108,8 @@ interface WebPageOptions {
   type?: "WebPage" | "CollectionPage";
   /** Например, ItemList для индексных страниц. */
   mainEntity?: Record<string, unknown>;
+  /** Иллюстрация страницы, абсолютный URL. */
+  image?: string;
 }
 
 /**
@@ -123,6 +125,7 @@ export function webPageSchema({
   datePublished,
   type = "WebPage",
   mainEntity,
+  image,
 }: WebPageOptions) {
   return {
     "@context": "https://schema.org",
@@ -137,6 +140,7 @@ export function webPageSchema({
     publisher: { "@id": ORGANIZATION_ID },
     ...(datePublished && { datePublished }),
     dateModified,
+    ...(image && { image }),
     ...(mainEntity && { mainEntity }),
   };
 }

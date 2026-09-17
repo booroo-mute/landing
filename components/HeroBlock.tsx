@@ -6,6 +6,7 @@ import ButtonSecondary from "./ButtonSecondary";
 import { useParallax } from "@/hooks/useParallax";
 import { useOS } from "@/components/OSProvider";
 import { webAppUrl } from "@/lib/webApp";
+import { useCtaVariant } from "@/hooks/useCtaVariant";
 
 export default function HeroBlock() {
   const parallaxRef = useParallax<HTMLImageElement>(0.08);
@@ -13,6 +14,7 @@ export default function HeroBlock() {
   const isMobile = os === "mobile";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
+  const variant = useCtaVariant();
 
   return (
     <section className="w-full min-h-[480px] md:min-h-[560px] min-[1200px]:h-[640px] bg-background-secondary flex flex-col min-[1200px]:flex-row mt-4 md:mt-6 lg:mt-8">
@@ -22,12 +24,18 @@ export default function HeroBlock() {
             Голосовое общение<br />для игр, друзей, тебя
           </h1>
           <p className="title-medium text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
-            Легче не бывает. Один клик — и ты на связи
+            Регистрация за минуту. Друзей зовёшь по ссылке.
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
           {isMobile ? (
             <ButtonPrimary href={webAppUrl("home", "hero-mobile")} target="_blank">Начать общаться</ButtonPrimary>
+          ) : variant === "web" ? (
+            // Ветка теста: браузер первым (см. lib/ctaTest.ts)
+            <>
+              <ButtonPrimary href={webAppUrl("home", "hero-primary-web")} target="_blank">Открыть в браузере</ButtonPrimary>
+              <ButtonSecondary icon={icon} href="/download">{label}</ButtonSecondary>
+            </>
           ) : (
             <>
               <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>

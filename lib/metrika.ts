@@ -26,7 +26,19 @@ export type MetrikaGoal =
 
 declare global {
   interface Window {
-    ym?: (id: number, action: string, goal: string, params?: Record<string, unknown>) => void;
+    ym?: (id: number, action: string, goalOrParams: string | Record<string, unknown>, params?: Record<string, unknown>) => void;
+  }
+}
+
+/** Параметры визита после init (например, ветка теста CTA). */
+export function ymParams(params: Record<string, unknown>, attempt = 0): void {
+  if (typeof window === "undefined") return;
+  if (typeof window.ym === "function") {
+    window.ym(METRIKA_COUNTER_ID, "params", params);
+    return;
+  }
+  if (attempt < 10) {
+    window.setTimeout(() => ymParams(params, attempt + 1), 500);
   }
 }
 

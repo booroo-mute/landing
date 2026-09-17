@@ -12,7 +12,7 @@ import ButtonPrimary from "@/components/ButtonPrimary";
 import ButtonSecondary from "@/components/ButtonSecondary";
 import { articleMarkdownComponents, articleRemarkPlugins } from "@/components/markdownComponents";
 import { getLandingBySlug, getAllLandingSlugs } from "@/lib/landings";
-import { splitFaq } from "@/lib/markdown";
+import { splitFaq, firstImageSrc } from "@/lib/markdown";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
 import { webAppUrl } from "@/lib/webApp";
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seoTitle,
       description: landing.description,
       url,
-      images: [DEFAULT_OG_IMAGE],
+      images: landing.ogImage ? [{ url: landing.ogImage, width: 1200, height: 630 }] : [DEFAULT_OG_IMAGE],
       type: "article",
       publishedTime: landing.date,
       ...(landing.updated && { modifiedTime: landing.updated }),
@@ -74,7 +74,7 @@ export default async function LandingPage({ params }: Props) {
   const url = `${SITE_URL}/voice-chat/${slug}`;
   const { body, faq } = splitFaq(landing.content);
   const [intro, rest] = splitIntro(body);
-  const markdownComponents = articleMarkdownComponents(null, `voice-chat/${slug}`);
+  const markdownComponents = articleMarkdownComponents(firstImageSrc(landing.content), `voice-chat/${slug}`);
 
   return (
     <>
@@ -87,6 +87,7 @@ export default async function LandingPage({ params }: Props) {
             description: landing.description,
             datePublished: landing.date,
             dateModified: landing.updated ?? landing.date,
+            ...(landing.image && { image: `${SITE_URL}${landing.image}` }),
           }),
         ]}
       />
@@ -105,7 +106,7 @@ export default async function LandingPage({ params }: Props) {
             <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{intro}</ReactMarkdown>
           </div>
 
-          <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div data-goal="guide_cta" data-variant="intro" className="mt-2 flex flex-col sm:flex-row sm:items-center gap-3">
             <ButtonPrimary href={webAppUrl(`voice-chat/${slug}`, "intro")} target="_blank">
               Открыть в браузере
             </ButtonPrimary>

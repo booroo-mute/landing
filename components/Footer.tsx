@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import LinkText from "./LinkText";
 
+const featureLinks = [
+  { href: "/voice-chat/rooms", label: "Комнаты до 8 человек" },
+  { href: "/voice-chat/screen-share", label: "Демонстрация экрана" },
+  { href: "/voice-chat/phone", label: "На телефоне" },
+];
+
 const productLinks = [
   { href: "/download", label: "Скачать" },
   { href: "/install", label: "Установка" },
@@ -18,6 +24,15 @@ export default function Footer() {
       <div className="container border-b border-[#1F1F1F]"></div>
       <div className="h-8 md:h-10 lg:h-[48px]"></div>
       <div className="container">
+        {/* Посадочные под сценарии раньше не были связаны ни с одной общей навигацией */}
+        <nav aria-label="Возможности" className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-5">
+          <span className="body-text text-text-secondary/70">Возможности:</span>
+          {featureLinks.map(({ href, label }) => (
+            <Link key={href} href={href} className="body-text text-text-secondary hover:text-accent transition-colors">
+              {label}
+            </Link>
+          ))}
+        </nav>
         <nav aria-label="Разделы сайта" className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8">
           {productLinks.map(({ href, label }) => (
             <Link key={href} href={href} className="body-text text-text-secondary hover:text-accent transition-colors">

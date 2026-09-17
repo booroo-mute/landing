@@ -19,6 +19,9 @@ export interface Landing {
   updated?: string;
   /** Подпись в хлебных крошках, если title слишком длинный. */
   breadcrumb?: string;
+  /** Иллюстрация страницы (первая картинка в тексте) и OG-картинка 1200×630. */
+  image?: string;
+  ogImage?: string;
   /** Связанные материалы для RelatedLinks ("blog/<slug>", "games/<slug>", …). */
   related?: string[];
   content: string;
@@ -53,6 +56,8 @@ export function getLandingBySlug(slug: string): Landing | null {
     date: data.date,
     updated: data.updated,
     breadcrumb: data.breadcrumb,
+    image: data.image,
+    ogImage: data.ogImage,
     related: Array.isArray(data.related) ? data.related : undefined,
     content,
   };

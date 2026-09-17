@@ -59,6 +59,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(landing.updated ?? landing.date),
     changeFrequency: "monthly",
     priority: 0.8,
+    images: allImageSrcs(landing.content).map((src) => `${baseUrl}${src}`),
   }));
 
   const latestRelease = releases[0]?.date;
