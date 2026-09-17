@@ -2,7 +2,7 @@
 title: "Аналог TeamSpeak для игр: свой сервер или Mute"
 description: "Сравниваем голосовую связь для игр, которая работает в России без VPN: TeamSpeak и Mute по установке, звуку, цене и удобству. И что случилось с Telegram."
 date: "2026-08-13"
-updated: "2026-09-14"
+updated: "2026-09-17"
 related:
   - "blog/analogi-discord-v-rossii"
   - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"

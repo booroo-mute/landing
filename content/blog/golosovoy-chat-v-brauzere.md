@@ -3,6 +3,7 @@ title: "Голосовой чат для игр в браузере: без ус
 seoTitle: "Голосовой чат для игр в браузере без установки"
 description: "Как созвониться с друзьями прямо в браузере: без установки программ и без VPN. Пошагово на примере веб-версии Mute."
 date: "2026-08-13"
+updated: "2026-09-17"
 related:
   - "blog/mute-na-telefone"
   - "blog/smotret-film-vmeste-onlayn-s-drugom"

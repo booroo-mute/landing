@@ -3,7 +3,7 @@ title: "Голосовой чат в Dota 2: настройка, почему в
 seoTitle: "Голосовой чат в Dota 2: настройка и почему не слышно"
 description: "Две кнопки войса в Dota 2 (команда и пати), настройка микрофона и порога срабатывания, чеклист «меня не слышно» и почему пати созваниваются отдельно."
 date: "2026-09-07"
-updated: "2026-09-14"
+updated: "2026-09-17"
 image: "/games/golosovoy-chat-v-dota-2.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-dota-2-og.jpg?v=2"
 topic: setup

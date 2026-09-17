@@ -2,6 +2,7 @@
 title: "Установка Mute на Windows"
 description: "Пошаговая инструкция по установке Mute на Windows и что делать с предупреждением SmartScreen."
 date: "2026-08-13"
+updated: "2026-09-17"
 related:
   - "blog/golosovoy-chat-v-brauzere"
   - "blog/mute-na-telefone"

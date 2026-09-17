@@ -3,7 +3,7 @@ title: "Голосовой чат в Роблоксе в 2026: что с ним 
 seoTitle: "Голосовой чат в Роблоксе в 2026: что с ним в России"
 description: "Хронология блокировки и возвращения Roblox в Россию, как устроена проверка возраста, как понять, доступен ли вам войс, и что делать, если нет."
 date: "2026-08-31"
-updated: "2026-09-16"
+updated: "2026-09-17"
 image: "/games/golosovoy-chat-v-roblox.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-roblox-og.jpg?v=2"
 topic: broken

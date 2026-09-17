@@ -2,6 +2,7 @@
 title: "Установка Mute на macOS"
 description: "Пошаговая инструкция по установке Mute на macOS: почему система не открывает приложение с первого раза и как разрешить запуск."
 date: "2026-03-15"
+updated: "2026-09-17"
 related:
   - "blog/golosovoy-chat-v-brauzere"
   - "blog/mute-na-telefone"

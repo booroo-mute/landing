@@ -3,7 +3,7 @@ title: "Discord не работает: что делать"
 seoTitle: "Discord не работает: что делать в России в 2026"
 description: "Почему Discord не подключается в России, как отличить ограничение от сбоя у себя и на что переходят геймеры. Разбор ситуации на сентябрь 2026 года."
 date: "2026-08-13"
-updated: "2026-09-14"
+updated: "2026-09-17"
 related:
   - "blog/discord-ne-rabotaet-segodnya"
   - "blog/analogi-discord-v-rossii"

@@ -3,7 +3,7 @@ title: "Аналоги Discord в России в 2026 году: честное 
 seoTitle: "Аналоги Discord в России в 2026: честное сравнение"
 description: "Чем заменить Discord в России без VPN на ПК и в браузере: TeamSpeak, Mumble, корпоративные сервисы и Mute. И почему Telegram больше не запасной вариант."
 date: "2026-08-13"
-updated: "2026-09-14"
+updated: "2026-09-17"
 related:
   - "blog/teamspeak-telegram-ili-mute"
   - "blog/discord-ne-rabotaet-chto-delat"
