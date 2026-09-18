@@ -33,13 +33,13 @@ export default function FeatureList() {
         <FeatureItem
           title="Показать экран другу"
           description={"Экран или окно со звуком,\nдо 1080p при 60 кадрах."}
-          icon="/feature.svg"
+          icon="/screen-share.svg"
           href="/voice-chat/screen-share"
         />
         <FeatureItem
           title="На телефоне"
           description={"Та же веб-версия в Safari\nи Chrome, без приложения."}
-          icon="/mute-icon.svg"
+          icon="/phone.svg"
           href="/voice-chat/phone"
         />
       </div>
