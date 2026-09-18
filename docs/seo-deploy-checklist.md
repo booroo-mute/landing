@@ -110,11 +110,11 @@ JS-цели, которые шлёт сайт (`components/MetrikaGoals.tsx`, `l
 | `download_click` | клик по ссылке на `/download` | все страницы |
 | `download_win` / `download_mac` | клик по прямой ссылке на `.exe`/`.dmg` и авторедирект на /download (`auto: true`) | все страницы, /download |
 | `telegram_click` | клик по ссылке на `t.me/…` (канал или бот поддержки) | все страницы |
-| `guide_cta` | клик внутри CTA-блока статьи, гайда, релиза, инструкции или посадочной (`data-goal="guide_cta"`), у посадочных также первая пара кнопок после вводных абзацев (`data-variant="intro"`) | /blog/*, /games/*, /releases/*, /install/*, /voice-chat/* |
+| `guide_cta` | клик внутри CTA-блока статьи, гайда, релиза, инструкции или посадочной (`data-goal="guide_cta"`) | /blog/*, /games/*, /releases/*, /install/*, /voice-chat/* |
 
 Параметры целей: `href`; `placement` (место на странице, это `utm_term`
 ссылки в веб-версию: `hero-secondary`, `hero-primary-web`, `cta-full`,
-`cta-compact`, `intro`, `body`, `header`, `auto-redirect`); `variant`
+`cta-compact`, `body`, `header`, `auto-redirect`); `variant`
 (`full`/`compact` у баннера).
 
 Top.Mail.Ru: `open_web`, `open_app`, `download` (без разделения по ОС).

@@ -8,14 +8,11 @@ import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import RelatedLinks from "@/components/RelatedLinks";
 import FaqSection from "@/components/FaqSection";
-import ButtonPrimary from "@/components/ButtonPrimary";
-import ButtonSecondary from "@/components/ButtonSecondary";
 import { articleMarkdownComponents, articleRemarkPlugins } from "@/components/markdownComponents";
 import { getLandingBySlug, getAllLandingSlugs } from "@/lib/landings";
 import { splitFaq, firstImageSrc } from "@/lib/markdown";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 import { SITE_URL, DEFAULT_OG_IMAGE, OG_SITE } from "@/lib/site";
-import { webAppUrl } from "@/lib/webApp";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -106,15 +103,8 @@ export default async function LandingPage({ params }: Props) {
             <ReactMarkdown remarkPlugins={articleRemarkPlugins} components={markdownComponents}>{intro}</ReactMarkdown>
           </div>
 
-          <div data-goal="guide_cta" data-variant="intro" className="mt-2 flex flex-col sm:flex-row sm:items-center gap-3">
-            <ButtonPrimary href={webAppUrl(`voice-chat/${slug}`, "intro")} target="_blank">
-              Открыть в браузере
-            </ButtonPrimary>
-            <ButtonSecondary href="/download">Скачать приложение</ButtonSecondary>
-          </div>
-          <p className="body-text text-text-secondary mt-3">
-            Регистрация за минуту: ник, почта и пароль. Телефон не нужен.
-          </p>
+          {/* Компактная карточка вместо голых кнопок; полная карточка стоит в конце. */}
+          <CtaBanner compact text="Регистрация за минуту: ник, почта и пароль. Телефон не нужен." />
 
           {rest && (
             <div className="mt-8 md:mt-10 prose prose-invert max-w-none">

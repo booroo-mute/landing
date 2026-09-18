@@ -7,8 +7,7 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import ButtonPrimary from "@/components/ButtonPrimary";
-import ButtonSecondary from "@/components/ButtonSecondary";
+import CtaBanner from "@/components/CtaBanner";
 import { FAQ_ITEMS } from "@/lib/faq";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 
@@ -85,14 +84,7 @@ export default function VoiceChatPage() {
                 давал отказ 36% и 26 секунд на странице — люди не находили,
                 где начать. Рядом честно про регистрацию, чтобы она не была
                 сюрпризом на следующем шаге. */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
-              <ButtonPrimary href={webAppUrl("voice-chat", "intro")} target="_blank">
-                Открыть в браузере
-              </ButtonPrimary>
-              <span className="body-text text-text-secondary">
-                Регистрация за минуту: ник, почта и пароль. Телефон не нужен.
-              </span>
-            </div>
+            <CtaBanner compact text="Регистрация за минуту: ник, почта и пароль. Телефон не нужен." />
             <p className="body-text text-text-secondary">
               Случайных собеседников здесь нет. Это не чат-рулетка и не сайт
               знакомств: в разговор попадают только те, кого вы сами позвали.
@@ -191,12 +183,7 @@ export default function VoiceChatPage() {
             на сообщества на сотни человек.
           </p>
 
-          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3">
-            <ButtonPrimary href={webAppUrl("voice-chat", "bottom")} target="_blank">
-              Открыть в браузере
-            </ButtonPrimary>
-            <ButtonSecondary href="/download">Скачать приложение</ButtonSecondary>
-          </div>
+          <CtaBanner />
 
           <p className="body-text text-text-secondary mt-8 md:mt-10">
             Полезное по теме:{" "}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { webAppUrl } from "@/lib/webApp";
 import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, DISCORD_ALTERNATIVE_UPDATED } from "@/lib/site";
 import Link from "next/link";
 import Header from "@/components/Header";
@@ -7,8 +6,7 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
-import ButtonPrimary from "@/components/ButtonPrimary";
-import ButtonSecondary from "@/components/ButtonSecondary";
+import CtaBanner from "@/components/CtaBanner";
 import { FAQ_ITEMS, type FaqItem } from "@/lib/faq";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 
@@ -214,12 +212,7 @@ export default function DiscordAlternativePage() {
             если он у вас открывается, или свой сервер вроде TeamSpeak. Mute рассчитан на созвоны со своими.
           </p>
 
-          <div className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-3">
-            <ButtonPrimary href="/download">Скачать Mute бесплатно</ButtonPrimary>
-            <ButtonSecondary href={webAppUrl("discord-alternative", "bottom")} target="_blank">
-              Открыть в браузере
-            </ButtonSecondary>
-          </div>
+          <CtaBanner />
 
           <p className="body-text text-text-secondary mt-8 md:mt-10">
             Полезное по теме:{" "}
