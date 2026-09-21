@@ -52,9 +52,16 @@ const nextConfig: NextConfig = {
       // /games/*.webp и *-og.jpg (редиректы срабатывают раньше статики).
       // 307, а не 308: постоянный редирект браузеры кешируют бессрочно, и
       // одна ошибка в правиле (как с картинками 13.09) залипает у посетителей.
+      // То же для остальных разделов и корневых страниц: в Метрике видны
+      // «/voice-chat отзывы» и «/voice-chat jnpsds», набранные в адресной строке.
       {
-        source: "/games/:slug([a-z0-9-]+):junk([^a-z0-9\\-/.].*)",
-        destination: "/games/:slug",
+        source: "/:section(blog|games|voice-chat|install|releases)/:slug([a-z0-9-]+):junk([^a-z0-9\\-/.].*)",
+        destination: "/:section/:slug",
+        permanent: false,
+      },
+      {
+        source: "/:page(voice-chat|download|discord-alternative|games|blog|install|releases):junk([^a-z0-9\\-/.].*)",
+        destination: "/:page",
         permanent: false,
       },
     ];

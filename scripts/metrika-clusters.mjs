@@ -133,28 +133,67 @@ function loadDay(dir) {
   return day;
 }
 
-/** Папка цели: «Посещаемость-<дата>…csv» по дням; имя цели из заголовка. */
+/**
+ * Папка цели: «Посещаемость-<дата>…csv» по дням. Имя цели берём из
+ * заголовка каждого табличного файла, поэтому папка, куда попали выгрузки
+ * по двум целям (так было 18–20.09: «Открыл приложение в браузере» лежала
+ * в «открыл скачать»), даёт две отдельные цели. Временные ряды имени цели
+ * не несут, их привязываем только когда цель в папке одна.
+ */
 function loadGoalFolder(dir) {
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".csv"));
-  const byDate = new Map();
-  let name;
+  const goals = new Map();
+  const seriesByDate = new Map();
   for (const f of files) {
     const date = dateOf(f);
     if (!date) continue;
     const rows = readCsv(dir, f);
-    const entry = byDate.get(date) ?? {};
-    if (isSeries(rows)) entry.hourly = hourly(rows, 1);
-    else {
-      const h = rows[0];
-      const ai = h.findIndex((x) => x.startsWith("Достижения цели"));
-      name ??= h[ai]?.match(/\((.+)\)/)?.[1];
-      entry.total = num(rows[1]?.[ai]);
-      const ci = h.findIndex((x) => x.startsWith("Конверсия"));
-      entry.conversion = num(rows[1]?.[ci]);
-    }
-    byDate.set(date, entry);
+    if (isSeries(rows)) { seriesByDate.set(date, hourly(rows, 1)); continue; }
+    const h = rows[0];
+    const ai = h.findIndex((x) => x.startsWith("Достижения цели"));
+    const name = h[ai]?.match(/\((.+)\)/)?.[1];
+    if (!name) continue;
+    const goal = goals.get(name) ?? { name, byDate: new Map() };
+    const ci = h.findIndex((x) => x.startsWith("Конверсия"));
+    goal.byDate.set(date, { total: num(rows[1]?.[ai]), conversion: num(rows[1]?.[ci]) });
+    goals.set(name, goal);
   }
-  return name ? { name, byDate } : null;
+  if (goals.size === 1) {
+    const [goal] = goals.values();
+    for (const [date, h] of seriesByDate) goal.byDate.set(date, { ...(goal.byDate.get(date) ?? {}), hourly: h });
+  }
+  return [...goals.values()];
+}
+
+/**
+ * Папка gsc/: выгрузки Search Console (Performance → Export → CSV). Файлы
+ * «Запросы» и «Страницы» с колонками клики/показы/CTR/позиция, язык
+ * интерфейса любой. Печатаем топ по кликам с позицией: это единственный
+ * источник запросов Google, Метрика их не показывает.
+ */
+function loadGsc(dir) {
+  const out = [];
+  for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".csv"))) {
+    const rows = readCsv(dir, f);
+    const h = rows[0] ?? [];
+    const ci = h.findIndex((x) => /^(Клики|Clicks)$/i.test(x));
+    const ii = h.findIndex((x) => /^(Показы|Impressions)$/i.test(x));
+    const pi = h.findIndex((x) => /^(Позиция|Position)$/i.test(x));
+    if (ci === -1 || ii === -1) continue;
+    const items = rows.slice(1).map((r) => ({ key: r[0], clicks: num(r[ci]), impressions: num(r[ii]), position: pi === -1 ? null : num(r[pi]) }))
+      .sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions);
+    out.push({ file: f, items });
+  }
+  return out;
+}
+
+function printGsc(tables) {
+  for (const t of tables) {
+    console.log(`\n== Search Console: ${t.file} (топ-20 по кликам: клики / показы / позиция)`);
+    for (const i of t.items.slice(0, 20)) {
+      console.log(`  ${i.key.slice(0, 70).padEnd(70)} ${String(i.clicks).padStart(5)} / ${String(i.impressions).padStart(6)}${i.position === null ? "" : " / " + i.position.toFixed(1)}`);
+    }
+  }
 }
 
 function printDay(day) {
@@ -223,17 +262,18 @@ if (hasCsv) {
   printDay(loadDay(target));
 } else {
   const subdirs = fs.readdirSync(target, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => path.join(target, e.name));
-  const days = [], goals = [];
+  const days = [], goals = [], gsc = [];
   for (const dir of subdirs) {
     const files = fs.readdirSync(dir).filter((f) => f.endsWith(".csv"));
     if (!files.length) continue;
+    if (/^gsc$/i.test(path.basename(dir))) { gsc.push(...loadGsc(dir)); continue; }
     const onlyVisits = files.every((f) => f.startsWith("Посещаемость"));
-    const goal = onlyVisits ? loadGoalFolder(dir) : null;
-    if (goal) goals.push(goal);
+    if (onlyVisits) goals.push(...loadGoalFolder(dir));
     else days.push(loadDay(dir));
   }
   days.sort((a, b) => (a.date < b.date ? -1 : 1));
   if (!days.length) { console.error("В папке нет подпапок с выгрузками за день"); process.exit(1); }
   printComparison(days, goals);
   printHourly(days, goals);
+  printGsc(gsc);
 }
