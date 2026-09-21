@@ -19,14 +19,17 @@ export interface GameGuide {
   ctaBefore?: string;
   image?: string;
   ogImage?: string;
-  /** Группа на /games: «Не работает войс» (broken) или «Настройка» (setup, по умолчанию). */
+  /** Группа на /games: «Не работает войс» (broken), «Нет встроенного войса» (novoice) или «Настройка» (setup, по умолчанию). */
   topic?: GameTopic;
   /** Связанные материалы: "blog/<slug>" или "games/<slug>" (см. RelatedLinks). */
   related?: string[];
   content: string;
 }
 
-export type GameTopic = "broken" | "setup";
+export type GameTopic = "broken" | "setup" | "novoice";
+
+/** Допустимые значения `topic`; тот же список в scripts/check-content.mjs, который ругается на всё остальное. */
+export const GAME_TOPICS: readonly GameTopic[] = ["broken", "novoice", "setup"];
 
 
 export function getGameGuideBySlug(slug: string): GameGuide | null {
@@ -51,7 +54,7 @@ export function getGameGuideBySlug(slug: string): GameGuide | null {
     ctaBefore: data.ctaBefore,
     image: data.image,
     ogImage: data.ogImage,
-    topic: data.topic === "broken" ? "broken" : data.topic === "setup" ? "setup" : undefined,
+    topic: GAME_TOPICS.includes(data.topic) ? (data.topic as GameTopic) : undefined,
     related: Array.isArray(data.related) ? data.related : undefined,
     content,
   };

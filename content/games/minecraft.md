@@ -6,7 +6,7 @@ date: "2026-08-28"
 updated: "2026-09-14"
 image: "/games/golosovoy-chat-v-minecraft.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg?v=2"
-topic: setup
+topic: novoice
 related:
   - "blog/golosovoy-chat-v-brauzere"
   - "games/roblox"

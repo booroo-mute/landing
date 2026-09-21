@@ -35,6 +35,12 @@ const MAX_SEO_TITLE_WARN = 58;
 
 // ---------- 1. Frontmatter ----------
 
+// Тот же список, что GAME_TOPICS в lib/games.ts: неизвестное значение там молча превращалось в «Настройку».
+const GAME_TOPICS = ["broken", "novoice", "setup"];
+
+// Черновики, которые ждут проверки фактов: сайт папку не читает, а правила те же.
+const CONTENT_BASES = ["content", path.join("content", "drafts")];
+
 const CONTENT_RULES = {
   blog: { description: true, date: true },
   games: { description: true, date: true },
@@ -57,9 +63,22 @@ function listFiles(dir, pattern) {
 
 function checkFrontmatter() {
   for (const [section, rules] of Object.entries(CONTENT_RULES)) {
-    for (const rel of listFiles(path.join("content", section), /\.md$/)) {
+    for (const rel of CONTENT_BASES.flatMap((base) => listFiles(path.join(base, section), /\.md$/))) {
       const { data, content } = matter(fs.readFileSync(path.join(ROOT, rel), "utf8"));
       const where = `${rel}:1`;
+
+      // Пометка для проверки фактов допустима только в черновике.
+      if (!rel.startsWith(path.join("content", "drafts")) && /ПРОВЕРИТЬ/u.test(content)) {
+        errors.push(`${where}: в тексте осталась пометка ПРОВЕРИТЬ, страница не готова к публикации`);
+      }
+
+      if (section === "games") {
+        if (data.topic === undefined) {
+          warnings.push(`${where}: нет topic (${GAME_TOPICS.join(", ")}), гайд попадёт в «Настройку»`);
+        } else if (!GAME_TOPICS.includes(String(data.topic))) {
+          errors.push(`${where}: topic «${data.topic}» не из списка ${GAME_TOPICS.join(", ")}`);
+        }
+      }
 
       // ctaBefore должен указывать на существующий H2, иначе баннер молча уедет на место по умолчанию.
       if (data.ctaBefore) {
