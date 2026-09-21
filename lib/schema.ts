@@ -34,7 +34,6 @@ export const ORGANIZATION_SCHEMA = {
   sameAs: [
     "https://t.me/mutecalls",
     "https://t.me/mute_calls_bot",
-    "https://boosty.to/muteapp",
     "https://github.com/ylwsubmarine/mute-releases",
   ],
   contactPoint: {

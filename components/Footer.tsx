@@ -40,7 +40,6 @@ export default function Footer() {
             </Link>
           ))}
           <LinkText href="https://t.me/mutecalls" underline={false} target="_blank">Мы в Telegram</LinkText>
-          <LinkText href="https://boosty.to/muteapp" underline={false} target="_blank">Поддержать проект</LinkText>
           <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Помощь</LinkText>
           <LinkText href="mailto:hello@mute.ac" underline={false} target="_blank">Связаться с нами</LinkText>
           <Link href="/privacy" className="body-text text-text-secondary hover:text-accent transition-colors">
