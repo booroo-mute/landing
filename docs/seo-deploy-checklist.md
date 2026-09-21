@@ -28,8 +28,10 @@
    - `curl -sI https://mute.ac/blog/feed.xml | grep -i content-type` →
      `application/rss+xml`; `curl -s https://mute.ac/blog/feed.xml | grep -c "<item>"`
      → число постов + гайдов (18 на 14.09.2026)
-   - `curl -s https://mute.ac/download | grep -c "<h2"` → 5;
-     `curl -s https://mute.ac/games | grep -c "<h2"` → 4 (три группы и «Вашей игры нет в списке?»)
+   - `curl -s https://mute.ac/download | grep -o "<h2" | wc -l` → 5;
+     `curl -s https://mute.ac/games | grep -o "<h2" | wc -l` → 4 (три группы и
+     «Вашей игры нет в списке?»). HTML отдаётся одной строкой, поэтому
+     `grep -c` всегда печатает 1
    - `curl -s https://mute.ac/voice-chat | grep -o 'og:site_name" content="[^"]*"'`
      → `Mute` (страницы со своим openGraph раньше теряли site_name и locale)
    - `curl -s https://mute.ac/voice-chat/rooms | grep -o '"@type":"[A-Za-z]*"' | sort -u`
