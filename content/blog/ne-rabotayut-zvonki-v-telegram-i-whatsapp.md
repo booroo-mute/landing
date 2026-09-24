@@ -3,9 +3,9 @@ title: "Не работают звонки в Telegram и WhatsApp: что пр�
 seoTitle: "Не работают звонки в Telegram и WhatsApp: что делать"
 description: "Почему звонки в Telegram и WhatsApp в России не проходят с августа 2025 года, как отличить ограничение от поломки у себя и как созвониться без VPN."
 date: "2026-09-13"
-updated: "2026-09-21"
-statusDate: "2026-09-21"
-statusLine: "Звонки в Telegram и WhatsApp ограничены с 13 августа 2025 года, решений об отмене мы не видели. Telegram в сентябре открывается у части пользователей, в основном на Android; на iPhone и компьютерах чаще нет."
+updated: "2026-09-24"
+statusDate: "2026-09-24"
+statusLine: "Звонки в Telegram и WhatsApp ограничены с 13 августа 2025 года, решений об отмене мы не видели. На 24 сентября Telegram открывается у части пользователей, в основном на Android; на iPhone и компьютерах чаще нет."
 related:
   - "blog/analogi-discord-v-rossii"
   - "blog/golosovoy-chat-v-brauzere"
