@@ -30,6 +30,7 @@
 | есть ли голосовой чат в геншине | `/games/genshin-impact` (в плане) | | | |
 | смотреть аниме вместе с другом | `/blog/smotret-anime-vmeste-s-drugom` | | | |
 | есть ли голосовой чат в амонг ас | `/games/among-us` | | | |
+| в каких играх нет голосового чата | `/blog/igry-bez-golosovogo-chata` | | | |
 
 Что известно без ручного снятия (14.09.2026): по «аналог дискорда без vpn в
 россии 2026» Google показывает `/blog/analogi-discord-v-rossii` третьим; в

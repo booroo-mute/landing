@@ -3,11 +3,12 @@ title: "Голосовой чат в Майнкрафте: моды для Java,
 seoTitle: "Голосовой чат в Майнкрафте: моды и способ без модов"
 description: "В Minecraft нет встроенного голосового чата. Разбираем оба рабочих способа: моды Plasmo Voice и Simple Voice Chat для своего сервера или созвон в браузере."
 date: "2026-08-28"
-updated: "2026-09-21"
+updated: "2026-09-24"
 image: "/games/golosovoy-chat-v-minecraft.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg?v=2"
 topic: novoice
 related:
+  - "blog/igry-bez-golosovogo-chata"
   - "blog/golosovoy-chat-v-brauzere"
   - "games/roblox"
   - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
