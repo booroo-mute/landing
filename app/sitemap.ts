@@ -51,6 +51,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.updated ?? post.date),
     changeFrequency: "monthly",
     priority: 0.7,
+    // Иллюстрации постов туда же, что и у гайдов.
+    images: allImageSrcs(post.content).map((src) => `${baseUrl}${src}`),
   }));
 
   const landings = getAllLandings();
