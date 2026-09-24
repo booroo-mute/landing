@@ -65,9 +65,11 @@ export default function CtaBanner({
       data-goal="guide_cta"
       data-variant="full"
       aria-label="Попробовать Mute"
-      className="mt-10 md:mt-12 bg-background-secondary p-4 md:p-6 flex flex-col lg:flex-row lg:items-center gap-5 md:gap-6"
+      // Кнопки всегда под текстом: колонка статьи не шире 920px, и в строке
+      // две кнопки (~500px) оставляли тексту узкий столбик с переносом заголовка.
+      className="mt-10 md:mt-12 bg-background-secondary p-4 md:p-6 flex flex-col gap-5 md:gap-6"
     >
-      <div className="flex items-start gap-4 md:gap-5 flex-1 min-w-0">
+      <div className="flex items-start gap-4 md:gap-5 min-w-0">
         <Image
           src="/mute-icon.svg"
           alt=""
@@ -80,7 +82,7 @@ export default function CtaBanner({
           <p className="body-text text-text-secondary mt-1 md:mt-2">{text}</p>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row gap-3 lg:shrink-0">
+      <div className="flex flex-col sm:flex-row gap-3">
         {isMobile ? (
           <ButtonPrimary href={WEB_URL} target="_blank" className="md:w-fit">
             Начать общаться
