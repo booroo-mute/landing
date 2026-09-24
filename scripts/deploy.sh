@@ -19,7 +19,8 @@ echo "HEAD $(git rev-parse --short HEAD)"
 if git diff --name-only HEAD@{1} HEAD 2>/dev/null | grep -q package-lock.json; then
   echo "lockfile changed: npm install"; npm install --no-audit --no-fund >/dev/null
 fi
-npm run build 2>&1 | grep -E "check-content|✓ Compiled|rror" | head -5
+# nice/ionice: сборка уступает процессор и диск mediasoup и backend, звонки не дрожат.
+nice -n 19 ionice -c3 npm run build 2>&1 | grep -E "check-content|✓ Compiled|rror" | head -5
 pm2 restart mute-landing --update-env >/dev/null
 i=0; until curl -sf -o /dev/null http://127.0.0.1:3002/robots.txt || [ $i -gt 60 ]; do i=$((i+1)); sleep 1; done
 npm run indexnow 2>&1 | tail -2
