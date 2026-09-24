@@ -65,6 +65,13 @@
     word-wrap: break-word;
   }
 
+  /* Жирный текст внутри серых абзацев и списков читается плохо (заметки релизов, 24.09.2026):
+     страховка на случай карты markdown без своего strong. */
+  .body-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
   .body-text {
     font-size: 15px;
     font-weight: 400;

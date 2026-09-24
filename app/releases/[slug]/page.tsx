@@ -123,6 +123,9 @@ export default async function ReleasePage({ params }: Props) {
                 li: ({ children }) => (
                   <li className="body-text text-text-secondary">{children}</li>
                 ),
+                strong: ({ children }) => (
+                  <strong className="text-text-primary font-semibold">{children}</strong>
+                ),
                 a: ({ href, children }) => (
                   <a href={withWebAppUtm(href, `releases/${slug}`)} className="text-accent hover:underline">{children}</a>
                 ),
