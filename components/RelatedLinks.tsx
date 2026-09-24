@@ -1,4 +1,4 @@
-import Link from "next/link";
+import PostCard from "./PostCard";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 import { getAllGameGuides, getGameGuideBySlug } from "@/lib/games";
 import { getReleaseBySlug } from "@/lib/releases";
@@ -9,6 +9,8 @@ interface RelatedItem {
   href: string;
   title: string;
   description?: string;
+  date?: string;
+  image?: string;
 }
 
 type Section = "blog" | "games" | "releases" | "install" | "landings";
@@ -26,23 +28,23 @@ function resolve(ref: string): RelatedItem | null {
   const [section, slug] = ref.split("/");
   if (section === "blog") {
     const post = getBlogPostBySlug(slug);
-    return post ? { href: `/blog/${slug}`, title: post.title, description: post.description } : null;
+    return post ? { href: `/blog/${slug}`, title: post.title, description: post.description, date: post.updated ?? post.date, image: post.image } : null;
   }
   if (section === "games") {
     const guide = getGameGuideBySlug(slug);
-    return guide ? { href: `/games/${slug}`, title: guide.title, description: guide.description } : null;
+    return guide ? { href: `/games/${slug}`, title: guide.title, description: guide.description, date: guide.updated ?? guide.date, image: guide.image } : null;
   }
   if (section === "releases") {
     const release = getReleaseBySlug(slug);
-    return release ? { href: `/releases/${slug}`, title: release.title, description: release.summary } : null;
+    return release ? { href: `/releases/${slug}`, title: release.title, description: release.summary, date: release.date, image: release.image } : null;
   }
   if (section === "install") {
     const guide = getInstallGuideBySlug(slug);
-    return guide ? { href: `/install/${slug}`, title: guide.title, description: guide.description } : null;
+    return guide ? { href: `/install/${slug}`, title: guide.title, description: guide.description, date: guide.updated ?? guide.date } : null;
   }
   if (section === "landings") {
     const landing = getLandingBySlug(slug);
-    return landing ? { href: `/voice-chat/${slug}`, title: landing.title, description: landing.description } : null;
+    return landing ? { href: `/voice-chat/${slug}`, title: landing.title, description: landing.description, date: landing.updated ?? landing.date, image: landing.image } : null;
   }
   return null;
 }
@@ -71,8 +73,8 @@ export default function RelatedLinks({ related = [], current, limit = 3 }: Relat
   if (items.length < limit) {
     const wantGuides = current.startsWith("blog/") || current.startsWith("landings/");
     const fallback: RelatedItem[] = wantGuides
-      ? getAllGameGuides().map((g) => ({ href: `/games/${g.slug}`, title: g.title, description: g.description }))
-      : getAllBlogPosts().map((p) => ({ href: `/blog/${p.slug}`, title: p.title, description: p.description }));
+      ? getAllGameGuides().map((g) => ({ href: `/games/${g.slug}`, title: g.title, description: g.description, date: g.updated ?? g.date, image: g.image }))
+      : getAllBlogPosts().map((p) => ({ href: `/blog/${p.slug}`, title: p.title, description: p.description, date: p.updated ?? p.date, image: p.image }));
     for (const item of fallback) {
       if (items.length >= limit) break;
       if (!seen.has(item.href)) {
@@ -87,18 +89,20 @@ export default function RelatedLinks({ related = [], current, limit = 3 }: Relat
   return (
     <aside aria-labelledby="related-heading" className="mt-10 md:mt-12 border-t border-[#1F1F1F] pt-6 md:pt-8">
       <h2 id="related-heading" className="title-medium-semibold">Читайте также</h2>
-      <ul className="mt-4 flex flex-col gap-3 md:gap-4">
+      {/* Те же карточки, что в блоке «Что нового, Mute?» на главной: колонка
+          статьи не шире 920px, поэтому три карточки помещаются уже с md. */}
+      <div className="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
         {items.map((item) => (
-          <li key={item.href}>
-            <Link href={item.href} className="text-accent hover:underline body-text">
-              {item.title}
-            </Link>
-            {item.description && (
-              <p className="body-text text-text-secondary mt-1 line-clamp-2">{item.description}</p>
-            )}
-          </li>
+          <PostCard
+            key={item.href}
+            href={item.href}
+            title={item.title}
+            description={item.description}
+            date={item.date}
+            image={item.image}
+          />
         ))}
-      </ul>
+      </div>
     </aside>
   );
 }
