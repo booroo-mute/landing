@@ -11,11 +11,13 @@ const featureLinks = [
 const productLinks = [
   { href: "/download", label: "Скачать" },
   { href: "/install", label: "Установка" },
+  { href: "/help", label: "Помощь" },
   { href: "/discord-alternative", label: "Аналог Discord" },
   { href: "/voice-chat", label: "Голосовой чат онлайн" },
   { href: "/games", label: "Для игр" },
   { href: "/releases", label: "Что нового" },
   { href: "/blog", label: "Блог" },
+  { href: "/about", label: "О Mute" },
 ];
 
 export default function Footer() {
@@ -40,7 +42,7 @@ export default function Footer() {
             </Link>
           ))}
           <LinkText href="https://t.me/mutecalls" underline={false} target="_blank">Мы в Telegram</LinkText>
-          <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Помощь</LinkText>
+          <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Бот поддержки</LinkText>
           <LinkText href="mailto:hello@mute.ac" underline={false} target="_blank">Связаться с нами</LinkText>
           <Link href="/privacy" className="body-text text-text-secondary hover:text-accent transition-colors">
             Политика конфиденциальности

@@ -27,6 +27,12 @@ export default function Header() {
           <Image src="/logo.svg" alt="Mute — на главную" width={92} height={24} className="w-[72px] md:w-[82px] lg:w-[92px] h-auto" />
         </Link>
         <div className="flex items-center gap-3 md:gap-6">
+          {/* Главная ссылка на хаб под «голосовой чат» (71% показов в GSC на
+              27.09). На узких экранах прячем, чтобы шапка не переносилась;
+              в DOM ссылка остаётся и видна краулерам. */}
+          <Link href="/voice-chat" className="hidden md:block body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap">
+            Голосовой чат
+          </Link>
           <Link href="/games" className="body-text text-text-secondary hover:text-accent transition-colors whitespace-nowrap">
             Для игр
           </Link>

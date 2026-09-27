@@ -4,7 +4,9 @@ import Footer from "@/components/Footer";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PostCard from "@/components/PostCard";
 import JsonLd from "@/components/JsonLd";
+import Link from "next/link";
 import { getAllBlogPosts } from "@/lib/blog";
+import { getAllGameGuides } from "@/lib/games";
 import { itemListSchema, webPageSchema } from "@/lib/schema";
 import { DEFAULT_OG_IMAGE, OG_SITE, SITE_URL, HOME_UPDATED } from "@/lib/site";
 
@@ -28,6 +30,9 @@ export const metadata: Metadata = {
 
 export default function BlogIndexPage() {
   const posts = getAllBlogPosts();
+  // Второй вход в свежие гайды: /games и /blog друг на друга не ссылались,
+  // и новый гайд находили только через хаб /games.
+  const guides = getAllGameGuides().slice(0, 4);
   const latest = posts
     .map((p) => p.updated ?? p.date)
     .sort()
@@ -65,6 +70,24 @@ export default function BlogIndexPage() {
                 description={post.description}
                 date={post.updated ?? post.date}
                 image={post.image}
+              />
+            ))}
+          </div>
+          <div className="mt-10 md:mt-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+            <h2 className="title-medium-semibold">Гайды по голосовому чату в играх</h2>
+            <Link href="/games" className="body-text text-accent hover:underline whitespace-nowrap">
+              Все гайды <span className="font-offbit">→</span>
+            </Link>
+          </div>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+            {guides.map((guide) => (
+              <PostCard
+                key={guide.slug}
+                href={`/games/${guide.slug}`}
+                title={guide.title}
+                description={guide.description}
+                date={guide.updated ?? guide.date}
+                image={guide.image}
               />
             ))}
           </div>

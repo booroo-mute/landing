@@ -4,6 +4,7 @@ import { getAllGameGuides, getGameGuideBySlug } from "@/lib/games";
 import { getReleaseBySlug } from "@/lib/releases";
 import { getInstallGuideBySlug } from "@/lib/install";
 import { getLandingBySlug } from "@/lib/landings";
+import { getHelpArticleBySlug } from "@/lib/help";
 
 interface RelatedItem {
   href: string;
@@ -13,7 +14,7 @@ interface RelatedItem {
   image?: string;
 }
 
-type Section = "blog" | "games" | "releases" | "install" | "landings";
+type Section = "blog" | "games" | "releases" | "install" | "landings" | "help";
 
 interface RelatedLinksProps {
   /** Записи вида "<раздел>/<slug>" из frontmatter текущей страницы. */
@@ -41,6 +42,10 @@ function resolve(ref: string): RelatedItem | null {
   if (section === "install") {
     const guide = getInstallGuideBySlug(slug);
     return guide ? { href: `/install/${slug}`, title: guide.title, description: guide.description, date: guide.updated ?? guide.date } : null;
+  }
+  if (section === "help") {
+    const article = getHelpArticleBySlug(slug);
+    return article ? { href: `/help/${slug}`, title: article.title, description: article.description, date: article.updated ?? article.date } : null;
   }
   if (section === "landings") {
     const landing = getLandingBySlug(slug);

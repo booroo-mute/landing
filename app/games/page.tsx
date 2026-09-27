@@ -125,6 +125,14 @@ export default function GamesIndexPage() {
             <div className="mt-6">
               <ButtonSecondary href="/voice-chat">Как созвониться в браузере</ButtonSecondary>
             </div>
+            <p className="body-text text-text-secondary mt-6">
+              Статусы Discord, Steam и Roblox, сравнения сервисов и советы по
+              созвону собраны{" "}
+              <Link href="/blog" className="text-accent hover:underline">
+                в блоге
+              </Link>
+              .
+            </p>
           </section>
         </div>
       </main>

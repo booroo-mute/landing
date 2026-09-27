@@ -4,6 +4,7 @@ import { getAllInstallGuides } from "@/lib/install";
 import { getAllGameGuides } from "@/lib/games";
 import { getAllBlogPosts } from "@/lib/blog";
 import { getAllLandings } from "@/lib/landings";
+import { getAllHelpArticles } from "@/lib/help";
 import { allImageSrcs } from "@/lib/markdown";
 import {
   SITE_URL,
@@ -12,6 +13,7 @@ import {
   VOICE_CHAT_UPDATED,
   DOWNLOAD_UPDATED,
   INSTALL_UPDATED,
+  ABOUT_UPDATED,
   LEGAL_UPDATED,
 } from "@/lib/site";
 
@@ -64,6 +66,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     images: allImageSrcs(landing.content).map((src) => `${baseUrl}${src}`),
   }));
 
+  const helpArticles = getAllHelpArticles();
+  const helpUrls: MetadataRoute.Sitemap = helpArticles.map((article) => ({
+    url: `${baseUrl}/help/${article.slug}`,
+    lastModified: new Date(article.updated ?? article.date),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
+  const latestHelp = helpArticles
+    .map((a) => a.updated ?? a.date)
+    .sort()
+    .at(-1);
+
   const latestRelease = releases[0]?.date;
   // Лента блога меняется и при обновлении старого поста, не только при новом
   const latestBlog = blogPosts
@@ -100,6 +114,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(DOWNLOAD_UPDATED),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date(ABOUT_UPDATED),
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/install`,
@@ -143,6 +163,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    ...(helpUrls.length > 0
+      ? [
+          {
+            url: `${baseUrl}/help`,
+            lastModified: new Date(latestHelp ?? HOME_UPDATED),
+            changeFrequency: "monthly" as const,
+            priority: 0.5,
+          },
+        ]
+      : []),
+    ...helpUrls,
     ...landingUrls,
     ...installUrls,
     ...gameUrls,

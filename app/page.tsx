@@ -4,6 +4,7 @@ import HeroBlock from "@/components/HeroBlock";
 import InfoBlock from "@/components/InfoBlock";
 import CallsCards from "@/components/CallsCards";
 import FeatureList from "@/components/FeatureList";
+import GameGuides from "@/components/GameGuides";
 import ReleaseNotes from "@/components/ReleaseNotes";
 import SeoIntro from "@/components/SeoIntro";
 import FaqSection from "@/components/FaqSection";
@@ -28,6 +29,7 @@ export default function Home() {
         </div>
         <CallsCards />
         <FeatureList />
+        <GameGuides />
         <ReleaseNotes />
         <SeoIntro />
         <FaqSection />

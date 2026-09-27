@@ -1,6 +1,7 @@
 import { getAllBlogPosts } from "@/lib/blog";
 import { getAllGameGuides } from "@/lib/games";
 import { getAllLandings } from "@/lib/landings";
+import { getAllHelpArticles } from "@/lib/help";
 import { SITE_URL } from "@/lib/site";
 
 // llms.txt — краткая машиночитаемая сводка сайта для AI-краулеров
@@ -11,6 +12,7 @@ export async function GET() {
   const posts = getAllBlogPosts();
   const guides = getAllGameGuides();
   const landings = getAllLandings();
+  const help = getAllHelpArticles();
 
   const body = `# Mute
 
@@ -28,6 +30,7 @@ export async function GET() {
 ## Основное
 
 - [Главная](${SITE_URL}/): что такое Mute и его возможности
+- [Что такое Mute](${SITE_URL}/about): коротко о приложении, названии, возможностях и ограничениях
 - [Аналог Discord в России](${SITE_URL}/discord-alternative): сравнение Mute и Discord по пунктам
 - [Голосовой чат с другом онлайн](${SITE_URL}/voice-chat): как созвониться в браузере за пару минут, в том числе с телефона
 ${landings.map((l) => `- [${l.title}](${SITE_URL}/voice-chat/${l.slug}): ${l.description}`).join("\n")}
@@ -40,6 +43,10 @@ ${landings.map((l) => `- [${l.title}](${SITE_URL}/voice-chat/${l.slug}): ${l.des
 ## Гайды по играм
 
 ${guides.map((g) => `- [${g.title}](${SITE_URL}/games/${g.slug}): ${g.description ?? ""}`).join("\n")}
+
+## Помощь по Mute
+
+${help.map((h) => `- [${h.title}](${SITE_URL}/help/${h.slug}): ${h.description}`).join("\n")}
 
 ## Блог
 

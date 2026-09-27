@@ -104,7 +104,7 @@ interface WebPageOptions {
   /** Дата последней содержательной правки (ISO), та же, что в sitemap. */
   dateModified: string;
   datePublished?: string;
-  type?: "WebPage" | "CollectionPage";
+  type?: "WebPage" | "CollectionPage" | "AboutPage";
   /** Например, ItemList для индексных страниц. */
   mainEntity?: Record<string, unknown>;
   /** Иллюстрация страницы, абсолютный URL. */

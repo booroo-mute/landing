@@ -47,6 +47,7 @@ const CONTENT_RULES = {
   install: { description: true, date: true },
   releases: { description: false, date: true },
   landings: { description: true, date: true },
+  help: { description: true, date: true },
 };
 
 function listFiles(dir, pattern) {
