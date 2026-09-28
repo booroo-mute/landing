@@ -65,7 +65,9 @@ export default function DownloadPage() {
         <DownloadClient />
         <article className="max-w-[920px] mx-auto pb-12 md:pb-16 lg:pb-[80px]">
           <p className="body-text text-text-secondary text-center">
-            Текущая версия — {DOWNLOAD_CONFIG.version}, изменения по версиям в разделе{" "}
+            Актуальные версии: {DOWNLOAD_CONFIG.versions.windows} для Windows
+            (дальше она обновляется сама) и {DOWNLOAD_CONFIG.versions.macos} для
+            macOS. Что менялось от версии к версии, смотрите в разделе{" "}
             <Link href="/releases" className={link}>«Что нового»</Link>.
             Не хотите ничего устанавливать?{" "}
             <a href={webAppUrl("download", "text")} className={link}>Веб-версия</a>{" "}
@@ -89,13 +91,16 @@ export default function DownloadPage() {
 
           <h2 className={h2}>Что нужно для работы</h2>
           <p className={p}>
-            Приложение ставится на Windows (файл .exe) и macOS (файл .dmg). Для
-            звонка нужен интернет и любой микрофон, лучше гарнитура. Веб-версии
+            Приложение ставится на Windows 10 и 11, 64-битные (файл .exe, права
+            администратора не нужны), и на macOS (файл .dmg). Для звонка нужен
+            интернет и любой микрофон, лучше гарнитура. Веб-версии
             хватает браузера с поддержкой WebRTC: Chrome, Яндекс Браузер, Safari
             или Firefox. Mute работает в России без VPN, дополнительных настроек
             не требует.
           </p>
-          {/* TODO: минимальные версии Windows и macOS подтвердить у команды, в репозитории их нет */}
+          {/* TODO: минимальную версию macOS подтвердить у команды. Windows 10 и 11
+              x64 взяты со страницы загрузки нативного клиента (mute-windows-client
+              release/download/index.html). */}
 
           <h2 className={h2}>Не хотите устанавливать: веб-версия</h2>
           <p className={p}>

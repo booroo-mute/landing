@@ -78,7 +78,8 @@ export const SOFTWARE_APPLICATION_SCHEMA = {
   ],
   operatingSystem: ["Windows", "macOS", "Web"],
   browserRequirements: "Браузер с поддержкой WebRTC: Chrome, Яндекс Браузер, Safari, Firefox",
-  softwareVersion: DOWNLOAD_CONFIG.version,
+  // Одна версия на схему: берём Windows, основную платформу аудитории.
+  softwareVersion: DOWNLOAD_CONFIG.versions.windows,
   downloadUrl: `${SITE_URL}/download`,
   installUrl: `${SITE_URL}/install`,
   releaseNotes: `${SITE_URL}/releases`,

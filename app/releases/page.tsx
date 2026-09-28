@@ -84,7 +84,8 @@ export default function ReleasesIndexPage() {
             <Link href="/blog" className="text-accent hover:underline">
               блоге
             </Link>
-            . Приложение само предлагает обновиться, когда выходит новая сборка.
+            . Приложение для Windows обновляется само, а на macOS предлагает
+            обновиться, когда выходит новая сборка.
           </p>
         </div>
       </main>
