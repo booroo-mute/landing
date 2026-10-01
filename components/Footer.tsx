@@ -3,6 +3,7 @@ import Link from "next/link";
 import LinkText from "./LinkText";
 
 const featureLinks = [
+  { href: "/voice-chat/sozvon", label: "Созвон для игр" },
   { href: "/voice-chat/rooms", label: "Комнаты до 8 человек" },
   { href: "/voice-chat/screen-share", label: "Демонстрация экрана" },
   { href: "/voice-chat/phone", label: "На телефоне" },

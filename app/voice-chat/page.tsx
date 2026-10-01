@@ -218,7 +218,11 @@ export default function VoiceChatPage() {
             <Link href="/voice-chat/screen-share" className={link}>
               показать свой экран со звуком
             </Link>
-            , в том числе из браузера.
+            , в том числе из браузера. Что нужно, чтобы собрать{" "}
+            <Link href="/voice-chat/sozvon" className={link}>
+              созвон для игр
+            </Link>
+            , описано на отдельной странице.
           </p>
 
           <h2 className={h2}>Почему без VPN</h2>
