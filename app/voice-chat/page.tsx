@@ -9,7 +9,7 @@ import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
 import MarkdownImage from "@/components/MarkdownImage";
-import { FAQ_ITEMS } from "@/lib/faq";
+import { FAQ_ITEMS, type FaqItem } from "@/lib/faq";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 
 const TITLE = "Голосовой чат с другом онлайн: в браузере, без VPN";
@@ -45,7 +45,15 @@ const faqQuestions = [
   "Как позвать друга в Mute?",
   "Можно ли пользоваться Mute без установки?",
 ];
-const faqSubset = FAQ_ITEMS.filter((item) => faqQuestions.includes(item.question));
+// Вопрос в форме из Метрики 30.09–4.10.2026 («сайт для разговоров онлайн с
+// друзьями», «сайт для войса через пк»): только на этой странице, в общий
+// список главной не добавляем.
+const siteFaq: FaqItem = {
+  question: "Есть ли сайт, чтобы поговорить с другом через ПК?",
+  answer:
+    "Да, Mute работает как сайт: откройте beta.mute.ac в браузере на компьютере, зарегистрируйтесь и отправьте другу ссылку-приглашение. Устанавливать ничего не нужно. Приложение для Windows и macOS есть для тех, кому удобнее отдельное окно.",
+};
+const faqSubset = [...FAQ_ITEMS.filter((item) => faqQuestions.includes(item.question)), siteFaq];
 
 const h2 = "title-medium-semibold mt-10 md:mt-12";
 const p = "body-text text-text-secondary mt-4";
@@ -131,6 +139,25 @@ export default function VoiceChatPage() {
             alt="Звонок в Mute: восемь друзей в комнате, у говорящих подсвечены аватары, внизу микрофон, звук и кнопка завершения"
             className="w-full h-auto mt-8 md:mt-10"
           />
+
+          {/* Яндекс 30.09–4.10.2026: «сайт для разговоров онлайн с друзьями»,
+              «сайт для войса через пк», «сайт для разговора с другом», «сайт
+              в зв с другом посидеть», около 13 визитов за пять дней, а слова
+              «сайт» в этом значении на странице не было. «Без регистрации»
+              не обещаем: аккаунт нужен обоим. */}
+          <h2 className={h2}>Сайт для разговора с друзьями онлайн</h2>
+          <p className={p}>
+            Если нужен просто сайт, чтобы поговорить с друзьями, Mute и есть
+            такой сайт. Голосовой чат открывается во вкладке браузера на{" "}
+            <a href={webAppUrl("voice-chat", "site")} className={link}>
+              beta.mute.ac
+            </a>
+            , ставить ничего не нужно. На компьютере подойдут Chrome, Яндекс
+            Браузер, Firefox и Safari, на телефоне Safari и Chrome. Вы
+            регистрируетесь, отправляете другу ссылку, и через минуту вы оба в
+            звонке. Пока идёт игра, вкладка висит рядом, а посидеть в войсе
+            можно хоть весь вечер: звонок один на один по времени не ограничен.
+          </p>
 
           {/* Формулировки из поисковых запросов сентября 2026 с высокой
               вовлечённостью: «позвонить другу на пк без впн», «как дискорд

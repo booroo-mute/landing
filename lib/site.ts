@@ -11,10 +11,10 @@ export const SITE_URL =
  */
 export const HOME_UPDATED = "2026-10-02";
 export const DISCORD_ALTERNATIVE_UPDATED = "2026-10-02";
-export const VOICE_CHAT_UPDATED = "2026-10-01";
-export const DOWNLOAD_UPDATED = "2026-10-02";
+export const VOICE_CHAT_UPDATED = "2026-10-05";
+export const DOWNLOAD_UPDATED = "2026-10-05";
 export const INSTALL_UPDATED = "2026-09-17";
-export const ABOUT_UPDATED = "2026-09-27";
+export const ABOUT_UPDATED = "2026-10-05";
 export const LEGAL_UPDATED = "2026-09-14";
 
 /** Дата публичного запуска беты (пост в t.me/mutecalls от 5 января 2026). */
