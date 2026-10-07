@@ -6,7 +6,7 @@ date: "2026-09-24"
 ctaBefore: "Как созвониться рядом"
 related:
   - "games/among-us"
-  - "games/minecraft"
+  - "games/repo"
   - "blog/proksimiti-chat"
 ---
 

@@ -9,7 +9,7 @@ ogImage: "/games/golosovoy-chat-v-fortnite-og.jpg?v=2"
 topic: broken
 related:
   - "games/steam"
-  - "games/cs2"
+  - "blog/ne-slyshno-timmeytov-v-igre"
   - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
 ---
 

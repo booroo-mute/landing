@@ -6,7 +6,7 @@ date: "2026-10-01"
 breadcrumb: "Созвон для игр"
 related:
   - "landings/rooms"
-  - "landings/screen-share"
+  - "games/arc-raiders"
   - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
 ---
 

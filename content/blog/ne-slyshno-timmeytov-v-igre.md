@@ -5,7 +5,7 @@ description: "Почему не слышно тиммейтов в CS2 и Dota 2
 date: "2026-09-16"
 related:
   - "games/steam"
-  - "games/cs2"
+  - "games/fortnite"
   - "games/dota-2"
 ---
 

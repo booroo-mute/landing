@@ -6,8 +6,8 @@ date: "2026-09-21"
 updated: "2026-10-05"
 ctaBefore: "Второй канал"
 related:
-  - "games/minecraft"
-  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
+  - "games/repo"
+  - "games/among-us"
   - "landings/rooms"
 ---
 
