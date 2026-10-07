@@ -82,8 +82,7 @@ export default function HelpIndexPage() {
             <a href="mailto:hello@mute.ac" className={link}>
               hello@mute.ac
             </a>
-            . Инструкции по установке с предупреждениями SmartScreen и
-            Gatekeeper лежат в разделе{" "}
+            . Инструкции по установке для Windows и macOS лежат в разделе{" "}
             <Link href="/install" className={link}>
               «Установка»
             </Link>

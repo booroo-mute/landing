@@ -36,7 +36,7 @@ export async function GET() {
 ${landings.map((l) => `- [${l.title}](${SITE_URL}/voice-chat/${l.slug}): ${l.description}`).join("\n")}
 - [Голосовой чат в играх](${SITE_URL}/games): гайды по войсу в конкретных играх и что делать, когда он не работает
 - [Скачать](${SITE_URL}/download): установщики для Windows и macOS
-- [Установка](${SITE_URL}/install): инструкции для Windows (SmartScreen) и macOS (Gatekeeper)
+- [Установка](${SITE_URL}/install): инструкции для Windows (SmartScreen) и macOS (Apple Silicon, macOS 14+)
 - [Что нового](${SITE_URL}/releases): история обновлений приложения
 - [Веб-версия](https://beta.mute.ac/welcome): Mute в браузере, без установки
 

@@ -74,8 +74,9 @@ export default function DownloadPage() {
         <article className="max-w-[920px] mx-auto pb-12 md:pb-16 lg:pb-[80px]">
           <p className="body-text text-text-secondary text-center">
             Актуальные версии: {DOWNLOAD_CONFIG.versions.windows} для Windows
-            (дальше она обновляется сама) и {DOWNLOAD_CONFIG.versions.macos} для
-            macOS. Что менялось от версии к версии, смотрите в разделе{" "}
+            и {DOWNLOAD_CONFIG.versions.macos} для macOS, дальше обе обновляются
+            сами. Для Mac нужен процессор Apple Silicon (M1 и новее) и macOS 14
+            или новее. Что менялось от версии к версии, смотрите в разделе{" "}
             <Link href="/releases" className={link}>«Что нового»</Link>.
             Не хотите ничего устанавливать?{" "}
             <a href={webAppUrl("download", "text")} className={link}>Веб-версия</a>{" "}
@@ -87,7 +88,7 @@ export default function DownloadPage() {
             Скачивание начинается само: страница определяет систему и отдаёт
             установщик MuteSetup.exe для Windows или файл .dmg для macOS. Если
             не началось, нажмите ссылку в начале страницы. Голосовой чат
-            бесплатный, версия для Windows дальше обновляется сама. После
+            бесплатный, приложение дальше обновляется само. После
             установки зарегистрируйтесь, отправьте другу ссылку-приглашение и
             звоните: окно Mute можно свернуть, разговор идёт, пока вы в игре.
           </p>

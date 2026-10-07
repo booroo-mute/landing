@@ -9,13 +9,13 @@ import { getAllInstallGuides } from "@/lib/install";
 export const metadata: Metadata = {
   title: "Установка Mute — инструкции для Windows и macOS",
   description:
-    "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows и Gatekeeper на macOS.",
+    "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows, установка и доступ к микрофону на macOS.",
   alternates: { canonical: "/install" },
   openGraph: {
     ...OG_SITE,
     title: "Установка Mute: инструкции для Windows и macOS",
     description:
-      "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows и Gatekeeper на macOS.",
+      "Пошаговые инструкции по установке голосового чата Mute: предупреждение SmartScreen на Windows, установка и доступ к микрофону на macOS.",
     url: "/install",
     images: [DEFAULT_OG_IMAGE],
     type: "website",
