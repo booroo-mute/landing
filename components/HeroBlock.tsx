@@ -24,7 +24,6 @@ export default function HeroBlock() {
           <p className="body-text text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
             Нативные приложения для Windows и macOS. Голос, чат, видео и демонстрация экрана — работает в России без VPN.
           </p>
-          <p className="body-text text-text-secondary mt-3">Нужен аккаунт: ник, почта и пароль. Mac: Apple Silicon, macOS 14+.</p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
           {isMobile ? (
