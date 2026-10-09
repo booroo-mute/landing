@@ -47,6 +47,13 @@ const nextConfig: NextConfig = {
         destination: "/releases",
         permanent: true,
       })),
+      // Три поста о версиях Mute для Mac сведены в один 09.10.2026:
+      // новые версии дописываются в /releases/mac, отдельных постов нет.
+      ...["mac-1-0-0", "mac-1-0-2", "mac-1-0-3"].map((slug) => ({
+        source: `/releases/${slug}`,
+        destination: "/releases/mac",
+        permanent: true,
+      })),
       // Два поста сняты 14.09.2026 — адреса были в индексе,
       // ведём на ближайшие по смыслу страницы.
       { source: "/blog/zapret-dlya-discord-ne-rabotaet", destination: "/blog/discord-ne-rabotaet-segodnya", permanent: true },
