@@ -6,7 +6,7 @@
 // сервере обновлений всегда указывает на последнюю стабильную сборку, так
 // что ссылка тоже постоянная; меняется только номер ниже. Только Apple
 // Silicon и macOS 14+, это сказано на /download и в /install/macos.
-const MACOS_VERSION = '1.0.3'
+const MACOS_VERSION = '1.0.4'
 
 export const DOWNLOAD_CONFIG = {
   versions: {
