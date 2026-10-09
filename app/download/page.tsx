@@ -67,6 +67,9 @@ export default function DownloadPage() {
         <DownloadClient />
         <article className="max-w-[920px] mx-auto pb-12 md:pb-16 lg:pb-[80px]">
           <p className="body-text text-text-secondary text-center">
+            Лёгкие приложения Mute для Windows и macOS экономно расходуют
+            оперативную память и ресурсы процессора. Внутри — голос, чаты, видео
+            и демонстрация экрана.{" "}
             Актуальные версии: {DOWNLOAD_CONFIG.versions.windows} для Windows
             и {DOWNLOAD_CONFIG.versions.macos} для macOS, дальше обе обновляются
             сами. Для Mac нужен процессор Apple Silicon (M1 и новее) и macOS 14
@@ -129,7 +132,8 @@ export default function DownloadPage() {
             откройте ту же ссылку в Safari на iPhone или в Chrome на Android,
             отдельного мобильного приложения нет. Захват экрана и системного
             звука зависит от браузера и ОС; на телефоне можно смотреть показ друга.
-            Для Windows и совместимого Mac доступны нативные приложения без Electron. Подробнее на
+            Для регулярных звонков во время игры скачайте лёгкое приложение
+            для Windows или совместимого Mac. Подробнее на
             страницах про{" "}
             <Link href="/voice-chat" className={link}>голосовой чат онлайн</Link>{" "}
             и{" "}

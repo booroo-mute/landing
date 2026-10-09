@@ -22,7 +22,7 @@ export default function HeroBlock() {
             Лёгкий голосовой чат<br />для игр с друзьями
           </h1>
           <p className="body-text text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
-            Нативные приложения для Windows и macOS. Голос, чат, видео и демонстрация экрана — работает в России без VPN.
+            Общайтесь во время игры без лишней нагрузки на компьютер. Голос, чат, видео и демонстрация экрана — в приложениях для Windows и macOS. Работает в России без VPN.
           </p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
