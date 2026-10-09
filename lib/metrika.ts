@@ -30,6 +30,17 @@ declare global {
   }
 }
 
+export function ymPageView(url: string, referer: string, attempt = 0): void {
+  if (typeof window === "undefined") return;
+  if (typeof window.ym === "function") {
+    window.ym(METRIKA_COUNTER_ID, "hit", url, {
+      referer, title: document.title, params: METRIKA_VISIT_PARAMS,
+    });
+  } else if (attempt < 10) {
+    window.setTimeout(() => ymPageView(url, referer, attempt + 1), 500);
+  }
+}
+
 
 export function ymReachGoal(goal: MetrikaGoal, params?: Record<string, unknown>, attempt = 0): void {
   if (typeof window === "undefined") return;

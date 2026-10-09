@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import HeroBlock from "@/components/HeroBlock";
+import NativeProof from "@/components/NativeProof";
 import InfoBlock from "@/components/InfoBlock";
 import CallsCards from "@/components/CallsCards";
 import FeatureList from "@/components/FeatureList";
@@ -24,6 +25,7 @@ export default function Home() {
       <main>
         <div className="container">
           <HeroBlock />
+          <NativeProof />
           <InfoBlock />
         </div>
         <CallsCards />

@@ -7,7 +7,7 @@ import { webAppUrl } from "@/lib/webApp";
 
 export default function FinalCallSection() {
   const os = useOS();
-  const isMobile = os === "mobile";
+  const isMobile = os === "mobile" || os === "other";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 

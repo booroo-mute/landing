@@ -9,10 +9,10 @@ export const SITE_URL =
  * поисковиков к sitemap. У каждой посадочной своя дата, чтобы правка главной
  * не «обновляла» соседние страницы.
  */
-export const HOME_UPDATED = "2026-10-07";
-export const DISCORD_ALTERNATIVE_UPDATED = "2026-10-02";
-export const VOICE_CHAT_UPDATED = "2026-10-07";
-export const DOWNLOAD_UPDATED = "2026-10-08";
+export const HOME_UPDATED = "2026-10-09";
+export const DISCORD_ALTERNATIVE_UPDATED = "2026-10-09";
+export const VOICE_CHAT_UPDATED = "2026-10-09";
+export const DOWNLOAD_UPDATED = "2026-10-09";
 export const INSTALL_UPDATED = "2026-09-17";
 export const ABOUT_UPDATED = "2026-10-05";
 export const LEGAL_UPDATED = "2026-09-14";

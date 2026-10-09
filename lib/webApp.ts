@@ -7,27 +7,21 @@ import { DOWNLOAD_CONFIG } from "./downloads";
 export const WEB_APP_URL = DOWNLOAD_CONFIG.webVersion;
 
 /**
- * Ссылка в веб-версию с UTM. Счётчик Метрики общий с beta.mute.ac, поэтому
- * визит в приложении начинается с источника «mute.ac / landing», и цель
- * «Зарегистрировался» (она считается в приложении) раскладывается по
- * utm_content (страница лендинга) и utm_term (место на странице). Без этого
- * регистрации из органики по страницам было не посчитать.
+ * Внутренний переход не является новой рекламной кампанией. Страница и
+ * место клика передаются отдельно; исходный источник хранится first-party.
  *
  * page — идентификатор страницы: "home", "download", "games/steam";
  * placement — место: "hero-secondary", "cta-full", "body".
  */
 export function webAppUrl(page: string, placement: string): string {
   const url = new URL(WEB_APP_URL);
-  url.searchParams.set("utm_source", "mute.ac");
-  url.searchParams.set("utm_medium", "landing");
-  url.searchParams.set("utm_campaign", page.split("/")[0] || "home");
-  url.searchParams.set("utm_content", page);
-  url.searchParams.set("utm_term", placement);
+  url.searchParams.set("mute_page", page);
+  url.searchParams.set("mute_placement", placement);
   return url.toString();
 }
 
 /**
- * Для ссылок из markdown: адрес веб-версии получает UTM текущей страницы,
+ * Для ссылок из markdown: адрес веб-версии получает контекст текущей страницы,
  * остальные ссылки не трогаем. Контент при этом остаётся с голым адресом.
  */
 export function withWebAppUtm(
@@ -35,7 +29,7 @@ export function withWebAppUtm(
   page: string,
   placement = "body",
 ): string | undefined {
-  if (!href || !href.startsWith(WEB_APP_URL) || href.includes("utm_source=")) return href;
+  if (!href || href.split(/[?#]/)[0] !== WEB_APP_URL || href.includes("mute_page=")) return href;
   return webAppUrl(page, placement);
 }
 

@@ -10,7 +10,7 @@ import { webAppUrl } from "@/lib/webApp";
 export default function HeroBlock() {
   const parallaxRef = useParallax<HTMLImageElement>(0.08);
   const os = useOS();
-  const isMobile = os === "mobile";
+  const isMobile = os === "mobile" || os === "other";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
 
@@ -19,18 +19,22 @@ export default function HeroBlock() {
       <div className="w-full min-[1200px]:w-1/2 pt-8 px-4 pb-8 md:pt-10 md:px-8 md:pb-10 min-[1200px]:pt-[44px] min-[1200px]:pl-[44px] min-[1200px]:pb-[44px] min-[1200px]:pr-0 flex flex-col justify-between order-2 min-[1200px]:order-1">
         <div>
           <h1 className="title-large">
-            Голосовое общение<br />для игр, друзей, тебя
+            Лёгкий голосовой чат<br />для игр с друзьями
           </h1>
-          <p className="title-medium text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
-            Легче не бывает. Один клик — и ты на связи
+          <p className="body-text text-text-secondary mt-4 md:mt-5 lg:mt-[24px]">
+            Нативные приложения для Windows и macOS. Голос, чат, видео и демонстрация экрана — работает в России без VPN.
           </p>
+          <p className="body-text text-text-secondary mt-3">Нужен аккаунт: ник, почта и пароль. Mac: Apple Silicon, macOS 14+.</p>
         </div>
         <div className="flex flex-col lg:flex-row gap-3 mt-8 min-[1200px]:mt-0 lg:gap-[12px]">
           {isMobile ? (
-            <ButtonPrimary href={webAppUrl("home", "hero-mobile")} target="_blank">Начать общаться</ButtonPrimary>
+            <>
+              <ButtonPrimary href={webAppUrl("home", "hero-mobile")} target="_blank">Начать общаться</ButtonPrimary>
+              <ButtonSecondary href="/download">Версии для компьютера</ButtonSecondary>
+            </>
           ) : (
             <>
-              <ButtonPrimary icon={icon} href="/download">{label}</ButtonPrimary>
+              <ButtonPrimary icon={icon} href="/download" placement="hero-primary">{label}</ButtonPrimary>
               <ButtonSecondary href={webAppUrl("home", "hero-secondary")} target="_blank">Открыть в браузере</ButtonSecondary>
             </>
           )}
@@ -45,6 +49,7 @@ export default function HeroBlock() {
           alt="Mute — голосовой чат для игр: интерфейс приложения с активным звонком и списком друзей"
           fill
           priority
+          fetchPriority="high"
           sizes="(min-width: 1200px) 50vw, 100vw"
           className="object-cover will-change-transform"
         />

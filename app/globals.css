@@ -22,7 +22,7 @@
   --background-secondary: #1F1F1F;
   --background-tertiary: #171717;
   --text-primary: #F3F3F3;
-  --text-secondary: #848484;
+  --text-secondary: #929292;
   --accent: #B5EF77;
   --accent-red: #EF7777;
   --accent-orange: #EFC377;
@@ -219,4 +219,20 @@
   header {
     display: none !important;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee { animation: none; }
+}
+
+/* Inline links must remain distinguishable without color perception. */
+p a, li a, td a {
+  text-decoration-line: underline;
+  text-underline-offset: 3px;
 }

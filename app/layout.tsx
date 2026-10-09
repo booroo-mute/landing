@@ -5,6 +5,7 @@ import "./globals.css";
 import { OSProvider } from "@/components/OSProvider";
 import CookieBanner from "@/components/CookieBanner";
 import MetrikaGoals from "@/components/MetrikaGoals";
+import MetrikaPageViews from "@/components/MetrikaPageViews";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/schema";
@@ -99,6 +100,7 @@ export default function RootLayout({
         <OSProvider>{children}</OSProvider>
         <CookieBanner />
         <MetrikaGoals />
+        <MetrikaPageViews />
         <Script
           id="yandex-metrika"
           strategy="afterInteractive"
@@ -110,7 +112,7 @@ export default function RootLayout({
                 for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
                 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
               })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108242058', 'ym');
-              ym(108242058, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true, params: {site: '${METRIKA_VISIT_PARAMS.site}'}});
+              ym(108242058, 'init', {defer:true, ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true, params: {site: '${METRIKA_VISIT_PARAMS.site}'}});
             `,
           }}
         />

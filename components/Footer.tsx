@@ -29,7 +29,7 @@ export default function Footer() {
       <div className="container">
         {/* Посадочные под сценарии раньше не были связаны ни с одной общей навигацией */}
         <nav aria-label="Возможности" className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-5">
-          <span className="body-text text-text-secondary/70">Возможности:</span>
+          <span className="body-text text-text-secondary">Возможности:</span>
           {featureLinks.map(({ href, label }) => (
             <Link key={href} href={href} className="body-text text-text-secondary hover:text-accent transition-colors">
               {label}

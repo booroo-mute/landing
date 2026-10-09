@@ -2,13 +2,14 @@
 
 import { useEffect } from "react";
 import { ymReachGoal, type MetrikaGoal } from "@/lib/metrika";
+import { captureCta } from "@/lib/acquisition";
+import { pageIdFromPath } from "@/lib/webApp";
 import { tmrReachGoal } from "@/lib/topMailRu";
 
 // Единый обработчик целей по кликам на всех страницах. Цели:
 //   open_web       — любая ссылка на веб-версию («Открыть в браузере», «Начать общаться»)
 //   download_click — переход на /download
-//   download_win / download_mac — прямая ссылка на установщик (клик; авторедирект
-//                    на /download шлёт те же цели сам, см. DownloadClient)
+//   download_win / download_mac — явный клик на установщик
 //   telegram_click — канал или бот поддержки в Telegram
 //   guide_cta      — клик внутри CTA-блока статьи/гайда (data-goal="guide_cta")
 // Автоцель Метрики «Скачивание файла» не ловит редирект через location.href,
@@ -31,17 +32,26 @@ export default function MetrikaGoals() {
       // data-variant (full | compact) у CtaBanner — чтобы сравнивать баннеры в Метрике
       const cta = target?.closest?.('[data-goal="guide_cta"]') as HTMLElement | null;
       if (cta) goals.push("guide_cta");
-      // utm_term ссылки в веб-версию = место на странице (см. lib/webApp.ts)
-      const placement = /[?&]utm_term=([^&]+)/.exec(href)?.[1];
+      if (!goals.length) return;
+      let url: URL;
+      try { url = new URL(href, window.location.origin); } catch { return; }
+      const page = pageIdFromPath(window.location.pathname);
+      const placement = url.searchParams.get("mute_placement")
+        ?? (link as HTMLElement).dataset.placement
+        ?? (cta ? `cta-${cta.dataset.variant || "full"}` : "body");
       const params = {
-        href,
-        ...(placement && { placement: decodeURIComponent(placement) }),
+        href: `${url.origin}${url.pathname}`,
+        page, placement,
         ...(cta?.dataset.variant && { variant: cta.dataset.variant }),
       };
+      if (goals.some(goal => ["open_web", "download_click", "download_win", "download_mac"].includes(goal))) {
+        captureCta(page, placement);
+      }
 
       for (const goal of goals) {
         ymReachGoal(goal, params);
         if (goal === "open_web") tmrReachGoal("open_web");
+        if (goal === "download_win" || goal === "download_mac") tmrReachGoal("download");
       }
     };
     document.addEventListener("click", onClick, true);

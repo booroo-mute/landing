@@ -31,7 +31,7 @@ export default function CtaBanner({
   text = compact ? COMPACT_TEXT : DEFAULT_TEXT,
 }: CtaBannerProps) {
   const os = useOS();
-  const isMobile = os === "mobile";
+  const isMobile = os === "mobile" || os === "other";
   const icon = os === "macos" ? "/macos.svg" : "/windows.svg";
   const label = os === "macos" ? "Скачать для macOS" : "Скачать для Windows";
   // Тот же адрес, что ловит MetrikaGoals как open_web, плюс UTM страницы и места.
