@@ -47,11 +47,12 @@ const nextConfig: NextConfig = {
         destination: "/releases",
         permanent: true,
       })),
-      // Три поста о версиях Mute для Mac сведены в один 09.10.2026:
-      // новые версии дописываются в /releases/mac, отдельных постов нет.
-      ...["mac-1-0-0", "mac-1-0-2", "mac-1-0-3"].map((slug) => ({
+      // Посты о версиях Mute для Mac сведены в /releases/mac, а 09.10.2026
+      // тот заменён общим постом о 1.0.4: с этой версии Mac и Windows
+      // выходят вместе, с одинаковыми возможностями и одним номером.
+      ...["mac", "mac-1-0-0", "mac-1-0-2", "mac-1-0-3"].map((slug) => ({
         source: `/releases/${slug}`,
-        destination: "/releases/mac",
+        destination: "/releases/1-0-4",
         permanent: true,
       })),
       // Два поста сняты 14.09.2026 — адреса были в индексе,
