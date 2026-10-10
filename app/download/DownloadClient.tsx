@@ -3,17 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { useOS } from "@/components/OSProvider";
-import { DOWNLOAD_CONFIG } from "@/lib/downloads";
+import { useOS, OS } from "@/components/OSProvider";
+import { getDownloadUrl, DOWNLOAD_CONFIG } from "@/lib/downloads";
 import { webAppUrl } from "@/lib/webApp";
-import ButtonPrimary from "@/components/ButtonPrimary";
-import ButtonSecondary from "@/components/ButtonSecondary";
-import { ymReachGoal } from "@/lib/metrika";
+import LinkText from "@/components/LinkText";
 import { tmrReachGoal } from "@/lib/topMailRu";
+import { ymReachGoal } from "@/lib/metrika";
 import { captureCta } from "@/lib/acquisition";
+
+function getDownloadInfo(os: OS): { url: string; label: string } | null {
+  if (os === "windows") {
+    return { url: DOWNLOAD_CONFIG.files.windows, label: "нажмите сюда" };
+  }
+  if (os === "macos") {
+    return { url: DOWNLOAD_CONFIG.files.macos, label: "нажмите сюда" };
+  }
+  return null;
+}
 
 export default function DownloadClient() {
   const os = useOS();
+
   const started = useRef(false);
 
   useEffect(() => {
@@ -36,44 +46,77 @@ export default function DownloadClient() {
     return () => window.clearTimeout(timer);
   }, [os]);
 
-  const desktop = os === "windows" || os === "macos";
+
+  if (os === "mobile") {
+    return null;
+  }
+
+  const downloadInfo = getDownloadInfo(os);
+  const isUnknownOS = os === "other";
+
   return (
     <section className="min-h-[70vh] flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-16 py-12 lg:py-16 gap-12 lg:gap-24">
-      <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[560px]">
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[500px]">
         <Link href="/">
-          <Image src="/logo.svg" alt="Mute" width={92} height={24} className="mb-8" />
+          <Image
+            src="/logo.svg"
+            alt="Mute"
+            width={92}
+            height={24}
+            className="w-[72px] md:w-[82px] lg:w-[92px] h-auto mb-6 md:mb-8"
+          />
         </Link>
+        {/* H1 не зависит от ОС: при SSR os === "other", и краулеры раньше
+            видели «Выбери версию для скачивания» вместо названия страницы. */}
         <h1 className="title-large">Скачать Mute для Windows и macOS</h1>
-        <p className="body-text text-text-secondary mt-4">
-          {desktop
-            ? "Скачивание начнётся автоматически. Если загрузка не началась, нажмите кнопку ниже."
-            : os === "mobile"
-              ? "Открываем Mute в браузере. Если переход не произошёл, нажмите кнопку ниже."
-              : "Выберите версию для Windows или macOS либо откройте Mute в браузере."}
-        </p>
-        <div className="flex flex-col gap-5 mt-6 w-full">
-          {(os === "windows" || os === "other") && (
-            <div>
-              <ButtonPrimary href={DOWNLOAD_CONFIG.files.windows} icon="/windows.svg" placement="download-windows">Скачать для Windows</ButtonPrimary>
-              <p className="body-text text-text-secondary mt-2">Windows 10/11, 64 бит · версия {DOWNLOAD_CONFIG.versions.windows}</p>
-            </div>
-          )}
-          {(os === "macos" || os === "other") && (
-            <div>
-              <ButtonSecondary href={DOWNLOAD_CONFIG.files.macos} icon="/macos.svg">Скачать для macOS</ButtonSecondary>
-              <p className="body-text text-text-secondary mt-2">Apple Silicon (M1 и новее), macOS 14+ · версия {DOWNLOAD_CONFIG.versions.macos}</p>
-            </div>
-          )}
-          <div>
-            <ButtonSecondary href={webAppUrl("download", "browser")}>Открыть в браузере</ButtonSecondary>
-            <p className="body-text text-text-secondary mt-2">Для Intel Mac, Linux и телефона — веб-версия без установки.</p>
+        {isUnknownOS ? (
+          <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <LinkText href={getDownloadUrl("windows")}>
+              Скачать для Windows
+            </LinkText>
+            <LinkText href={getDownloadUrl("macos")}>
+              Скачать для macOS
+            </LinkText>
           </div>
-        </div>
-        <p className="body-text text-text-secondary mt-6">Создайте аккаунт, добавьте друга по ссылке и позвоните. Каждому участнику нужны ник, почта и пароль; телефон не требуется.</p>
-        <Link href={os === "macos" ? "/install/macos" : "/install"} className="body-text text-accent hover:underline mt-6">Инструкция по установке →</Link>
+        ) : (
+          <p className="body-text text-text-secondary mt-4 md:mt-6">
+            Скачивание начнётся автоматически. Если загрузка не началась,{" "}
+            <LinkText href={downloadInfo!.url}>{downloadInfo!.label}</LinkText>
+          </p>
+        )}
+        {/* Ссылка всегда в серверном HTML: os === "other" при SSR, и краулеры
+            без JS иначе никогда не увидят путь на /install/* */}
+        <Link
+          href={os === "macos" ? "/install/macos" : "/install"}
+          className="group mt-14 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
+        >
+          <div className="flex flex-col">
+            <span className="text-accent">Инструкция по установке</span>
+            <span>{os === "macos" ? "для macOS" : "для Windows и macOS"}</span>
+          </div>
+          <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
+        </Link>
+        <a
+          href="https://t.me/mutecalls"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group mt-3 p-4 border border-[#1F1F1F] hover:bg-white/5 body-text text-text-secondary transition-colors flex items-center justify-between gap-6 w-full"
+        >
+          <div className="flex flex-col">
+            <span className="text-accent-blue">Подпишитесь на наш Telegram</span>
+            <span>чтобы не пропустить новости</span>
+          </div>
+          <span className="font-offbit text-2xl group-hover:text-accent transition-colors">→</span>
+        </a>
       </div>
-      <div className="w-full max-w-[600px] lg:max-w-[500px]">
-        <Image src="/hero-image-new1.webp" alt="Mute — голосовой чат для геймеров на Windows и macOS" width={600} height={400} sizes="(min-width: 1024px) 40vw, 100vw" className="w-full h-auto" />
+      <div className="w-full max-w-[600px] lg:max-w-[500px] xl:max-w-[600px]">
+        <Image
+          src="/hero-image-new1.webp"
+          alt="Mute — голосовой чат для геймеров на Windows и macOS"
+          width={600}
+          height={400}
+          className="w-full h-auto"
+        />
       </div>
     </section>
   );
