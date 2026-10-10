@@ -10,7 +10,7 @@ const MACOS_VERSION = '1.0.6'
 
 export const DOWNLOAD_CONFIG = {
   versions: {
-    windows: '1.0.5',
+    windows: '1.0.6',
     macos: MACOS_VERSION,
   },
   files: {
