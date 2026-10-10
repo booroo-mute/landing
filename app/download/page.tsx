@@ -41,7 +41,7 @@ const h3 = "title-medium-semibold mt-6 md:mt-8";
 const p = "body-text text-text-secondary mt-4";
 const link = "text-accent hover:underline";
 
-// Both installers and the browser option remain visible without automatic navigation.
+// Server HTML exposes both installers; the client restores platform-based download routing.
 export default function DownloadPage() {
   return (
     <>
@@ -82,8 +82,9 @@ export default function DownloadPage() {
 
           <h2 className={h2}>Скачать голосовой чат на ПК</h2>
           <p className={p}>
-            Выберите установщик MuteSetup.exe для Windows или файл .dmg для
-            macOS в начале страницы. Загрузка начинается по нажатию. Голосовой чат
+            На Windows автоматически начнётся загрузка MuteSetup.exe, на macOS —
+            файла .dmg. Если скачивание не началось, нажмите кнопку в начале
+            страницы. С телефона откроется веб-версия. Голосовой чат
             бесплатный, приложение дальше обновляется само. После
             установки зарегистрируйтесь, отправьте другу ссылку-приглашение и
             звоните: окно Mute можно свернуть, разговор идёт, пока вы в игре.
