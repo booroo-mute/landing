@@ -56,6 +56,12 @@ const nextConfig: NextConfig = {
         destination: "/releases/1-0-4",
         permanent: true,
       })),
+      // 11.10.2026: посты о 1.0.6 и 1.0.7 сведены в один пост с 1.0.8.
+      ...["1-0-6", "1-0-7"].map((slug) => ({
+        source: `/releases/${slug}`,
+        destination: "/releases/1-0-8",
+        permanent: true,
+      })),
       // Два поста сняты 14.09.2026 — адреса были в индексе,
       // ведём на ближайшие по смыслу страницы.
       { source: "/blog/zapret-dlya-discord-ne-rabotaet", destination: "/blog/discord-ne-rabotaet-segodnya", permanent: true },
