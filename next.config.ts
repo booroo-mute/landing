@@ -43,7 +43,7 @@ const nextConfig: NextConfig = {
       { source: "/blog/golosovoy-chat-v-brauz%D0%B5%D1%80%D0%B5", destination: "/blog/golosovoy-chat-v-brauzere", permanent: true },
       // Вымышленные релизы 1.x удалены (реальная версия приложения — 0.x).
       // URL были в sitemap и могли попасть в индекс — отдаём 301 на список релизов.
-      ...["1-0-0", "1-1-0", "1-2-0", "1-3-0"].map((slug) => ({
+      ...["1-0-0", "1-2-0", "1-3-0"].map((slug) => ({
         source: `/releases/${slug}`,
         destination: "/releases",
         permanent: true,
@@ -54,14 +54,15 @@ const nextConfig: NextConfig = {
       // 11.10.2026 пост о 1.0.4 вошёл в общий пост о 1.0.8 (ниже).
       ...["mac", "mac-1-0-0", "mac-1-0-2", "mac-1-0-3"].map((slug) => ({
         source: `/releases/${slug}`,
-        destination: "/releases/1-0-9",
+        destination: "/releases/1-1-0",
         permanent: true,
       })),
       // 11.10.2026: посты о 1.0.4, 1.0.6 и 1.0.7 сведены в один пост с 1.0.8,
-      // 12.10.2026 тот переехал на 1.0.9 (новая версия сверху, старые адреса ведут туда).
-      ...["1-0-4", "1-0-6", "1-0-7", "1-0-8"].map((slug) => ({
+      // 12.10.2026 тот переехал на 1.0.9, затем на 1.1.0 (новая версия сверху,
+      // старые адреса ведут туда). /releases/1-1-0 убран из списка выше: теперь это настоящий пост.
+      ...["1-0-4", "1-0-6", "1-0-7", "1-0-8", "1-0-9"].map((slug) => ({
         source: `/releases/${slug}`,
-        destination: "/releases/1-0-9",
+        destination: "/releases/1-1-0",
         permanent: true,
       })),
       // Два поста сняты 14.09.2026 — адреса были в индексе,
