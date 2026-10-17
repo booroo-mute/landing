@@ -5,22 +5,17 @@
 //                                                          кластеры запросов, страницы
 //   node scripts/metrika-clusters.mjs <папка с днями>     папка, где лежат подпапки
 //                                                          по дням: таблица день к дню
-//                                                          и почасовые регистрации
+//                                                          и цели по датам
 //
 // Папка дня: отчёты «Посещаемость», «Источники, сводка», «Поисковые запросы»
-// (или «Поисковые системы»), «Популярное», «Сайты» — табличный вариант «(1)»
-// и временной ряд без суффикса. Папки целей («регистрации», «открыл скачать»)
+// (или «Поисковые системы»), «Популярное», «Сайты». Тип таблицы определяется
+// по заголовкам колонок, а не суффиксу имени. Папки целей («регистрации», «открыл скачать»)
 // с «Посещаемость-<дата>…csv» по каждому дню кладутся рядом с папками дней и
 // подхватываются сами. Без зависимостей.
 
 import fs from "node:fs";
 import path from "node:path";
-
-const target = process.argv[2];
-if (!target || !fs.existsSync(target)) {
-  console.error("Укажите папку с выгрузками Метрики: node scripts/metrika-clusters.mjs reports/");
-  process.exit(1);
-}
+import { fileURLToPath } from "node:url";
 
 // Первое совпадение выигрывает, поэтому игры стоят раньше общего «голосового чата»:
 // иначе «не работает голосовой чат в варфейс» уходил в общий кластер. \b в JS
@@ -30,6 +25,7 @@ const CLUSTERS = [
   ["бренд", /(?<![a-z])mute(?![a-z])|мьют|(?<![а-яё])мут(?![а-яё])|муте|мути|mute\.ac|\{mute\}/iu],
   ["roblox", /роблокс|roblox|(?<![а-яё])рб(?![а-яё])|робокс|облоксе|робосе/iu],
   ["steam", /стим|steam|(?<![а-яё])стив(?![а-яё])/iu],
+  ["консоли", /пс ?5|ps ?5|xbox|икс ?бокс|плейстейшн|playstation|консол|switch|свитч/iu],
   ["discord", /дискорд|discord|запрет|(?<![а-яё])дс(?![а-яё])|дискор|обход/iu],
   ["cs/dota/fortnite/pubg", /(?<![а-яё])кс(?![а-яё])|кс2|дот|фортнайт|пабг|pubg/iu],
   ["warface/valorant/arc", /варфейс|warface|валорант|valorant|arc raiders|арк р[ае]йд/iu],
@@ -43,7 +39,8 @@ const CLUSTERS = [
   ["экран/фильм", /фильм|кино|мультик|экран|демк|аниме|сериал|ютуб|youtube/iu],
 ];
 
-function parseCsv(text) {
+export function parseCsv(text) {
+  text = text.replace(/^\uFEFF/, "");
   const rows = [];
   let row = [], cell = "", q = false;
   for (let i = 0; i < text.length; i++) {
@@ -63,7 +60,10 @@ function parseCsv(text) {
 
 const num = (v) => Number(String(v ?? "").replace(",", ".")) || 0;
 const isSeries = (rows) => rows[0]?.[0] === "Период";
-const dateOf = (f) => f.match(/-(\d{4}-\d{2}-\d{2})-/)?.[1];
+const dateOf = (f) => {
+  const m = f.match(/-(\d{4}-\d{2}-\d{2})-(\d{4}-\d{2}-\d{2})/);
+  return m && m[1] === m[2] ? m[1] : undefined;
+};
 const readCsv = (dir, f) => parseCsv(fs.readFileSync(path.join(dir, f), "utf8").replace(/^﻿/, ""));
 
 /** Суммирует временной ряд (10-минутные интервалы) по часам для колонки col. */
@@ -77,24 +77,36 @@ function hourly(rows, col) {
 }
 
 /** Читает папку одного дня. */
-function loadDay(dir) {
+export function loadDay(dir) {
   const files = fs.readdirSync(dir).filter((f) => f.endsWith(".csv"));
-  const byPrefix = (prefix) => files.filter((f) => f.startsWith(prefix)).map((f) => ({ f, rows: readCsv(dir, f) }));
-  const table = (prefix) => byPrefix(prefix).filter((x) => x.rows.length && !isSeries(x.rows)).sort((a, b) => b.rows.length - a.rows.length)[0];
-  const series = (prefix) => byPrefix(prefix).find((x) => isSeries(x.rows));
+  const unique = new Map();
+  for (const f of files) {
+    const rows = readCsv(dir, f);
+    unique.set(JSON.stringify(rows), { f, rows });
+  }
+  const byPrefix = (prefix) => [...unique.values()].filter(x => x.f.startsWith(prefix) && dateOf(x.f));
+  const table = (prefix) => byPrefix(prefix).find(x => {
+    const h = x.rows[0] || [];
+    if (isSeries(x.rows)) return false;
+    if (prefix === "Посещаемость") return h.includes("Визиты") && h.includes("Посетители");
+    if (prefix === "Популярное") return h.includes("Адрес страницы") && h.includes("Просмотры");
+    return h.includes("Визиты");
+  });
+  const series = (prefix) => byPrefix(prefix).find(x => isSeries(x.rows));
 
   const day = { dir, date: files.map(dateOf).find(Boolean) ?? path.basename(dir), clusters: new Map(), clusterPhrases: new Map(), other: [], hidden: [] };
 
   const total = table("Посещаемость");
   if (total) {
-    const h = total.rows[0], t = total.rows[1];
-    day.totals = Object.fromEntries(h.map((k, i) => [k, t[i]]).filter(([, v], i) => i));
+    const h = total.rows[0], t = total.rows.find(r => r[0] === day.date);
+    if (!t) throw new Error(`Missing daily row in ${total.f}`);
+    day.totals = Object.fromEntries(h.map((k, i) => [k, t[i]]).filter((_, i) => i));
     day.visits = num(t[h.indexOf("Визиты")]);
     day.visitors = num(t[h.indexOf("Посетители")]);
     day.views = num(t[h.indexOf("Просмотры")]);
   }
   const visitsSeries = series("Посещаемость");
-  if (visitsSeries) day.hourlyVisits = hourly(visitsSeries.rows, 1);
+  if (visitsSeries && /\(Визиты\)$/.test(visitsSeries.rows[0][1])) day.hourlyVisits = hourly(visitsSeries.rows, 1);
 
   const src = table("Источники, сводка");
   if (src) {
@@ -104,6 +116,12 @@ function loadDay(dir) {
     const by = (name) => day.sources.find((s) => s.name === name)?.visits ?? 0;
     day.yandex = by("Яндекс"); day.google = by("Google"); day.direct = by("Прямые заходы");
     day.internal = by("Внутренние переходы"); day.steam = by("steamcommunity.com");
+    if (day.visits === undefined) {
+      day.visits = num(src.rows[1][h.indexOf("Визиты")]);
+      const visitorsColumn = h.indexOf("Посетители");
+      if (visitorsColumn >= 0) day.visitors = num(src.rows[1][visitorsColumn]);
+      day.totalsSource = "sources-fallback";
+    }
   }
   const srcSeries = series("Источники, сводка");
   if (srcSeries) {
@@ -133,9 +151,24 @@ function loadDay(dir) {
 
   const pop = table("Популярное");
   if (pop) {
-    day.pages = pop.rows.slice(2).map((r) => ({ url: r[4] ?? r[0], views: num(r[5]), visitors: num(r[6]) }));
-    day.landingViews = day.pages.filter((p) => p.url.startsWith("https://mute.ac")).reduce((s, p) => s + p.views, 0);
-    day.betaViews = day.pages.filter((p) => p.url.startsWith("https://beta.mute.ac")).reduce((s, p) => s + p.views, 0);
+    const h = pop.rows[0];
+    day.pages = pop.rows.slice(2).map(r => ({
+      url: r[h.indexOf("Адрес страницы")], views: num(r[h.indexOf("Просмотры")]),
+      visitors: num(r[h.indexOf("Посетители")]),
+    }));
+    const groups = new Map();
+    for (const page of day.pages) {
+      const url = normalizedPage(page.url);
+      const prior = groups.get(url);
+      // Visitors across query variants overlap. Only pageviews are additive.
+      groups.set(url, { url, views: (prior?.views || 0) + page.views,
+        visitors: prior ? null : page.visitors });
+    }
+    day.pages = [...groups.values()];
+    const views = predicate => day.pages.filter(p => predicate(p.url)).reduce((n, p) => n + p.views, 0);
+    day.landingViews = views(url => url.startsWith("https://mute.ac/"));
+    day.syntheticViews = views(url => url.startsWith("https://beta.mute.ac/native/"));
+    day.betaViews = views(url => url.startsWith("https://beta.mute.ac/") && !url.startsWith("https://beta.mute.ac/native/"));
   }
 
   const sites = table("Сайты");
@@ -150,29 +183,62 @@ function loadDay(dir) {
  * в «открыл скачать»), даёт две отдельные цели. Временные ряды имени цели
  * не несут, их привязываем только когда цель в папке одна.
  */
-function loadGoalFolder(dir) {
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".csv"));
+function mergeGoalObservation(goal, date, value) {
+  const previous = goal.byDate.get(date);
+  if (previous && (previous.total !== value.total || previous.visits !== value.visits || previous.conversion !== value.conversion)) {
+    goal.conflicts.push({ date, files: [previous.file, value.file], policy: "prefer narrower report period; never sum" });
+    if (previous.span === value.span) throw new Error(`Conflicting same-period goal exports: ${goal.name} ${date}`);
+  }
+  if (!previous || value.span < previous.span) goal.byDate.set(date, value);
+}
+
+export function loadGoalFolder(dir) {
   const goals = new Map();
-  const seriesByDate = new Map();
-  for (const f of files) {
-    const date = dateOf(f);
-    if (!date) continue;
-    const rows = readCsv(dir, f);
-    if (isSeries(rows)) { seriesByDate.set(date, hourly(rows, 1)); continue; }
-    const h = rows[0];
-    const ai = h.findIndex((x) => x.startsWith("Достижения цели"));
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith(".csv"))) {
+    const rows = readCsv(dir, f), h = rows[0] || [];
+    const ai = h.findIndex(x => x.startsWith("Достижения цели"));
     const name = h[ai]?.match(/\((.+)\)/)?.[1];
     if (!name) continue;
-    const goal = goals.get(name) ?? { name, byDate: new Map() };
-    const ci = h.findIndex((x) => x.startsWith("Конверсия"));
-    goal.byDate.set(date, { total: num(rows[1]?.[ai]), conversion: num(rows[1]?.[ci]) });
+    const ci = h.findIndex(x => x.startsWith("Конверсия"));
+    const vi = h.findIndex(x => x.startsWith("Целевые визиты"));
+    const goal = goals.get(name) ?? { name, byDate: new Map(), conflicts: [] };
+    const range = f.match(/-(\d{4}-\d{2}-\d{2})-(\d{4}-\d{2}-\d{2})/);
+    const span = range ? (Date.parse(range[2]) - Date.parse(range[1])) / 86400000 + 1 : Infinity;
+    // Never put a period summary under a filename date. Daily rows carry truth.
+    for (const row of rows.slice(1)) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(row[0])) continue;
+      const value = { total: num(row[ai]), conversion: ci >= 0 ? num(row[ci]) : null,
+        visits: vi >= 0 ? num(row[vi]) : null, span, file: path.join(dir, f) };
+      mergeGoalObservation(goal, row[0], value);
+    }
     goals.set(name, goal);
   }
-  if (goals.size === 1) {
-    const [goal] = goals.values();
-    for (const [date, h] of seriesByDate) goal.byDate.set(date, { ...(goal.byDate.get(date) ?? {}), hourly: h });
-  }
   return [...goals.values()];
+}
+
+export function normalizedPage(value) {
+  try { const url = new URL(value); return url.origin + url.pathname; }
+  catch { return value; }
+}
+
+export function loadReports(target) {
+  const dirs = fs.readdirSync(target, { withFileTypes: true }).some(x => x.name.endsWith(".csv"))
+    ? [target] : fs.readdirSync(target, { withFileTypes: true }).filter(x => x.isDirectory() && x.name !== "gsc").map(x => path.join(target, x.name));
+  const days = [], goals = new Map();
+  for (const dir of dirs) {
+    const files = fs.readdirSync(dir).filter(f => f.endsWith(".csv"));
+    if (files.some(f => /^(Источники|Популярное|Поисковые)/.test(f) || (dateOf(f) && readCsv(dir, f)[0]?.includes("Визиты") && readCsv(dir, f)[0]?.includes("Посетители")))) days.push(loadDay(dir));
+    for (const goal of loadGoalFolder(dir)) {
+      const merged = goals.get(goal.name) ?? { name: goal.name, byDate: new Map(), conflicts: [] };
+      merged.conflicts.push(...goal.conflicts);
+      for (const [date, value] of goal.byDate) {
+        mergeGoalObservation(merged, date, value);
+      }
+      goals.set(goal.name, merged);
+    }
+  }
+  days.sort((a, b) => a.date.localeCompare(b.date));
+  return { days, goals: [...goals.values()] };
 }
 
 /**
@@ -181,7 +247,7 @@ function loadGoalFolder(dir) {
  * интерфейса любой. Печатаем топ по кликам с позицией: это единственный
  * источник запросов Google, Метрика их не показывает.
  */
-function loadGsc(dir) {
+export function loadGsc(dir, completeThrough) {
   const out = [];
   for (const f of fs.readdirSync(dir).filter((f) => f.endsWith(".csv"))) {
     const rows = readCsv(dir, f);
@@ -190,7 +256,7 @@ function loadGsc(dir) {
     const ii = h.findIndex((x) => /^(Показы|Impressions)$/i.test(x));
     const pi = h.findIndex((x) => /^(Позиция|Position)$/i.test(x));
     if (ci === -1 || ii === -1) continue;
-    const items = rows.slice(1).map((r) => ({ key: r[0], clicks: num(r[ci]), impressions: num(r[ii]), position: pi === -1 ? null : num(r[pi]) }))
+    const items = rows.slice(1).filter(r => !/^(Date|Дата)$/i.test(h[0]) || (completeThrough && r[0] <= completeThrough)).map((r) => ({ key: r[0], clicks: num(r[ci]), impressions: num(r[ii]), position: pi === -1 ? null : num(r[pi]) }))
       .sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions);
     out.push({ file: f, items });
   }
@@ -222,7 +288,7 @@ function printDay(day) {
   if (day.pages) {
     console.log(`\n== Просмотры: лендинг mute.ac ${day.landingViews}, приложение beta.mute.ac ${day.betaViews}`);
     console.log("== Страницы лендинга (просмотры / посетители)");
-    for (const p of day.pages) if (p.url.startsWith("https://mute.ac")) console.log(`  ${p.url.replace("https://mute.ac", "").padEnd(56)} ${p.views} / ${p.visitors}`);
+    for (const p of day.pages) if (p.url.startsWith("https://mute.ac")) console.log(`  ${p.url.replace("https://mute.ac", "").padEnd(56)} ${p.views} / ${p.visitors ?? "— (пересечение вариантов URL)"}`);
   }
   if (day.referrers) {
     console.log("\n== Внешние рефереры");
@@ -244,46 +310,33 @@ function printComparison(days, goals) {
   row("Внутренние переходы", (d) => d.internal);
   row("steamcommunity.com", (d) => d.steam);
   row("Просмотры mute.ac", (d) => d.landingViews);
-  row("Просмотры beta.mute.ac", (d) => d.betaViews);
+  row("Просмотры приложения", (d) => d.betaViews);
+  row("Синтетические native-хиты", (d) => d.syntheticViews);
   for (const g of goals) {
     row(`Цель: ${g.name}`.slice(0, 30), (d) => g.byDate.get(d.date)?.total);
-    row(`  конверсия, %`, (d) => { const c = g.byDate.get(d.date)?.conversion; return c === undefined ? "" : (c * 100).toFixed(1); });
+    row(`  конверсия, %`, (d) => { const c = g.byDate.get(d.date)?.conversion; return c == null ? "" : (c * 100).toFixed(1); });
   }
   console.log("Кластеры запросов Яндекса (визиты с видимой фразой):");
-  for (const [name] of CLUSTERS) row(`  ${name}`, (d) => d.clusters.get(name) ?? 0);
-  row("  вне кластеров", (d) => d.other.reduce((s, x) => s + x[0], 0));
+  for (const [name] of CLUSTERS) row(`  ${name}`, (d) => d.queryMetric ? d.clusters.get(name) ?? 0 : undefined);
+  row("  вне кластеров", (d) => d.queryMetric ? d.other.reduce((s, x) => s + x[0], 0) : undefined);
 }
 
-function printHourly(days, goals) {
-  for (const g of goals) {
-    const rows = days.map((d) => ({ d, h: g.byDate.get(d.date)?.hourly }));
-    if (!rows.some((r) => r.h)) continue;
-    console.log(`\n== По часам: ${g.name} / визиты из поиска`);
-    console.log("час  " + days.map((d) => d.date.slice(5).padStart(9)).join(""));
-    for (let hour = 0; hour < 24; hour++) {
-      const cells = rows.map(({ d, h }) => `${h ? h[hour] : "-"}/${d.hourlySearch ? d.hourlySearch[hour] : "-"}`.padStart(9));
-      console.log(`${String(hour).padStart(2, "0")}:00${cells.join("")}`);
+
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  const target = process.argv[2];
+  if (!target || !fs.existsSync(target)) throw new Error("Provide a Metrika export directory");
+  const { days, goals } = loadReports(target);
+  if (process.argv.includes("--json")) {
+    console.log(JSON.stringify({ days, goals }, (_, value) => value instanceof Map ? Object.fromEntries(value) : value, 2));
+  } else {
+    console.log("Daily visitors are not period-unique users. Goals are events, not backend registrations. Blank cells mean missing data.");
+    for (const goal of goals) if (goal.conflicts.length) console.warn(`${goal.name}: ${goal.conflicts.length} overlapping daily/period discrepancies; prefer daily exports. Details in --json.`);
+    if (days.length === 1) printDay(days[0]); else printComparison(days, goals);
+    const gscIndex = process.argv.indexOf("--gsc");
+    if (gscIndex >= 0) {
+      const cutoffIndex = process.argv.indexOf("--complete-through");
+      if (cutoffIndex < 0 || !/^\d{4}-\d{2}-\d{2}$/.test(process.argv[cutoffIndex + 1] || "")) throw new Error("GSC requires --complete-through YYYY-MM-DD; do not infer completeness from low traffic");
+      printGsc(loadGsc(process.argv[gscIndex + 1], process.argv[cutoffIndex + 1]));
     }
   }
-}
-
-const hasCsv = fs.readdirSync(target).some((f) => f.endsWith(".csv"));
-if (hasCsv) {
-  printDay(loadDay(target));
-} else {
-  const subdirs = fs.readdirSync(target, { withFileTypes: true }).filter((e) => e.isDirectory()).map((e) => path.join(target, e.name));
-  const days = [], goals = [], gsc = [];
-  for (const dir of subdirs) {
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".csv"));
-    if (!files.length) continue;
-    if (/^gsc$/i.test(path.basename(dir))) { gsc.push(...loadGsc(dir)); continue; }
-    const onlyVisits = files.every((f) => f.startsWith("Посещаемость"));
-    if (onlyVisits) goals.push(...loadGoalFolder(dir));
-    else days.push(loadDay(dir));
-  }
-  days.sort((a, b) => (a.date < b.date ? -1 : 1));
-  if (!days.length) { console.error("В папке нет подпапок с выгрузками за день"); process.exit(1); }
-  printComparison(days, goals);
-  printHourly(days, goals);
-  printGsc(gsc);
 }
