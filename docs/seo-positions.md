@@ -43,6 +43,10 @@
 | аудио чат | `/voice-chat` | | 7,5 (GSC 6.09–5.10) | |
 | голосовой чат для ps5 и xbox | `/voice-chat/console` | | | |
 | трансляция стим как включить | `/blog/translyaciya-steam` | | | |
+| не работает голосовой чат варфейс | `/games/warface` (план) | | | |
+| фазмофобия не работает голосовой чат | `/games/phasmophobia` (план) | | | |
+| во что поиграть с другом на пк по сети | `/blog/vo-chto-poigrat-s-drugom-po-seti` (план) | | | |
+| arc raiders пве | `/games/arc-raiders` | | | |
 | можно ли в стиме по звонку делать демонстрацию экрана | `/blog/translyaciya-steam` | | | |
 | не работает голосовой чат в пабг | `/games/pubg` (план) | | | |
 | peak не работает голосовой чат | `/games/peak` (план) | | | |

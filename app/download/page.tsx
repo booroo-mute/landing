@@ -56,7 +56,7 @@ export default function DownloadPage() {
             name: TITLE,
             description: DESCRIPTION,
             datePublished: PRODUCT_LAUNCHED,
-            dateModified: DOWNLOAD_UPDATED,
+            dateModified: DOWNLOAD_CONFIG.released > DOWNLOAD_UPDATED ? DOWNLOAD_CONFIG.released : DOWNLOAD_UPDATED,
           }),
         ]}
       />

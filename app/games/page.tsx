@@ -126,6 +126,18 @@ export default function GamesIndexPage() {
               <ButtonSecondary href="/voice-chat">Как созвониться в браузере</ButtonSecondary>
             </div>
             <p className="body-text text-text-secondary mt-6">
+              Играете на приставке? Что с голосом на PS5 и Xbox и как говорить с
+              другом на ПК, собрано на странице{" "}
+              <Link href="/voice-chat/console" className="text-accent hover:underline">
+                голосового чата для консолей
+              </Link>
+              . Собираете компанию на вечер:{" "}
+              <Link href="/voice-chat/sozvon" className="text-accent hover:underline">
+                созвон для игр
+              </Link>
+              .
+            </p>
+            <p className="body-text text-text-secondary mt-6">
               Статусы Discord, Steam и Roblox, сравнения сервисов и советы по
               созвону собраны{" "}
               <Link href="/blog" className="text-accent hover:underline">

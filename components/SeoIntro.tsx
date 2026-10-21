@@ -40,6 +40,11 @@ export default function SeoIntro() {
               для созвона. Если в вашей игре войс отключили или он не работает,
               загляните в{" "}
               <Link href="/games" className="text-accent hover:underline">гайды по голосовому чату в играх</Link>.
+              Отдельные страницы есть про{" "}
+              <Link href="/voice-chat/sozvon" className="text-accent hover:underline">созвон для игр</Link>,{" "}
+              <Link href="/voice-chat/console" className="text-accent hover:underline">голосовой чат для PS5 и Xbox</Link>{" "}
+              и{" "}
+              <Link href="/voice-chat/screen-share" className="text-accent hover:underline">демонстрацию экрана со звуком</Link>.
             </p>
             <p className="body-text text-text-secondary">
               Если вы ищете, чем заменить Discord для созвонов со своей
