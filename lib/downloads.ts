@@ -12,9 +12,9 @@ export const DOWNLOAD_CONFIG = {
   // Дата последнего релиза на странице: dateModified /download берёт её,
   // если она новее ручной DOWNLOAD_UPDATED, чтобы страница «свежела» с
   // каждым релизом без правки lib/site.ts.
-  released: '2026-10-20',
+  released: '2026-10-23',
   versions: {
-    windows: '1.1.5',
+    windows: '1.1.6',
     macos: MACOS_VERSION,
   },
   files: {
