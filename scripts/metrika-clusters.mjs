@@ -296,6 +296,64 @@ function printDay(day) {
   }
 }
 
+
+/** ISO-неделя (понедельник) для даты YYYY-MM-DD: возвращает дату понедельника. */
+export function isoWeekStart(date) {
+  const d = new Date(date + "T00:00:00Z");
+  const shift = (d.getUTCDay() + 6) % 7;
+  d.setUTCDate(d.getUTCDate() - shift);
+  return d.toISOString().slice(0, 10);
+}
+
+/**
+ * Сводка по ISO-неделям: что смотреть, когда «трафик упал». Волна Steam
+ * помечается по кластеру «steam» (> 40 визитов с фразой за день), потому что
+ * после каждой волны визиты и регистрации возвращаются к спокойному уровню,
+ * и это не падение. Дни без таблицы посещаемости считаются в days, но визиты
+ * у них пустые, поэтому неполные недели помечены числом дней.
+ */
+export function weeklySummary(days, goals) {
+  const weeks = new Map();
+  for (const d of days) {
+    const key = isoWeekStart(d.date);
+    const w = weeks.get(key) ?? { week: key, days: 0, daysWithVisits: 0, visits: 0, yandex: 0, google: 0, direct: 0, steamcomm: 0, landingViews: 0, betaViews: 0, steamCluster: 0, waveDays: 0, goals: new Map() };
+    w.days++;
+    if (d.visits !== undefined) { w.daysWithVisits++; w.visits += d.visits; }
+    w.yandex += d.yandex ?? 0; w.google += d.google ?? 0; w.direct += d.direct ?? 0; w.steamcomm += d.steam ?? 0;
+    w.landingViews += d.landingViews ?? 0; w.betaViews += d.betaViews ?? 0;
+    const steam = d.clusters.get("steam") ?? 0;
+    w.steamCluster += steam;
+    if (steam > 40) w.waveDays++;
+    for (const g of goals) {
+      const v = g.byDate.get(d.date)?.total;
+      if (v !== undefined) w.goals.set(g.name, (w.goals.get(g.name) ?? 0) + v);
+    }
+    weeks.set(key, w);
+  }
+  return [...weeks.values()].sort((a, b) => a.week.localeCompare(b.week));
+}
+
+function printWeekly(days, goals) {
+  const weeks = weeklySummary(days, goals);
+  if (weeks.length < 2) return;
+  const w = 9, cell = (v) => String(v ?? "").padStart(w);
+  const row = (label, get) => console.log(label.padEnd(30) + weeks.map((x) => cell(get(x))).join(""));
+  console.log("\n== Неделя к неделе (ISO, с понедельника); дни = сколько дней с таблицей посещаемости");
+  row("", (x) => x.week.slice(5));
+  row("дней", (x) => `${x.daysWithVisits}/${x.days}`);
+  row("Визиты", (x) => x.visits);
+  row("Яндекс (поиск)", (x) => x.yandex);
+  row("Google (поиск)", (x) => x.google);
+  row("Прямые заходы", (x) => x.direct);
+  row("steamcommunity.com", (x) => x.steamcomm);
+  row("Просмотры mute.ac", (x) => x.landingViews);
+  row("Просмотры приложения", (x) => x.betaViews);
+  row("Фразы Steam (Яндекс)", (x) => x.steamCluster);
+  row("Дней волны Steam (>40)", (x) => x.waveDays || "");
+  for (const g of goals) row(`Цель: ${g.name}`.slice(0, 30), (x) => x.goals.get(g.name));
+  console.log("Спокойная неделя = без дней волны; сравнивать падение нужно с прошлой спокойной неделей, а не с неделей волны.");
+}
+
 function printComparison(days, goals) {
   const w = 8;
   const cell = (v) => String(v ?? "").padStart(w);
@@ -331,7 +389,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   } else {
     console.log("Daily visitors are not period-unique users. Goals are events, not backend registrations. Blank cells mean missing data.");
     for (const goal of goals) if (goal.conflicts.length) console.warn(`${goal.name}: ${goal.conflicts.length} overlapping daily/period discrepancies; prefer daily exports. Details in --json.`);
-    if (days.length === 1) printDay(days[0]); else printComparison(days, goals);
+    if (days.length === 1) printDay(days[0]); else { printComparison(days, goals); printWeekly(days, goals); }
     const gscIndex = process.argv.indexOf("--gsc");
     if (gscIndex >= 0) {
       const cutoffIndex = process.argv.indexOf("--complete-through");

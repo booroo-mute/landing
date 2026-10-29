@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { loadReports, loadGoalFolder, loadGsc, parseCsv } from '../metrika-clusters.mjs';
+import { loadReports, loadGoalFolder, loadGsc, parseCsv, isoWeekStart, weeklySummary } from '../metrika-clusters.mjs';
 const csv = rows => rows.map(row => row.map(x => `"${String(x).replaceAll('"', '""')}"`).join(',')).join('\n');
 function fixture(t) { const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mute-reports-')); t.after(() => fs.rmSync(dir, { recursive: true, force: true })); return dir; }
 function put(dir, file, rows) { fs.writeFileSync(path.join(dir, file), csv(rows)); }
@@ -34,4 +34,15 @@ test('period totals never become a daily value; daily discrepancies are disclose
 test('GSC completed-day cutoff is explicit, not inferred from small numbers',t=>{
  const dir=fixture(t); put(dir,'Chart.csv',[['Date','Clicks','Impressions','Position'],['2026-10-04',117,2989,6],['2026-10-05',7,246,7]]);
  assert.deepEqual(loadGsc(dir,'2026-10-04')[0].items.map(x=>x.key),['2026-10-04']);
+});
+
+test('ISO weeks start on Monday and the weekly summary flags Steam wave days', () => {
+ assert.equal(isoWeekStart('2026-10-11'), '2026-10-05');
+ assert.equal(isoWeekStart('2026-10-12'), '2026-10-12');
+ assert.equal(isoWeekStart('2026-10-18'), '2026-10-12');
+ const day = (date, visits, steam) => ({ date, visits, yandex: 1, google: 2, direct: 3, steam: 4, landingViews: 5, betaViews: 6, clusters: new Map([['steam', steam]]) });
+ const goals = [{ name: 'Зарегистрировался', byDate: new Map([['2026-10-11', { total: 7 }], ['2026-10-12', { total: 9 }]]) }];
+ const weeks = weeklySummary([day('2026-10-11', 100, 233), day('2026-10-12', 50, 125), day('2026-10-13', undefined, 10)], goals);
+ assert.deepEqual(weeks.map(w => [w.week, w.days, w.daysWithVisits, w.visits, w.waveDays, w.steamCluster, w.goals.get('Зарегистрировался')]),
+  [['2026-10-05', 1, 1, 100, 1, 233, 7], ['2026-10-12', 2, 1, 50, 1, 135, 9]]);
 });
