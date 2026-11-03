@@ -8,6 +8,7 @@ related:
   - "games/among-us"
   - "games/repo"
   - "blog/proksimiti-chat"
+  - "blog/vo-chto-poigrat-s-drugom-po-seti"
 ---
 
 Встроенного голосового чата нет вовсе в Among Us, Dead by Daylight, Terraria, Valheim, Satisfactory, Baldur's Gate 3, Forza Horizon 5 и в Minecraft без модов. Ещё в нескольких играх голос есть, но только для собранной пати или отряда, а в трёх он появился в 2026 году, и об этом многие не знают. Всё ниже проверено на сентябрь 2026 года по официальным справкам, патчноутам и обсуждениям в Steam.
