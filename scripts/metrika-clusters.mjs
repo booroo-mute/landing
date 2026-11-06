@@ -28,7 +28,7 @@ const CLUSTERS = [
   ["steam", /стим|steam|(?<![а-яё])стив(?![а-яё])/iu],
   ["консоли", /пс ?5|ps ?5|xbox|икс ?бокс|плейстейшн|playstation|консол|switch|свитч/iu],
   ["discord", /дискорд|discord|запрет|(?<![а-яё])дс(?![а-яё])|дискор|обход/iu],
-  ["cs/dota/fortnite/pubg", /(?<![а-яё])кс(?![а-яё])|кс2|дот|фортнайт|пабг|pubg/iu],
+  ["cs/dota/fortnite/pubg", /(?<![а-яё])кс(?![а-яё])|кс2|демк|фейсит|faceit|дот|фортнайт|пабг|pubg/iu],
   ["warface/valorant/arc/wardogs", /варфейс|warface|валорант|valorant|arc raiders|арк р[ае]йд|wardogs|вардогс/iu],
   ["кооп/проксимити", /(?<![а-яё])репо(?![а-яё])|(?<![a-z])r\.?e\.?p\.?o(?![a-z])|(?<![а-яё])пик(?![а-яё])|(?<![a-z])peak(?![a-z])|content warning|контент ворнинг|фазмо|phasmo|проксимити|proximity|lethal|летал|sea of thieves|(?<![a-z])squad(?![a-z])|сквад|devour|демонолог|demonologist/iu],
   ["нет войса", /геншин|genshin|амонг|among|(?<![а-яё])лол(?![а-яё])|league of legends|лига легенд|террари|terraria|(?<![а-яё])дбд(?![а-яё])|dead by daylight|валхейм|valheim|satisfactory|сатисфактор|балдур|baldur|(?<![a-z])bg3(?![a-z])|палворлд|palworld|диабло|diablo|форз|forza|(?<![a-z])raft(?![a-z])|(?<![а-яё])рафт(?![а-яё])|сталкрафт|stalcraft|(?<![a-z])tf2(?![a-z])|тф2|team fortress|(?<![a-z])ets ?2(?![a-z])|етс ?2|нет голосового чата|без голосового чата/iu],
