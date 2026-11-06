@@ -6,7 +6,6 @@ date: "2026-09-16"
 updated: "2026-11-06"
 related:
   - "games/steam"
-  - "games/fortnite"
   - "games/dota-2"
   - "games/pubg"
 ---
