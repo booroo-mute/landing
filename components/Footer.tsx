@@ -43,7 +43,7 @@ const groups: Array<{ title: string; links: FooterLink[] }> = [
   },
 ];
 
-const linkClass = "body-text text-text-secondary hover:text-accent transition-colors";
+const linkClass = "body-text text-text-secondary hover:text-accent transition-colors no-underline";
 
 function FooterAnchor({ href, label, external }: FooterLink) {
   if (external) {
