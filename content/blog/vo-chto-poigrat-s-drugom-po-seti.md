@@ -99,7 +99,7 @@ It Takes Two, Split Fiction и A Way Out в российском регионе 
 
 ## Во что поиграть на каникулах
 
-Зимние каникулы это две недели вечеров подряд, и выбирать стоит то, что не кончится через вечер. На двоих берите Stardew Valley или Terraria, на четверых Valheim, Sons of the Forest или Project Zomboid, а на один громкий вечер Phasmophobia или Lethal Company. Когда играть надоело, тот же созвон годится, чтобы [посмотреть фильм вместе](/blog/smotret-film-vmeste-onlayn-s-drugom) или [аниме](/blog/smotret-anime-vmeste-s-drugom). Созвон при этом один и тот же: комната живёт постоянно, завтра та же ссылка.
+Зимние каникулы это две недели вечеров подряд, и выбирать стоит то, что не кончится через вечер. На двоих берите Stardew Valley или Terraria, на четверых Valheim, Sons of the Forest или Project Zomboid, а на один громкий вечер Phasmophobia или Lethal Company. Когда играть надоело, тот же созвон годится, чтобы [посмотреть фильм или аниме вместе](/blog/smotret-film-vmeste-onlayn-s-drugom). Созвон при этом один и тот же: комната живёт постоянно, завтра та же ссылка.
 
 ## Зимняя распродажа Steam: когда и что брать на компанию
 
