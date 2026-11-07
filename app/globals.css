@@ -231,8 +231,13 @@
   .marquee { animation: none; }
 }
 
-/* Inline links must remain distinguishable without color perception. */
+/* Inline links must remain distinguishable without color perception.
+   Navigation lists (footer) are exempt: unlayered CSS beats Tailwind's
+   layered no-underline utility, so the exception lives here. */
 p a, li a, td a {
   text-decoration-line: underline;
   text-underline-offset: 3px;
+}
+footer li a {
+  text-decoration-line: none;
 }
