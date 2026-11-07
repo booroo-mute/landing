@@ -10,7 +10,7 @@ export const SITE_URL =
  * не «обновляла» соседние страницы.
  */
 export const HOME_UPDATED = "2026-10-21";
-export const DISCORD_ALTERNATIVE_UPDATED = "2026-10-17";
+export const DISCORD_ALTERNATIVE_UPDATED = "2026-11-07";
 export const VOICE_CHAT_UPDATED = "2026-10-17";
 export const DOWNLOAD_UPDATED = "2026-10-10";
 export const INSTALL_UPDATED = "2026-10-21";

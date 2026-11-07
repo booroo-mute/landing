@@ -9,7 +9,6 @@ statusLine: "На 29 октября Discord в России по-прежнем�
 ctaBefore: "Как понять, что дело не в вашем компьютере"
 related:
   - "blog/discord-ne-rabotaet-chto-delat"
-  - "blog/analogi-discord-v-rossii"
   - "games/steam"
 ---
 

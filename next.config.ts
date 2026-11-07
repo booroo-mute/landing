@@ -69,6 +69,8 @@ const nextConfig: NextConfig = {
       // ведём на ближайшие по смыслу страницы.
       { source: "/blog/zapret-dlya-discord-ne-rabotaet", destination: "/blog/discord-ne-rabotaet-segodnya", permanent: true },
       { source: "/blog/vpn-tolko-dlya-discord", destination: "/discord-alternative", permanent: true },
+      { source: "/blog/teamspeak-telegram-ili-mute", destination: "/discord-alternative", permanent: true },
+      { source: "/blog/analogi-discord-v-rossii", destination: "/discord-alternative", permanent: true },
       { source: "/blog/smotret-anime-vmeste-s-drugom", destination: "/blog/smotret-film-vmeste-onlayn-s-drugom", permanent: true },
       { source: "/blog/igry-bez-golosovogo-chata", destination: "/blog/vo-chto-poigrat-s-drugom-po-seti", permanent: true },
       { source: "/blog/kak-pozvonit-druzyam-v-igre-bez-discord", destination: "/blog/kak-razgovarivat-s-drugom-onlayn", permanent: true },
