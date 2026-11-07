@@ -5,7 +5,7 @@ description: "Как созвониться с друзьями прямо в б
 date: "2026-08-13"
 updated: "2026-10-09"
 related:
-  - "blog/mute-na-telefone"
+  - "landings/phone"
   - "blog/smotret-film-vmeste-onlayn-s-drugom"
   - "games/roblox"
 ---

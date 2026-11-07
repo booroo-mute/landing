@@ -5,7 +5,7 @@ date: "2026-03-15"
 updated: "2026-10-08"
 related:
   - "blog/golosovoy-chat-v-brauzere"
-  - "blog/mute-na-telefone"
+  - "landings/phone"
   - "games/dota-2"
 ---
 

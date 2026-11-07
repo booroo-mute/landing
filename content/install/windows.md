@@ -5,7 +5,7 @@ date: "2026-08-13"
 updated: "2026-10-21"
 related:
   - "blog/golosovoy-chat-v-brauzere"
-  - "blog/mute-na-telefone"
+  - "landings/phone"
   - "games/steam"
 ---
 

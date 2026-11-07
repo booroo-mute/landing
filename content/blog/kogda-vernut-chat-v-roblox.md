@@ -10,7 +10,7 @@ image: "/games/golosovoy-chat-v-roblox.webp?v=2"
 ogImage: "/games/golosovoy-chat-v-roblox-og.jpg?v=2"
 related:
   - "games/roblox"
-  - "blog/mute-na-telefone"
+  - "landings/phone"
   - "blog/golosovoy-chat-v-brauzere"
 ---
 

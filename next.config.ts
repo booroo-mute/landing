@@ -69,6 +69,7 @@ const nextConfig: NextConfig = {
       // ведём на ближайшие по смыслу страницы.
       { source: "/blog/zapret-dlya-discord-ne-rabotaet", destination: "/blog/discord-ne-rabotaet-segodnya", permanent: true },
       { source: "/blog/vpn-tolko-dlya-discord", destination: "/discord-alternative", permanent: true },
+      { source: "/blog/mute-na-telefone", destination: "/voice-chat/phone", permanent: true },
       // В логах встречаются /games/roblox~~~Голосовой и /games/robloxГолосовой —
       // хвост заголовка прилипает к ссылке при копировании из мессенджеров.
       // Точка исключена из «хвоста»: иначе под правило попадают картинки

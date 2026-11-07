@@ -9,7 +9,7 @@ ogImage: "/games/golosovoy-chat-v-roblox-og.jpg?v=2"
 topic: broken
 related:
   - "blog/kogda-vernut-chat-v-roblox"
-  - "blog/mute-na-telefone"
+  - "landings/phone"
   - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
 ---
 
