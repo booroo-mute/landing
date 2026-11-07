@@ -808,4 +808,18 @@ landing_path, cta_page, cta_placement), `growth_activations` отмечает п
   CS2, `танки` → broken-voice в `npm run metrika`. Превью ссылок-приглашений в чате
   Steam общее (логотип и слоган), персональное превью это правка веб-клиента, Alex
   исключал её 5.10, не делаем.
+- **Склейки 7.11 (Alex: «давай сделаем»).** Шесть страниц с тем же посылом, что у
+  более сильных соседей, и без своих кликов ушли редиректом 308 (постоянный,
+  Next): `mute-na-telefone` → `/voice-chat/phone`; `kak-pozvonit-druzyam-v-igre-bez-discord`
+  → `kak-razgovarivat-s-drugom-onlayn` (раздел про компанию и три вопроса FAQ
+  перенесены); `igry-bez-golosovogo-chata` → хаб (раздел «Где голос только для своих,
+  а где его нет совсем»: LoL, Diablo 4, Stalcraft X, Genshin 6.4, Forza, ETS2, TF2,
+  плюс четыре вопроса FAQ); `smotret-anime-vmeste-s-drugom` → пост про фильм (H2 про
+  аниме, seoTitle «…фильм или аниме…»); `analogi-discord-v-rossii` и
+  `teamspeak-telegram-ili-mute` → `/discord-alternative` (раздел «Другие замены
+  Discord: TeamSpeak, Mumble, видеоконференции»). Все внутренние ссылки и `related`
+  перенаправлены, sitemap 75 → 69 URL, задеплоено 1a02f14. Не трогали: пару
+  Discord «сегодня / что делать» (разные вопросы), /games/roblox, молодые гайды,
+  /releases и /help. Проверка через месяц: Search Console должна показать шесть
+  редиректов вместо «просканирована, не проиндексирована».
 
