@@ -1,25 +1,64 @@
 import Image from "next/image";
 import Link from "next/link";
-import LinkText from "./LinkText";
 
-const featureLinks = [
-  { href: "/voice-chat/sozvon", label: "Созвон для игр" },
-  { href: "/voice-chat/rooms", label: "Комнаты до 8 человек" },
-  { href: "/voice-chat/screen-share", label: "Демонстрация экрана" },
-  { href: "/voice-chat/phone", label: "На телефоне" },
+type FooterLink = { href: string; label: string; external?: boolean };
+
+/** Четыре группы вместо двух длинных строк: продукт, возможности, игрокам, о нас. */
+const groups: Array<{ title: string; links: FooterLink[] }> = [
+  {
+    title: "Продукт",
+    links: [
+      { href: "/download", label: "Скачать" },
+      { href: "/install", label: "Установка" },
+      { href: "/releases", label: "Что нового" },
+      { href: "/help", label: "Помощь" },
+    ],
+  },
+  {
+    title: "Возможности",
+    links: [
+      { href: "/voice-chat", label: "Голосовой чат онлайн" },
+      { href: "/voice-chat/sozvon", label: "Созвон для игр" },
+      { href: "/voice-chat/rooms", label: "Комнаты до 8 человек" },
+      { href: "/voice-chat/screen-share", label: "Демонстрация экрана" },
+      { href: "/voice-chat/phone", label: "На телефоне" },
+    ],
+  },
+  {
+    title: "Игрокам",
+    links: [
+      { href: "/games", label: "Гайды по играм" },
+      { href: "/discord-alternative", label: "Аналог Discord" },
+      { href: "/blog", label: "Блог" },
+    ],
+  },
+  {
+    title: "Mute",
+    links: [
+      { href: "/about", label: "О Mute" },
+      { href: "https://t.me/mutecalls", label: "Мы в Telegram", external: true },
+      { href: "https://t.me/mute_calls_bot", label: "Бот поддержки", external: true },
+      { href: "mailto:hello@mute.ac", label: "Связаться с нами", external: true },
+    ],
+  },
 ];
 
-const productLinks = [
-  { href: "/download", label: "Скачать" },
-  { href: "/install", label: "Установка" },
-  { href: "/help", label: "Помощь" },
-  { href: "/discord-alternative", label: "Аналог Discord" },
-  { href: "/voice-chat", label: "Голосовой чат онлайн" },
-  { href: "/games", label: "Для игр" },
-  { href: "/releases", label: "Что нового" },
-  { href: "/blog", label: "Блог" },
-  { href: "/about", label: "О Mute" },
-];
+const linkClass = "body-text text-text-secondary hover:text-accent transition-colors";
+
+function FooterAnchor({ href, label, external }: FooterLink) {
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+        {label}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={linkClass}>
+      {label}
+    </Link>
+  );
+}
 
 export default function Footer() {
   return (
@@ -27,37 +66,34 @@ export default function Footer() {
       <div className="container border-b border-[#1F1F1F]"></div>
       <div className="h-8 md:h-10 lg:h-[48px]"></div>
       <div className="container">
-        {/* Посадочные под сценарии раньше не были связаны ни с одной общей навигацией */}
-        <nav aria-label="Возможности" className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8 mb-4 md:mb-5">
-          <span className="body-text text-text-secondary">Возможности:</span>
-          {featureLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className="body-text text-text-secondary hover:text-accent transition-colors">
-              {label}
-            </Link>
+        <nav aria-label="Разделы сайта" className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4 md:gap-x-8">
+          {groups.map(({ title, links }) => (
+            <div key={title}>
+              <h2 className="body-text text-text-primary font-semibold mb-3 md:mb-4">{title}</h2>
+              <ul className="flex flex-col gap-2 md:gap-3">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <FooterAnchor {...link} />
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </nav>
-        <nav aria-label="Разделы сайта" className="flex flex-wrap items-center gap-4 md:gap-6 lg:gap-8">
-          {productLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className="body-text text-text-secondary hover:text-accent transition-colors">
-              {label}
+        <div className="h-8 md:h-10"></div>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <Image src="/mute-icon.svg" alt="Mute" width={32} height={32} />
+            <span className="body-text text-text-secondary">© 2026 Mute</span>
+          </div>
+          <nav aria-label="Документы" className="flex flex-wrap gap-4 md:gap-6">
+            <Link href="/privacy" className={linkClass}>
+              Политика конфиденциальности
             </Link>
-          ))}
-          <LinkText href="https://t.me/mutecalls" underline={false} target="_blank">Мы в Telegram</LinkText>
-          <LinkText href="https://t.me/mute_calls_bot" underline={false} target="_blank">Бот поддержки</LinkText>
-          <LinkText href="mailto:hello@mute.ac" underline={false} target="_blank">Связаться с нами</LinkText>
-          <Link href="/privacy" className="body-text text-text-secondary hover:text-accent transition-colors">
-            Политика конфиденциальности
-          </Link>
-          <Link href="/terms" className="body-text text-text-secondary hover:text-accent transition-colors">
-            Пользовательское соглашение
-          </Link>
-        </nav>
-        <div className="h-6 md:h-8"></div>
-        <div className="flex items-center gap-4">
-          <Image src="/mute-icon.svg" alt="Mute" width={32} height={32} />
-          <span className="body-text text-text-secondary">
-            © 2026 Mute
-          </span>
+            <Link href="/terms" className={linkClass}>
+              Пользовательское соглашение
+            </Link>
+          </nav>
         </div>
       </div>
       <div className="h-8 md:h-10 lg:h-[48px]"></div>
