@@ -64,7 +64,7 @@ export function articleMarkdownComponents(eagerSrc: string | null = null, page =
       <p
         className={
           isFaqParagraph(node)
-            ? "body-text text-text-secondary mb-5 md:mb-6 [&>strong]:block [&>strong]:mb-1"
+            ? "body-text text-text-secondary mb-5 md:mb-6 [&>strong]:block [&>strong]:mb-3"
             : "body-text text-text-secondary mb-5 md:mb-6"
         }
       >
@@ -87,7 +87,7 @@ export function articleMarkdownComponents(eagerSrc: string | null = null, page =
       <a href={withWebAppUtm(href, page)} className="text-accent hover:underline">{children}</a>
     ),
     code: ({ children }) => (
-      <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm">{children}</code>
+      <code className="bg-white/10 px-1.5 py-0.5 rounded text-sm text-text-primary">{children}</code>
     ),
     img: ({ src, alt }) => (
       <MarkdownImage src={src} alt={alt} eager={typeof src === "string" && src === eagerSrc} />
