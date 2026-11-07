@@ -28,7 +28,7 @@ export default function Home() {
         <CallsCards />
         <FeatureList />
         <ReleaseNotes />
-        <FaqSection />
+        <FaqSection tone="primary" />
         <div className="container border-b border-[#1F1F1F]"></div>
         <FinalCallSection />
       </main>

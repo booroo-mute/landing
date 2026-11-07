@@ -7,13 +7,15 @@ interface FaqSectionProps {
   items?: FaqItem[];
   /** Отключить JSON-LD (если FAQPage уже объявлен на странице) */
   withSchema?: boolean;
+  /** Фон секции: главная чередует тёмный и основной, по умолчанию тёмный */
+  tone?: "tertiary" | "primary";
 }
 
 // Серверный компонент: текст вопросов и ответов присутствует в HTML
 // (details/summary), краулеры видят его без JavaScript.
-export default function FaqSection({ items = FAQ_ITEMS, withSchema = true }: FaqSectionProps) {
+export default function FaqSection({ items = FAQ_ITEMS, withSchema = true, tone = "tertiary" }: FaqSectionProps) {
   return (
-    <section className="w-full py-16 md:py-20 lg:!py-[132px] bg-background-tertiary">
+    <section className={`w-full py-16 md:py-20 lg:!py-[132px] ${tone === "primary" ? "bg-background-primary" : "bg-background-tertiary"}`}>
       <div className="container">
         {withSchema && <JsonLd data={faqPageSchema(items)} />}
         <h2 className="title-large text-center">Частые вопросы</h2>
