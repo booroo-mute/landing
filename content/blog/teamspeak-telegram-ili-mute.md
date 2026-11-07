@@ -5,7 +5,7 @@ date: "2026-08-13"
 updated: "2026-09-17"
 related:
   - "blog/analogi-discord-v-rossii"
-  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
+  - "blog/kak-razgovarivat-s-drugom-onlayn"
   - "games/cs2"
 ---
 

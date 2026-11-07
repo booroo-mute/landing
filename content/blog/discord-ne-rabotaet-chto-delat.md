@@ -7,7 +7,7 @@ updated: "2026-10-29"
 related:
   - "blog/discord-ne-rabotaet-segodnya"
   - "blog/analogi-discord-v-rossii"
-  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
+  - "blog/kak-razgovarivat-s-drugom-onlayn"
 ---
 
 Если Discord бесконечно висит на сером экране загрузки или не подключается совсем, с вашим компьютером всё в порядке. Дальше о том, что случилось с сервисом в России и какие остались варианты.

@@ -10,7 +10,7 @@ topic: broken
 related:
   - "blog/kogda-vernut-chat-v-roblox"
   - "landings/phone"
-  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
+  - "blog/kak-razgovarivat-s-drugom-onlayn"
 ---
 
 Голосового чата в Roblox у российских аккаунтов в 2026 году нет, и это не поломка: платформа вернулась в Россию с выключенным общением, а проверка возраста и настройки этого не меняют. Дальше о том, что произошло, как понять, что дело не в вашем аккаунте, и как общаться с друзьями, пока войс закрыт.

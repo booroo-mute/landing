@@ -215,8 +215,8 @@ export default function VoiceChatPage() {
             больше не приходится. Из того, что ещё работает, есть встроенный
             войс самой игры и свой сервер вроде TeamSpeak или Mumble. Чем они
             отличаются и когда что выбрать, разобрано в статье{" "}
-            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className={link}>
-              «Где созвониться с друзьями в 2026: три способа»
+            <Link href="/blog/kak-razgovarivat-s-drugom-onlayn" className={link}>
+              «Как разговаривать с другом онлайн: созвон с ПК и телефона»
             </Link>
             .
           </p>
@@ -292,8 +292,8 @@ export default function VoiceChatPage() {
               как устроен голосовой чат в браузере
             </Link>{" "}
             и{" "}
-            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className={link}>
-              где созвониться с друзьями в 2026
+            <Link href="/blog/kak-razgovarivat-s-drugom-onlayn" className={link}>
+              как разговаривать с другом онлайн
             </Link>
             .
           </p>

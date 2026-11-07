@@ -245,8 +245,8 @@ export default function DiscordAlternativePage() {
             не нужно, комната до 8 человек создаётся одной кнопкой, друзей
             зовут по ссылке-приглашению. Все три способа с плюсами и минусами
             разобраны в статье{" "}
-            <Link href="/blog/kak-pozvonit-druzyam-v-igre-bez-discord" className={link}>
-              «Где созвониться с друзьями в 2026»
+            <Link href="/blog/kak-razgovarivat-s-drugom-onlayn" className={link}>
+              «Как разговаривать с другом онлайн»
             </Link>
             , а как устроен сам{" "}
             <Link href="/voice-chat/sozvon" className={link}>

@@ -7,7 +7,7 @@ breadcrumb: "Созвон для игр"
 related:
   - "landings/rooms"
   - "games/arc-raiders"
-  - "blog/kak-pozvonit-druzyam-v-igre-bez-discord"
+  - "blog/kak-razgovarivat-s-drugom-onlayn"
 ---
 
 Mute сделан для одного сценария: созвон с друзьями, пока вы играете. Позвонили другу или зашли в свою комнату, свернули окно и говорите весь вечер. Бесплатно, в России без VPN, в приложении для Windows и macOS или прямо во вкладке браузера.
