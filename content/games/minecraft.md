@@ -9,7 +9,7 @@ ogImage: "/games/golosovoy-chat-v-minecraft-og.jpg?v=3"
 topic: novoice
 related:
   - "blog/kak-poigrat-v-minecraft-s-drugom"
-  - "blog/igry-bez-golosovogo-chata"
+  - "blog/vo-chto-poigrat-s-drugom-po-seti"
   - "blog/golosovoy-chat-v-brauzere"
   - "blog/kak-razgovarivat-s-drugom-onlayn"
 ---

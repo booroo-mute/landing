@@ -12,7 +12,7 @@ topic: broken
 ctaBefore: "Созвон рядом с игрой"
 related:
   - "blog/proksimiti-chat"
-  - "blog/igry-bez-golosovogo-chata"
+  - "blog/vo-chto-poigrat-s-drugom-po-seti"
   - "games/among-us"
 ---
 

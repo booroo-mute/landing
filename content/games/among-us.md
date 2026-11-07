@@ -9,7 +9,7 @@ ogImage: "/games/golosovoy-chat-v-among-us-og.jpg"
 topic: novoice
 ctaBefore: "Созвон рядом с игрой"
 related:
-  - "blog/igry-bez-golosovogo-chata"
+  - "blog/vo-chto-poigrat-s-drugom-po-seti"
   - "blog/proksimiti-chat"
   - "games/repo"
 ---
