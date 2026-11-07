@@ -25,6 +25,27 @@ export const tableMarkdownComponents: Pick<Components, "table" | "thead" | "th" 
   ),
 };
 
+/** Текст hast-узла целиком (для проверки формы абзаца). */
+function hastText(node: unknown): string {
+  if (!node || typeof node !== "object") return "";
+  const n = node as { type?: string; value?: string; children?: unknown[] };
+  if (n.type === "text") return n.value ?? "";
+  return (n.children ?? []).map(hastText).join("");
+}
+
+/**
+ * Абзац частых вопросов: «**Вопрос?** Ответ». Вопрос в таком абзаце
+ * выносится на отдельную строку, чтобы ответ читался под ним, а не в
+ * продолжение жирного текста. Распознаётся по форме: первый узел абзаца —
+ * strong, который заканчивается вопросительным знаком.
+ */
+function isFaqParagraph(node: unknown): boolean {
+  const n = node as { children?: Array<{ type?: string; tagName?: string }> } | undefined;
+  const first = n?.children?.[0];
+  if (!first || first.type !== "element" || first.tagName !== "strong") return false;
+  return /\?\s*$/.test(hastText(first).trim());
+}
+
 /**
  * Единый набор переопределений react-markdown для длинных статей
  * (блог и гайды по играм). `eagerSrc` — первая картинка статьи, её грузим
@@ -39,8 +60,16 @@ export function articleMarkdownComponents(eagerSrc: string | null = null, page =
     h3: ({ children }) => (
       <h3 className="title-medium-semibold mt-6 md:mt-8 mb-2 md:mb-3">{children}</h3>
     ),
-    p: ({ children }) => (
-      <p className="body-text text-text-secondary mb-5 md:mb-6">{children}</p>
+    p: ({ children, node }) => (
+      <p
+        className={
+          isFaqParagraph(node)
+            ? "body-text text-text-secondary mb-5 md:mb-6 [&>strong]:block [&>strong]:mb-1"
+            : "body-text text-text-secondary mb-5 md:mb-6"
+        }
+      >
+        {children}
+      </p>
     ),
     ul: ({ children }) => (
       <ul className="list-disc list-inside space-y-3 md:space-y-4 mb-5">{children}</ul>
