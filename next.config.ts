@@ -43,7 +43,7 @@ const nextConfig: NextConfig = {
       { source: "/blog/golosovoy-chat-v-brauz%D0%B5%D1%80%D0%B5", destination: "/blog/golosovoy-chat-v-brauzere", permanent: true },
       // Вымышленные релизы 1.x удалены (реальная версия приложения — 0.x).
       // URL были в sitemap и могли попасть в индекс — отдаём 301 на список релизов.
-      ...["1-0-0", "1-2-0", "1-3-0"].map((slug) => ({
+      ...["1-0-0", "1-3-0"].map((slug) => ({
         source: `/releases/${slug}`,
         destination: "/releases",
         permanent: true,
