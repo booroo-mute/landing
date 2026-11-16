@@ -12,6 +12,18 @@
 // по заголовкам колонок, а не суффиксу имени. Папки целей («регистрации», «открыл скачать»)
 // с «Посещаемость-<дата>…csv» по каждому дню кладутся рядом с папками дней и
 // подхватываются сами. Без зависимостей.
+//
+//   --webmaster <csv>   таблица Яндекс Вебмастера «Запросы» (формат выгрузки
+//                       16.11.2026: запрос, URL, показы, клики, CTR, позиция,
+//                       прошлый период): кластеры по тем же регулярным
+//                       выражениям, что и у Метрики, плюс позиция и CTR.
+//
+// Две ловушки чтения, пойманные 17.11.2026. Переходы из ChatGPT с 12.10 идут
+// без реферера, но с utm_source=chatgpt.com, и Метрика кладёт их в «Прямые
+// заходы»: ИИ-источники считать по отчёту «Метки UTM», а не по рефереру.
+// Отказы, время и доля прямых заходов по всему счётчику размыты веб-приложением
+// (beta.mute.ac): для лендинга смотреть сегмент по параметру визита
+// site=landing (10–15.11: 5 161 из 10 222 визитов, отказы 16,3 % против 12,6 %).
 
 import fs from "node:fs";
 import path from "node:path";
@@ -243,6 +255,50 @@ export function loadReports(target) {
 }
 
 /**
+ * Таблица Яндекс Вебмастера «Запросы» (выгрузка руками, формат 16.11.2026):
+ * заголовок с описанием периода, пустая строка, шапка «Запрос, URL в выдаче,
+ * Показы, Клики, CTR, %, Ср. позиция, …прошлый период». Возвращает кластеры
+ * по CLUSTERS с показами, кликами, CTR и взвешенной по показам позицией,
+ * плюс те же числа по URL. Запросы без URL в мониторинге попадают в «(нет URL)».
+ */
+export function loadWebmaster(file) {
+  const rows = parseCsv(fs.readFileSync(file, "utf8"));
+  const hi = rows.findIndex(r => r[0] === "Запрос");
+  if (hi < 0) throw new Error(`Нет шапки «Запрос» в ${file}`);
+  const h = rows[hi];
+  const col = (re) => h.findIndex(x => re.test(x));
+  const ui = col(/^URL/), ii = col(/^Показы$/), ci = col(/^Клики$/), pi = col(/^Ср\. позиция$/), pii = col(/^Показы, прошл/);
+  const add = (map, key, r) => {
+    const cur = map.get(key) ?? { impressions: 0, clicks: 0, posWeighted: 0, prevImpressions: 0, queries: 0 };
+    const imp = num(r[ii]);
+    cur.impressions += imp; cur.clicks += num(r[ci]); cur.posWeighted += num(r[pi]) * imp;
+    cur.prevImpressions += pii >= 0 ? num(r[pii]) : 0; cur.queries++;
+    map.set(key, cur);
+  };
+  const clusters = new Map(), urls = new Map(), queries = [];
+  for (const r of rows.slice(hi + 1)) {
+    if (!r[0] || num(r[ii]) === 0 && num(r[ci]) === 0) continue;
+    const hit = CLUSTERS.find(([, re]) => re.test(r[0]))?.[0] ?? "вне кластеров";
+    add(clusters, hit, r);
+    add(urls, (ui >= 0 && r[ui]) || "(нет URL)", r);
+    queries.push({ query: r[0], url: ui >= 0 ? r[ui] : "", impressions: num(r[ii]), clicks: num(r[ci]), position: num(r[pi]), cluster: hit });
+  }
+  const finish = (map) => [...map.entries()].map(([key, v]) => ({ key, impressions: v.impressions, clicks: v.clicks,
+    ctr: v.impressions ? v.clicks / v.impressions : 0, position: v.impressions ? v.posWeighted / v.impressions : null,
+    prevImpressions: v.prevImpressions, queries: v.queries })).sort((a, b) => b.impressions - a.impressions);
+  return { period: rows[0]?.[0] ?? "", clusters: finish(clusters), urls: finish(urls), queries };
+}
+
+function printWebmaster(w) {
+  console.log(`\n== Яндекс Вебмастер: ${w.period}`);
+  const line = (x) => `  ${x.key.slice(0, 40).padEnd(40)} ${String(x.impressions).padStart(7)} ${String(x.clicks).padStart(6)} ${(x.ctr * 100).toFixed(1).padStart(6)}% ${x.position === null ? "" : x.position.toFixed(1).padStart(6)}  фраз ${x.queries}`;
+  console.log("  кластер / URL".padEnd(42) + "  показы  клики    CTR  позиция");
+  for (const c of w.clusters) console.log(line(c));
+  console.log("  --");
+  for (const u of w.urls) console.log(line(u));
+}
+
+/**
  * Папка gsc/: выгрузки Search Console (Performance → Export → CSV). Файлы
  * «Запросы» и «Страницы» с колонками клики/показы/CTR/позиция, язык
  * интерфейса любой. Печатаем топ по кликам с позицией: это единственный
@@ -391,6 +447,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     console.log("Daily visitors are not period-unique users. Goals are events, not backend registrations. Blank cells mean missing data.");
     for (const goal of goals) if (goal.conflicts.length) console.warn(`${goal.name}: ${goal.conflicts.length} overlapping daily/period discrepancies; prefer daily exports. Details in --json.`);
     if (days.length === 1) printDay(days[0]); else { printComparison(days, goals); printWeekly(days, goals); }
+    const wmIndex = process.argv.indexOf("--webmaster");
+    if (wmIndex >= 0) printWebmaster(loadWebmaster(process.argv[wmIndex + 1]));
     const gscIndex = process.argv.indexOf("--gsc");
     if (gscIndex >= 0) {
       const cutoffIndex = process.argv.indexOf("--complete-through");

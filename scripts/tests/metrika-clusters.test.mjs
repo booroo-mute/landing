@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { loadReports, loadGoalFolder, loadGsc, parseCsv, isoWeekStart, weeklySummary } from '../metrika-clusters.mjs';
+import { loadReports, loadGoalFolder, loadGsc, loadWebmaster, parseCsv, isoWeekStart, weeklySummary } from '../metrika-clusters.mjs';
 const csv = rows => rows.map(row => row.map(x => `"${String(x).replaceAll('"', '""')}"`).join(',')).join('\n');
 function fixture(t) { const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mute-reports-')); t.after(() => fs.rmSync(dir, { recursive: true, force: true })); return dir; }
 function put(dir, file, rows) { fs.writeFileSync(path.join(dir, file), csv(rows)); }
@@ -45,4 +45,22 @@ test('ISO weeks start on Monday and the weekly summary flags Steam wave days', (
  const weeks = weeklySummary([day('2026-10-11', 100, 233), day('2026-10-12', 50, 125), day('2026-10-13', undefined, 10)], goals);
  assert.deepEqual(weeks.map(w => [w.week, w.days, w.daysWithVisits, w.visits, w.waveDays, w.steamCluster, w.goals.get('Зарегистрировался')]),
   [['2026-10-05', 1, 1, 100, 1, 233, 7], ['2026-10-12', 2, 1, 50, 1, 135, 9]]);
+});
+
+test('Webmaster query table: clusters by the same regexes, impression-weighted position, per-URL totals', t => {
+ const dir=fixture(t);
+ put(dir,'wm.csv',[['Популярные запросы, период 06.09–06.10.2026','','','','','','','','','','',''],[],
+  ['Запрос','URL в выдаче (мониторинг, сен 26)','Показы','Клики','CTR, %','Ср. позиция','Показы, прошл.','Клики, прошл.','CTR, прошл. %','Позиция, прошл.','Δ показы','Δ позиция'],
+  ['голосовой чат','/',1000,10,1,8,500,5,1,8.5,500,-0.5],
+  ['войс чат','/',200,2,1,6,'','','','',200,''],
+  ['не работает звонок в стиме','/games/steam',100,10,10,3,'','','','',100,''],
+  ['как включить войс в демке кс2','',50,0,0,12,'','','','',50,'']]);
+ const w=loadWebmaster(path.join(dir,'wm.csv'));
+ const voice=w.clusters.find(c=>c.key==='голосовой чат');
+ assert.equal(voice.impressions,1200); assert.equal(voice.clicks,12); assert.ok(Math.abs(voice.position-(1000*8+200*6)/1200)<1e-9);
+ assert.equal(voice.prevImpressions,500);
+ assert.equal(w.clusters.find(c=>c.key==='steam').clicks,10);
+ assert.equal(w.clusters.find(c=>c.key==='cs/dota/fortnite/pubg').position,12);
+ assert.equal(w.urls.find(u=>u.key==='(нет URL)').impressions,50);
+ assert.equal(w.urls[0].key,'/'); assert.equal(w.urls[0].impressions,1200);
 });
