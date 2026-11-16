@@ -1,5 +1,6 @@
 import { SITE_URL, HOME_UPDATED, PRODUCT_LAUNCHED } from "./site";
 import { DOWNLOAD_CONFIG } from "./downloads";
+import { FEATURE_LIST } from "./facts";
 import type { FaqItem } from "./faq";
 
 // Стабильные @id, чтобы Organization / WebSite / SoftwareApplication
@@ -67,16 +68,7 @@ export const SOFTWARE_APPLICATION_SCHEMA = {
     "Голосовой чат для геймеров — российский аналог Discord без VPN. Звонки 1:1 с видео, комнаты до 8 человек, демонстрация экрана, личные и групповые чаты.",
   applicationCategory: "CommunicationApplication",
   applicationSubCategory: "Voice chat",
-  featureList: [
-    "Голосовые звонки 1:1 без лимита времени",
-    "Голосовые комнаты до 8 участников",
-    "Видеозвонки со стилизацией под пиксельный ретро-телефон (отключается)",
-    "Демонстрация экрана со звуком",
-    "Режим рации (push-to-talk) в приложениях для Windows и macOS",
-    "Личные и групповые текстовые чаты",
-    "Работает в России без VPN",
-    "Веб-версия в браузере без установки, в том числе на телефоне",
-  ],
+  featureList: FEATURE_LIST,
   operatingSystem: ["Windows", "macOS", "Web"],
   browserRequirements: "Браузер с поддержкой WebRTC: Chrome, Яндекс Браузер, Safari, Firefox",
   // Одна версия на схему: берём Windows, основную платформу аудитории.
@@ -85,7 +77,8 @@ export const SOFTWARE_APPLICATION_SCHEMA = {
   installUrl: `${SITE_URL}/install`,
   releaseNotes: `${SITE_URL}/releases`,
   datePublished: PRODUCT_LAUNCHED,
-  dateModified: HOME_UPDATED,
+  // Приложение «свежеет» с каждым релизом, а не с правкой главной.
+  dateModified: DOWNLOAD_CONFIG.released > HOME_UPDATED ? DOWNLOAD_CONFIG.released : HOME_UPDATED,
   inLanguage: "ru-RU",
   image: `${SITE_URL}/open-graph.png`,
   screenshot: [`${SITE_URL}/hero-image-new1.webp`, `${SITE_URL}/calls.webp`, `${SITE_URL}/chat.webp`],

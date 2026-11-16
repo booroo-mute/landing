@@ -4,6 +4,9 @@ import { getAllBlogPosts } from "@/lib/blog";
 import { getAllGameGuides } from "@/lib/games";
 import { getAllLandings } from "@/lib/landings";
 import { SITE_URL } from "@/lib/site";
+import { FACTS, FACT_LINES, MISSING_LINES } from "@/lib/facts";
+import { getAllHelpArticles } from "@/lib/help";
+import { getAllInstallGuides } from "@/lib/install";
 
 // llms-full.txt — развёрнутый фактический профиль продукта для AI-систем.
 // Генерируется из lib/faq.ts и контента, чтобы никогда не расходиться с сайтом.
@@ -14,8 +17,12 @@ export async function GET() {
   const posts = getAllBlogPosts();
   const guides = getAllGameGuides();
   const landings = getAllLandings();
+  const help = getAllHelpArticles();
+  const install = getAllInstallGuides();
 
   const body = `# Mute — полный профиль продукта
+
+Факты сверены с приложением ${FACTS.lastReviewed}; версии: Windows ${FACTS.versions.windows}, macOS ${FACTS.versions.macos}.
 
 ## Что такое Mute
 
@@ -44,11 +51,13 @@ spellings: «мьют», «мут», «муте».
 - Русский интерфейс
 - Бесплатно: без подписок и платных функций; звонки без лимита по времени. Лимит продукта один: до 8 человек в комнате
 
+## Факты коротко
+
+${FACT_LINES.map((l) => `- ${l}`).join("\n")}
+
 ## Чего в Mute нет (чтобы не вводить в заблуждение)
 
-- Мобильных приложений в App Store / Google Play / RuStore — на телефоне используется веб-версия в браузере
-- Гостевого входа: чтобы принять звонок, другу тоже нужен аккаунт (ник, e-mail, пароль; телефон не нужен)
-- Публичных серверов, каналов, ролей, ботов и случайных собеседников
+${MISSING_LINES.map((l) => `- ${l}`).join("\n")}
 
 ## Темп разработки
 
@@ -118,6 +127,10 @@ ${guides.map((g) => `- ${g.title} — ${SITE_URL}/games/${g.slug}\n  ${g.descrip
 ## Отдельные сценарии
 
 ${landings.map((l) => `- ${l.title} — ${SITE_URL}/voice-chat/${l.slug}\n  ${l.description}`).join("\n")}
+
+## Помощь по Mute и установка
+
+${[...help.map((h) => `- ${h.title} — ${SITE_URL}/help/${h.slug}\n  ${h.description}`), ...install.map((g) => `- ${g.title} — ${SITE_URL}/install/${g.slug}\n  ${g.description ?? ""}`)].join("\n")}
 
 ## Частые вопросы
 

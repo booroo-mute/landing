@@ -3,6 +3,8 @@ import { getAllGameGuides } from "@/lib/games";
 import { getAllLandings } from "@/lib/landings";
 import { getAllHelpArticles } from "@/lib/help";
 import { SITE_URL } from "@/lib/site";
+import { FACT_LINES, MISSING_LINES } from "@/lib/facts";
+import { getAllInstallGuides } from "@/lib/install";
 
 // llms.txt — краткая машиночитаемая сводка сайта для AI-краулеров
 // (конвенция llmstxt.org). Генерируется из данных, чтобы не устаревать.
@@ -13,6 +15,7 @@ export async function GET() {
   const guides = getAllGameGuides();
   const landings = getAllLandings();
   const help = getAllHelpArticles();
+  const install = getAllInstallGuides();
 
   const body = `# Mute
 
@@ -39,6 +42,7 @@ ${landings.map((l) => `- [${l.title}](${SITE_URL}/voice-chat/${l.slug}): ${l.des
 - [Голосовой чат в играх](${SITE_URL}/games): гайды по войсу в конкретных играх и что делать, когда он не работает
 - [Скачать](${SITE_URL}/download): установщики для Windows и macOS
 - [Установка](${SITE_URL}/install): инструкции для Windows (SmartScreen) и macOS (Apple Silicon, macOS 14+)
+${install.map((g) => `- [${g.title}](${SITE_URL}/install/${g.slug}): ${g.description ?? ""}`).join("\n")}
 - [Что нового](${SITE_URL}/releases): история обновлений приложения
 - [Веб-версия](https://beta.mute.ac/welcome): Mute в браузере, без установки
 
@@ -56,16 +60,11 @@ ${posts.map((p) => `- [${p.title}](${SITE_URL}/blog/${p.slug}): ${p.description}
 
 ## Факты
 
-- Цена: бесплатно, без подписок
-- Платформы: Windows, macOS, веб-браузер (WebRTC)
-- Лимит голосовой комнаты: 8 участников
-- Видеозвонки: есть; фирменная стилизация под пиксельный ретро-телефон, отключается
-- Демонстрация экрана: есть, в приложении и в браузере, со звуком системы
-- Веб-версия на телефоне: работает в Safari (iOS) и Chrome (Android), отдельных мобильных приложений нет
-- Регистрация: ник, e-mail, пароль; гостевого входа без аккаунта нет
-- Push-to-talk: есть в приложениях для Windows и macOS («Режим рации», клавиша или кнопка мыши); в веб-версии нет, там микрофон включается и выключается кнопкой
-- Работает в России: да, VPN не требуется
-- Публичных серверов и каналов нет — общение только в своём круге
+${FACT_LINES.map((l) => `- ${l}`).join("\n")}
+
+## Чего в Mute нет
+
+${MISSING_LINES.map((l) => `- ${l}`).join("\n")}
 
 ## Контакты
 

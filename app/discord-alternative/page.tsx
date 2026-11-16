@@ -7,6 +7,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import FaqSection from "@/components/FaqSection";
 import JsonLd from "@/components/JsonLd";
 import CtaBanner from "@/components/CtaBanner";
+import { FACTS } from "@/lib/facts";
 import { FAQ_ITEMS, type FaqItem } from "@/lib/faq";
 import { SOFTWARE_APPLICATION_SCHEMA, webPageSchema } from "@/lib/schema";
 
@@ -38,7 +39,7 @@ const comparisonRows: Array<{ label: string; mute: string; discord: string }> = 
   { label: "Видеозвонки", mute: "Есть, в фирменном пиксельном ретро-стиле (отключается)", discord: "Есть" },
   { label: "Демонстрация экрана", mute: "Есть, со звуком, в приложении и в браузере", discord: "Есть (Go Live)" },
   { label: "Шумоподавление", mute: "Включено сразу, без настройки", discord: "Есть" },
-  { label: "Организация звонков", mute: "Звонки 1:1 и комнаты до 8 участников", discord: "Личные звонки и голосовые каналы серверов" },
+  { label: "Организация звонков", mute: `Звонки 1:1 и комнаты до ${FACTS.roomLimit} участников`, discord: "Личные звонки и голосовые каналы серверов" },
   { label: "Текстовые чаты", mute: "Личные и групповые", discord: "Личные, групповые, каналы" },
   { label: "Публичные сообщества", mute: "Нет — только свой круг", discord: "Да, основной сценарий" },
   { label: "Сложность", mute: "Позвонить можно сразу после регистрации", discord: "Серверы, роли, права, настройки" },
