@@ -15,6 +15,16 @@ function writeCookie(name: string, value: unknown, seconds: number) {
   try { document.cookie = `${name}=${encodeURIComponent(JSON.stringify(value))}; Max-Age=${seconds}; Path=/; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}${domain}`; } catch { /* Storage may be unavailable; navigation still works. */ }
 }
 
+// Invite links arrive as /i/<code>, but also as //<code> and /I/<code> (pasted
+// with a doubled slash or an upper-case I); 3 of 111 sign-ups in the week of
+// 9 Nov 2026 missed the LIKE '/i/%' report that way. Collapse repeated slashes
+// and lower-case the section so the report groups them.
+export function normalizePath(pathname: string): string {
+  const collapsed = pathname.replace(/\/{2,}/g, "/");
+  if (!/^\/[a-z0-9/-]{0,127}$/i.test(collapsed)) return "/";
+  return collapsed.replace(/^\/([A-Za-z0-9-]+)/, (_, section: string) => `/${section.toLowerCase()}`);
+}
+
 export function captureAcquisition() {
   if (typeof document === "undefined") return;
   const existing = readCookie(COOKIE);
@@ -33,7 +43,7 @@ export function captureAcquisition() {
     captured_at: Date.now(),
     source: campaign ? campaignSource : search || (internal ? "unknown" : safe(host) || "direct"),
     medium: campaign ? safe(query.get("utm_medium")) || "unknown" : search ? "organic" : host && !internal ? "referral" : internal ? "unknown" : "none",
-    landing_path: /^\/[a-z0-9/-]{0,127}$/i.test(location.pathname) ? location.pathname : "/",
+    landing_path: normalizePath(location.pathname),
   }, MAX_AGE);
 }
 
