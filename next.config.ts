@@ -75,6 +75,10 @@ const nextConfig: NextConfig = {
       { source: "/blog/igry-bez-golosovogo-chata", destination: "/blog/vo-chto-poigrat-s-drugom-po-seti", permanent: true },
       { source: "/blog/kak-pozvonit-druzyam-v-igre-bez-discord", destination: "/blog/kak-razgovarivat-s-drugom-onlayn", permanent: true },
       { source: "/blog/mute-na-telefone", destination: "/voice-chat/phone", permanent: true },
+      // 17.11.2026: Google дважды отказался индексировать пост (дубль интента с
+      // трансляцией Steam и посадочной про демонстрацию). Таблица трёх способов
+      // переехала на посадочную.
+      { source: "/blog/kak-pokazat-igru-drugu", destination: "/voice-chat/screen-share", permanent: true },
       // В логах встречаются /games/roblox~~~Голосовой и /games/robloxГолосовой —
       // хвост заголовка прилипает к ссылке при копировании из мессенджеров.
       // Точка исключена из «хвоста»: иначе под правило попадают картинки
