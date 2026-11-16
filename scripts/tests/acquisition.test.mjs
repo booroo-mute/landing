@@ -13,7 +13,7 @@ const normalizePath = new Function("pathname", body);
 
 test("invite links are grouped under /i/ whatever the pasted form", () => {
   assert.equal(normalizePath("/i/up5h7qjv"), "/i/up5h7qjv");
-  assert.equal(normalizePath("//tjcgvPbS"), "/tjcgvpbs".replace("/tjcgvpbs", "/tjcgvpbs"));
+  assert.equal(normalizePath("//tjcgvPbS"), "/tjcgvpbs");
   assert.equal(normalizePath("/I/viWsxhdY"), "/i/viWsxhdY");
   assert.equal(normalizePath("/games//steam"), "/games/steam");
 });
