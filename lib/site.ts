@@ -14,7 +14,7 @@ export const DISCORD_ALTERNATIVE_UPDATED = "2026-11-07";
 export const VOICE_CHAT_UPDATED = "2026-10-17";
 export const DOWNLOAD_UPDATED = "2026-10-10";
 export const INSTALL_UPDATED = "2026-10-21";
-export const ABOUT_UPDATED = "2026-10-21";
+export const ABOUT_UPDATED = "2026-11-17";
 export const LEGAL_UPDATED = "2026-10-20";
 
 /** Дата публичного запуска беты (пост в t.me/mutecalls от 5 января 2026). */
