@@ -9,7 +9,7 @@ ctaBefore: "Как созвониться рядом с игрой за мину
 related:
   - "landings/console"
   - "blog/vo-chto-poigrat-s-drugom-po-seti"
-  - "blog/discord-na-ps5-i-xbox-v-rossii"
+  - "blog/kak-razgovarivat-s-drugom-onlayn"
 ---
 
 Последняя проверка сведений: **6 ноября 2026 года**.

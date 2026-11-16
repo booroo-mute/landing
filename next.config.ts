@@ -79,6 +79,7 @@ const nextConfig: NextConfig = {
       // трансляцией Steam и посадочной про демонстрацию). Таблица трёх способов
       // переехала на посадочную.
       { source: "/blog/kak-pokazat-igru-drugu", destination: "/voice-chat/screen-share", permanent: true },
+      { source: "/blog/discord-na-ps5-i-xbox-v-rossii", destination: "/voice-chat/console", permanent: true },
       // В логах встречаются /games/roblox~~~Голосовой и /games/robloxГолосовой —
       // хвост заголовка прилипает к ссылке при копировании из мессенджеров.
       // Точка исключена из «хвоста»: иначе под правило попадают картинки

@@ -228,9 +228,9 @@ export default function DiscordAlternativePage() {
           <p className={p}>
             Приложения для приставок нет. Компании с консолями созваниваются в
             Mute на телефоне или ноутбуке рядом, игра остаётся на большом
-            экране. Что на консоли работает без Discord, разобрано в{" "}
-            <Link href="/blog/discord-na-ps5-i-xbox-v-rossii" className={link}>
-              заметке про PS5 и Xbox
+            экране. Что на консоли работает без Discord, разобрано на странице{" "}
+            <Link href="/voice-chat/console" className={link}>
+              про голосовой чат для PS5 и Xbox
             </Link>
             .
           </p>
