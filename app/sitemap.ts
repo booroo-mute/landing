@@ -1,3 +1,4 @@
+import { DOWNLOAD_CONFIG } from "@/lib/downloads";
 import { MetadataRoute } from "next";
 import { getAllReleases } from "@/lib/releases";
 import { getAllInstallGuides } from "@/lib/install";
@@ -111,7 +112,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/download`,
-      lastModified: new Date(DOWNLOAD_UPDATED),
+      // Как dateModified на самой странице: каждый релиз меняет версии на ней.
+      lastModified: new Date(DOWNLOAD_CONFIG.released > DOWNLOAD_UPDATED ? DOWNLOAD_CONFIG.released : DOWNLOAD_UPDATED),
       changeFrequency: "monthly",
       priority: 0.9,
     },
