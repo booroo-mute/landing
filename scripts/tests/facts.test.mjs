@@ -24,9 +24,15 @@ const sources = SCAN.flatMap((d) => [...files(path.join(root, d))])
   .filter((p) => !SKIP.has(p));
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
 
+// JSX и markdown переносят фразу на следующую строку, поэтому перед проверкой
+// пробелы и переводы строк схлопываются: 17.11.2026 «кнопки «говорить, пока
+// нажата»» в списке «Чего в Mute нет» прошла мимо построчной проверки.
+const flat = (p) => read(p).replace(/\s+/g, " ");
+
 test("никто не пишет, что режима рации / push-to-talk нет (он есть в приложениях)", () => {
-  const bad = /(push-to-talk|нажми и говори|режима? рации)[^.\n]{0,40}\b(нет|не предусмотрен|отсутствует)\b(?![^.\n]*веб)/iu;
-  const hits = sources.filter((p) => bad.test(read(p)));
+  const bad = /(push-to-talk|нажми и говори|режима? рации)[^.]{0,40}\b(нет|не предусмотрен|отсутствует)\b(?![^.]*веб)/iu;
+  const missingList = /(Чего в Mute нет|в Mute нет)[^.]{0,200}(пока нажат|push-to-talk|нажми и говори|режима? рации)(?![^.]*веб)/iu;
+  const hits = sources.filter((p) => bad.test(flat(p)) || missingList.test(flat(p)));
   assert.deepEqual(hits, [], `формулировки про отсутствие PTT: ${hits.join(", ")}`);
 });
 
