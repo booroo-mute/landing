@@ -6,13 +6,13 @@
 // сервере обновлений всегда указывает на последнюю стабильную сборку, так
 // что ссылка тоже постоянная; меняется только номер ниже. Только Apple
 // Silicon и macOS 14+, это сказано на /download и в /install/macos.
-const MACOS_VERSION = '1.2.1'
+const MACOS_VERSION = '1.2.2'
 
 export const DOWNLOAD_CONFIG = {
   // Дата последнего релиза на странице: dateModified /download берёт её,
   // если она новее ручной DOWNLOAD_UPDATED, чтобы страница «свежела» с
   // каждым релизом без правки lib/site.ts.
-  released: '2026-11-16',
+  released: '2026-11-21',
   versions: {
     windows: '1.2.1',
     macos: MACOS_VERSION,
